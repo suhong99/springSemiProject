@@ -5,7 +5,8 @@
     pageEncoding="UTF-8"%>
    
 <%
-	List<NetflixContentDto> list = NetflixUtil.getNetflixContent();
+	List<NetflixContentDto> list = NetflixUtil.getNetflixMovie();
+	List<NetflixContentDto> list2 = NetflixUtil.getNetflixTv();
 	//String imgUrl = "https://image.tmdb.org/t/p/w500" + list.get(0).getPosterUrl();
 	//System.out.println("https://image.tmdb.org/t/p/w500"+list.get(0).getPosterUrl());
 %>
@@ -53,7 +54,7 @@
 		    </div>
 	        <div class="slider-container">
 	        	<% 
-		    		for (NetflixContentDto content : list) { 
+		    		for (NetflixContentDto content : list2) { 
 			    	%>
 			        	<div class="poster-container">
 			        		<a href=""> <!-- 클릭시 이동할 페이지 -->
@@ -72,6 +73,7 @@
 		    	%>
 	        </div>
 		</div>
+		<br><br>
 	    <!-- slider 스크립트 -->
 	    <script>
 	        const sliderContainer = document.querySelector('.slider-container');
