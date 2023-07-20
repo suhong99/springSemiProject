@@ -24,12 +24,7 @@ public class MemberController {
 
 	@Autowired
 	MemberService service;
-	@RequestMapping(value = "main.do")
-	public String main() {
-		System.out.println("MemberController login() " + new Date());
-		return "main";
-	}
-	
+		
 	@RequestMapping(value = "login.do")
 	public String login() {
 		System.out.println("MemberController login() " + new Date());
