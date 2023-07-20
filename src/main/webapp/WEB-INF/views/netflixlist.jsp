@@ -3,11 +3,7 @@
 <%@page import="ssg.com.a.util.NetflixUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!-- c:foreach를 사용하기위해 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+   
 <%
 	List<NetflixContentDto> list = NetflixUtil.getNetflixContent();
 	//String imgUrl = "https://image.tmdb.org/t/p/w500" + list.get(0).getPosterUrl();
@@ -18,57 +14,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<style type="text/css">
-			/* 전체 배경색 검정 글자색 하얀색 */
-			body {
-	            background-color: #0D0D0D;
-	            color: #F2F2F2;
-	        }
-	        
-			/* 스크롤바 스타일 수정 */
-	        .slider-container::-webkit-scrollbar {
-	            width: 3px; 
-	        }
-	
-	        .slider-container::-webkit-scrollbar-thumb {
-	            background-color: #D91E1E; /* 스크롤바 색상 */
-	            border-radius: 5px; 
-	        }
-	
-	        .slider-container::-webkit-scrollbar-thumb:hover {
-	            background-color: darkred; /* 스크롤바 호버시 색상 */
-	        }
-	        
-	        /* 슬라이더 컨테이너 */
-	        .slider-container {
-	            display: flex;
-	            overflow-x: auto;
-	            width: 100%;
-	            scroll-behavior: smooth;
-
-	            background-color: black; /* 배경색 검정으로 */ 
-	        }
-	        
-	        .poster-container {
-	            width: 300px;
-	            margin-left: 5px;
-	            margin-right 5px;
-	            flex-shrink: 0;
-	            text-align: center; /* 텍스트 중앙정렬 */
-	            font-size: 20px;
-	            font-weight: bold;
-	        }
-	        
-	        .poster-container img {
-	            width: 300px;
-	            height: 400px;
-	        }
-	        
-	        .poster-title {
-	        	width: 300px;
-	        	
-	        }
-		</style>
 	</head>
 	<body>
 		<h1>여기는 test용 netflix 콘텐츠 슬라이더 표기입니다.</h1>
