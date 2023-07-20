@@ -33,7 +33,7 @@
 	<h1>header</h1><br><br><br><br><br><br>
 		<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->
 			<div class="headerLogin">
-				<a href="./login.do">login</a>		
+				<a href="#" id="loginBtn">login</a>		
 			</div>
 		<% }else{ %>	<!-- 로그인이 된 경우 -->
 			<div class="headerLogin">
@@ -42,5 +42,13 @@
 		<%	} %>
 	</div>
 </div>
+<!-- Add the following script at the end -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('modal');
+
+  
+});
+</script>
 </body>
 </html>
