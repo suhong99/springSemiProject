@@ -17,10 +17,15 @@ public class NetflixDaoImpl implements NetflixDao{
 	String ns = "Netflix.";
 
 	@Override
-	public List<NetflixContentDto> getNetflixKoreanContent() {
-		// TODO Auto-generated method stub
-		return null;
+	public void insertNetflixcontent(List<NetflixContentDto> contentList) {
+		session.insert(ns+"insertNetflixcontent", contentList);
 	}
+
+	@Override
+	public NetflixContentDto netflixdetail(Long id) {
+		return session.selectOne(ns+"netflixdetail", id);
+	}
+
 	
 	
 }

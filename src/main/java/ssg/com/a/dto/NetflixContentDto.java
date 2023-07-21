@@ -1,25 +1,44 @@
 package ssg.com.a.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true) // 만약 JSON 파일에 모르는 파라미터가 들어오면 무시하는 annotation
 public class NetflixContentDto {
+	private Long id; // 컨텐츠 고유 아이디 
     private String title;
     private String overview;
-    private String posterUrl;
+    
+    @JsonProperty("poster_path") // json null값으로 들어가서 key값 매핑시켜주기위해서
+    private String posterpath;
+    
     private Double popularity;
-    private String releaseDate;
+    
+    @JsonProperty("release_date") // json null값으로 들어가서 key값 매핑시켜주기위해서
+    private String releasedate;
     
     public NetflixContentDto() {
     }
-    
-    
-	public NetflixContentDto(String title, String overview, String posterUrl, Double popularity, String releaseDate) {
+
+	public NetflixContentDto(Long id, String title, String overview, String posterpath, Double popularity,
+			String releasedate) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.overview = overview;
-		this.posterUrl = posterUrl;
+		this.posterpath = posterpath;
 		this.popularity = popularity;
-		this.releaseDate = releaseDate;
+		this.releasedate = releasedate;
+	}
+	
+	
+	public Long getId() {
+		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;
@@ -40,16 +59,13 @@ public class NetflixContentDto {
 		this.overview = overview;
 	}
 
-
-	public String getPosterUrl() {
-		return posterUrl;
+	public String getPosterpath() {
+		return posterpath;
 	}
 
-
-	public void setPosterUrl(String posterUrl) {
-		this.posterUrl = posterUrl;
+	public void setPosterpath(String posterpath) {
+		this.posterpath = posterpath;
 	}
-
 
 	public Object getPopularity() {
 		return popularity;
@@ -62,21 +78,18 @@ public class NetflixContentDto {
 
 
 	public String getReleaseDate() {
-		return releaseDate;
+		return releasedate;
 	}
 
 
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setReleaseDate(String releasedate) {
+		this.releasedate = releasedate;
 	}
-
 
 	@Override
 	public String toString() {
-		return "Title: " + title +
-                "\nOverview: " + overview +
-                "\nPoster URL: " + posterUrl +
-                "\nPopularity: " + popularity +
-                "\nRelease Date: " + releaseDate + "\n";
+		return "NetflixContentDto [id=" + id + ", title=" + title + ", overview=" + overview + ", posterpath="
+				+ posterpath + ", popularity=" + popularity + ", releasedate=" + releasedate + "]";
 	}
+
 }

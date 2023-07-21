@@ -28,7 +28,7 @@
 		    	%>
 		        	<div class="poster-container">
 		        		<a href=""> <!-- 클릭시 이동할 페이지 -->
-		        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterUrl() %>">
+		        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 		        		</a>
 		        		<div class="poster-title">
 		        			<%= content.getTitle() %>

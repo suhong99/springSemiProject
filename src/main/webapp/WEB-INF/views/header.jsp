@@ -42,11 +42,14 @@
 					<div class="headerLogin">
 						<a href="./login.do">login</a>		
 					</div>
-				<% }else{ %>	<!-- 로그인이 된 경우 -->
+				<% }
+				
+				else{ %>	<!-- 로그인이 된 경우 -->
 					<div class="headerLogin">
 					 	<a href="./logout.do">logout</a>		
 					</div>
-				<%	} %>
+				<%	
+				} %>
 		</div>
 	</div>
 	</body>

@@ -7,9 +7,11 @@
 <%
 	List<NetflixContentDto> list = NetflixUtil.getNetflixMovie();
 	List<NetflixContentDto> list2 = NetflixUtil.getNetflixTv();
+	List<NetflixContentDto> listJson = NetflixUtil.getNetflixMovieJson();
 	//String imgUrl = "https://image.tmdb.org/t/p/w500" + list.get(0).getPosterUrl();
 	//System.out.println("https://image.tmdb.org/t/p/w500"+list.get(0).getPosterUrl());
 %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +24,24 @@
             <input type="text" class="input" placeholder="검색어를 입력하세요.">
             <button id="searchBtn" onclick="searchMovies()">검색</button>
         </div>
+        
+        <!-- TOP20 Movie JSON 컨트롤러에 넘겨주기 -->
+        <script type="text/javascript">
+        	let contentList = {"contentList": JSON.stringify(<%=listJson%>)}
+	        $.ajax({
+	            url : "insertNetflixcontent.do",
+	            type : "POST",
+	            data : contentList,
+	            success : function(data) {
+	            	alert("movie JSON 보내기 성공 [home.jsp]");
+	            },
+	            
+	            error : function(e) {
+	            	alert("실패");
+	            }
+	         });
+        </script>
+        
 		
 		<br><br>
 	    <div style="width: 1800px; height:500px;">
@@ -33,8 +53,8 @@
 		    		for (NetflixContentDto content : list) { 
 			    	%>
 			        	<div class="poster-container">
-			        		<a href=""> <!-- 클릭시 이동할 페이지 -->
-			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterUrl() %>">
+			        		<a href="netflixdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
+			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
 			        			<%= content.getTitle() %> <!-- 제목 표시 -->
@@ -58,7 +78,7 @@
 			    	%>
 			        	<div class="poster-container">
 			        		<a href=""> <!-- 클릭시 이동할 페이지 -->
-			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterUrl() %>">
+			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
 			        			<%= content.getTitle() %>

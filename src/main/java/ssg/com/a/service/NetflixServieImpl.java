@@ -15,8 +15,15 @@ public class NetflixServieImpl implements NetflixService{
 	NetflixDao dao;
 
 	@Override
-	public List<NetflixContentDto> getNetflixKoreanContent() {
-		return dao.getNetflixKoreanContent();
+	public void insertNetflixcontent(List<NetflixContentDto> contentList) {
+		dao.insertNetflixcontent(contentList);
 	}
 
+	@Override
+	public NetflixContentDto netflixdetail(Long id) {
+		System.out.println(dao.netflixdetail(id));
+		return dao.netflixdetail(id);
+	}
+
+	
 }

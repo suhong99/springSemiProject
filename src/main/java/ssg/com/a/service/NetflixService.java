@@ -6,6 +6,6 @@ import ssg.com.a.dto.NetflixContentDto;
 
 public interface NetflixService {
 	
-	List<NetflixContentDto> getNetflixKoreanContent();
-	
+	void insertNetflixcontent(List<NetflixContentDto> contentList);
+	NetflixContentDto netflixdetail(Long id);
 }
