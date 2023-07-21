@@ -5,93 +5,87 @@
 <head>
 
 <style type="text/css">
-.divider:after,
-.divider:before {
-	content: "";
-	flex: 1;
-	height: 1px;
-	background: #eee;
+.authHeader {
+	color :white;
+	padding: 15px;
 }
-.h-custom {
+.authContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	width: 500px;	
+	height: 500px;
+}
+
+.innerContainer{
+	width: 100%;
+	height: 100%;
+	
+}
+
+.authInput{
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+	margin-bottom: 20px;
+	border-radius: 8px;
+	font-family: 15px;
+	font-weight: 700;
+}
+/* .h-custom {
 	height: calc(100% - 73px);
 }
 @media (max-width: 450px) {
 	.h-custom {
 		height: 100%;
 	}
-}
+} */
 .sec-100{
-	height: 500px;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
 }
 </style>
 <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
 </head>
 <body>
-<br><br>
-<div class="center">
+<div class="authContainer">
 <section class="sec-100">
+
   <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          class="img-fluid" alt="Sample image">
-      </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-      
+  		<h1 class="authHeader"> 로그인</h1>
+  		
         <form action="loginAf.do" method="post">
-          <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
-            <button type="button" class="btn btn-primary btn-floating mx-1e">
-			  <i class="fa fa-facebook-f"></i>
-			</button>
-			
-			<button type="button" class="btn btn-primary btn-floating mx-1">
-			  <i class="fa fa-twitter"></i>
-			</button>
-			
-			<button type="button" class="btn btn-primary btn-floating mx-1">
-			  <i class='fa fa-linkedin'></i>
-			</button>
-          </div>
-
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0">Or</p>
-          </div>
-
           <!-- ID input -->
-          <div class="form-outline mb-4">
-            <input type="text" id="id" name="id" class="form-control form-control-lg"
-              placeholder="Enter a valid id" />            
+          <div>
+            <input class="authInput" type="text" id="id" name="id"  placeholder="아이디" />            
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
-            <input type="password" id="pwd" name="pwd" class="form-control form-control-lg"
-              placeholder="Enter password" />            
+            <input class="authInput" type="password" id="pwd" name="pwd" placeholder="비밀번호" />            
           </div>
 
-          <div class="d-flex justify-content-between align-items-center">
-            <!-- Checkbox -->
-            <div class="form-check mb-0">
-              <input class="form-check-input me-2" id="chk_save_id" type="checkbox" value="" id="form2Example3" />
-              <label class="form-check-label" for="form2Example3">
-                Remember me
+
+          <div>
+            <button type="submit" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%">Login</button>
+              <!-- Checkbox -->
+            <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
+            <div>
+              <input class="form-check-input me-2" id="chk_save_id" style="accent-color :black;" type="checkbox" value="" id="form2Example3" />
+              <label class="form-check-label" style="color: #b3b3b3; font-size: 13px;"  for="form2Example3">
+               	로그인 정보 저장
               </label>
             </div>
-            <a href="#!" class="text-body">Forgot password?</a>
-          </div>
-
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                class="link-danger">Register</a></p>
+               <p class="small fw-bold mt-2 pt-1 mb-0"> <a href="#!"
+                class="link-danger" style="color: #b3b3b3; font-size: 13px;">회원가입</a></p>
+            </div>
+           
           </div>
           
         </form>
         
-      </div>
-    </div>
   </div>  
 </section>
 </div>

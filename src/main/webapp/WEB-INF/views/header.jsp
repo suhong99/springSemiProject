@@ -37,8 +37,11 @@
 			</div>
 		<% }else{ %>	<!-- 로그인이 된 경우 -->
 			<div class="headerLogin">
-			 	<a href="./logout.do">logout</a>		
+				<a href="#" id="loginBtn">login</a>		
 			</div>
+			<!-- <div class="headerLogin">
+			 	<a href="./logout.do">logout</a>		
+			</div> -->
 		<%	} %>
 	</div>
 </div>
