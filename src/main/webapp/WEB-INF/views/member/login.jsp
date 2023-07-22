@@ -56,7 +56,7 @@
   <div class="container-fluid h-custom">
   		<h1 class="authHeader"> 로그인</h1>
   		
-        <form action="loginAf.do" method="post">
+        <form action="loginAf.do">
           <!-- ID input -->
           <div>
             <input class="authInput" type="text" id="id" name="id"  placeholder="아이디" />            
