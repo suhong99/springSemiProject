@@ -65,6 +65,7 @@ public class MemberController {
 		return "message";
 	}	
 	
+	@ResponseBody
 	@PostMapping("loginAf.do")
 	public String login(MemberDto mem, Model model, HttpServletRequest request) {
 		System.out.println("MemberController login() " + new Date());
@@ -75,9 +76,8 @@ public class MemberController {
 			request.getSession().setAttribute("login", dto);	// session에 저장			
 			loginmsg = "LOGIN_YES";
 		}
-		model.addAttribute("loginmsg", loginmsg);
 		
-		return "message";
+		return loginmsg;
 	}
 }
 

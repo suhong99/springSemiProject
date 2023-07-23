@@ -36,22 +36,12 @@
 				<a href="#" id="loginBtn">login</a>		
 			</div>
 		<% }else{ %>	<!-- 로그인이 된 경우 -->
+			
 			<div class="headerLogin">
-				<a href="#" id="loginBtn">login</a>		
-			</div>
-			<!-- <div class="headerLogin">
 			 	<a href="./logout.do">logout</a>		
-			</div> -->
+			</div> 
 		<%	} %>
 	</div>
 </div>
-<!-- Add the following script at the end -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const modal = document.getElementById('modal');
-
-  
-});
-</script>
 </body>
 </html>

@@ -54,37 +54,35 @@
 <section class="sec-100">
 
   <div class="container-fluid h-custom">
-  		<h1 class="authHeader"> 로그인</h1>
+		<h1 class="authHeader"> 로그인</h1>
   		
-        <form action="loginAf.do">
-          <!-- ID input -->
-          <div>
-            <input class="authInput" type="text" id="id" name="id"  placeholder="아이디" />            
-          </div>
+      <form id="loginForm">
+        <!-- ID input -->
+        <div>
+            <input class="authInput" type="text" id="loginId" name="loginId" placeholder="아이디" />            
+        </div>
 
-          <!-- Password input -->
-          <div class="form-outline mb-3">
-            <input class="authInput" type="password" id="pwd" name="pwd" placeholder="비밀번호" />            
-          </div>
+        <!-- Password input -->
+        <div class="form-outline mb-3">
+            <input class="authInput" type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호" />            
+        </div>
 
-
-          <div>
-            <button type="submit" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%">Login</button>
-              <!-- Checkbox -->
+        <div>
+            <button class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" type="button" onclick="login()">Login</button>
+            <!-- Checkbox -->
             <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
-            <div>
-              <input class="form-check-input me-2" id="chk_save_id" style="accent-color :black;" type="checkbox" value="" id="form2Example3" />
-              <label class="form-check-label" style="color: #b3b3b3; font-size: 13px;"  for="form2Example3">
-               	로그인 정보 저장
-              </label>
+                <div>
+                    <input class="form-check-input me-2" id="chk_save_id" style="accent-color :black;" type="checkbox" value="" id="form2Example3" />
+                    <label class="form-check-label" style="color: #b3b3b3; font-size: 13px;"  for="form2Example3">
+                        로그인 정보 저장
+                    </label>
+                </div>
+                <p class="small fw-bold mt-2 pt-1 mb-0">
+                    <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;">회원가입</a>
+                </p>
             </div>
-               <p class="small fw-bold mt-2 pt-1 mb-0"> <a href="#!"
-                class="link-danger" style="color: #b3b3b3; font-size: 13px;">회원가입</a></p>
-            </div>
-           
-          </div>
-          
-        </form>
+        </div>
+    </form>
         
   </div>  
 </section>
@@ -92,6 +90,37 @@
 
 
 <script type="text/javascript">
+		function login() {
+		    // 폼 데이터 가져오기
+		    const formData = {
+		        id: $("#loginId").val(),
+		        pwd: $("#loginPwd").val()
+		    };
+			console.log(formData);
+		    // Ajax로 서버에 POST 요청 보내기
+		    $.ajax({
+		        url: "loginAf.do",
+		        type: "post",
+		        data: formData,
+		        success: function(response) {
+		        	console.log(response);
+		        	 const loginMsg = response.trim();
+		             if (loginMsg === "LOGIN_NO") {
+		                 alert("아이디나 비밀번호를 확인해 주십시오");
+		             } else if (loginMsg === "LOGIN_YES") {
+		                 alert("로그인 되었습니다.");	            
+		             } else {
+		                 alert("로그인 처리 중 에러가 발생했습니다.");
+		             }
+		        },
+		        error: function() {
+		            alert("서버와 통신 중 에러가 발생했습니다.");
+		        }
+		    });
+		}
+
+
+
 /*
 	session : server에 저장. login 정보.	Object
 	cookie : client에 저장. id를 저장. pw 저장	String 
