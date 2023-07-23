@@ -84,10 +84,7 @@
 			        			<%= content.getTitle() %>
 			        		</div>
 			            </div>
-			            <!-- 
-			            <p><a>제목: <%= content.getTitle() %></a></p>
-			            <p>요약: <%= content.getOverview() %></p>
-			            <p>개봉일: <%= content.getReleaseDate() %></p> -->
+			            
 		            <% 
 			    	} 
 		    	%>
