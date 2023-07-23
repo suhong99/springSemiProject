@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import ssg.com.a.dto.NetflixContentDto;
+import ssg.com.a.dto.NetflixTvDto;
 
 public class NetflixUtil {
     
@@ -162,5 +163,43 @@ public class NetflixUtil {
 			return list;
     }
     
-    
+    public static List<NetflixTvDto> getNetflixTvJson() throws UnsupportedEncodingException, IOException, ParseException  {
+    	// API를 통해 추출한 JSON형태 결과를 저장할 변수
+    	String result = "";
+    	
+        // themoviedb API 키
+        String apiKey = "d5aa3423c1d19e90331f7ffda7962079";
+        
+        // 한글 컨텐츠의 언어 코드 (한국어)
+        String language = "ko-KR";
+        
+        // Netflix 컨텐츠 ID = 8
+        String netflixId = "8";
+        
+        // 국가
+        String region = "KR";
+
+        
+            // API 요청을 보낼 URL -- movie파트
+            URL url = new URL("https://api.themoviedb.org/3/discover/tv"
+                    + "?api_key=" + apiKey
+                    + "&watch_region=" + region
+                    + "&with_watch_providers=" + netflixId
+                    + "&language=" + language);
+            		//+ "&page"= + num);
+            
+
+            BufferedReader bf;
+
+            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+
+            result = bf.readLine();
+
+            // API 응답 JSON 파싱
+            JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
+			JSONArray list = (JSONArray) jsonObject.get("results");
+			
+			return list;
+    }
 }

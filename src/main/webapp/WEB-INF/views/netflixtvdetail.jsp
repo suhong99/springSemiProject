@@ -1,9 +1,8 @@
 <%@page import="ssg.com.a.dto.NetflixTvDto"%>
-<%@page import="ssg.com.a.dto.NetflixContentDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	NetflixContentDto dto = (NetflixContentDto)request.getAttribute("netflixDto"); //moive
+	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //tv
 	
 	System.out.println(dto);
 %>
@@ -75,14 +74,14 @@
 		<div class="outside">
 			<div class="container">
 				<div class="image">
-					<img src="https://image.tmdb.org/t/p/w500<%=dto.getPosterpath() %>"
+					<img src="https://image.tmdb.org/t/p/w500<%= dto.getPosterpath() %>"
 					width="400px" height="auto">
 				</div>
 				<div class="text">
 					<div class="title">
-						<!-- 영화 제목과 개봉일 연도 표시 -->
+						<!-- tv 제목과 개봉일 연도 표시 -->
 						<span><%= dto.getTitle() %></span>&nbsp;
-						<span style="color: gray;">(<%=dto.getReleaseDate().substring(0, 4) %>)</span>
+						<span style="color: gray;">(<%=dto.getReleasedate().substring(0, 4) %>)</span>
 						<br><br>
 					</div>
 					<div class="score">
@@ -111,7 +110,7 @@
 						%>
 						</p>
 						<b>인기도:</b> <%= dto.getPopularity() %><br>
-				        <b>개봉일:</b> <%= dto.getReleaseDate() %><br><br>
+				        <b>개봉일:</b> <%= dto.getReleasedate() %><br><br>
 						<button id="back" onclick="back()">Back to home</button>
 					</div>
 				</div>

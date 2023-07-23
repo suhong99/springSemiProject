@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ssg.com.a.dto.NetflixContentDto;
+import ssg.com.a.dto.NetflixTvDto;
 
 @Repository
 public class NetflixDaoImpl implements NetflixDao{
@@ -20,10 +21,20 @@ public class NetflixDaoImpl implements NetflixDao{
 	public void insertNetflixcontent(List<NetflixContentDto> contentList) {
 		session.insert(ns+"insertNetflixcontent", contentList);
 	}
+	
+	@Override
+	public void insertNetflixtvcontent(List<NetflixTvDto> contentList) {
+		session.insert(ns+"insertNetflixtvcontent", contentList);
+	}
 
 	@Override
 	public NetflixContentDto netflixdetail(Long id) {
 		return session.selectOne(ns+"netflixdetail", id);
+	}
+
+	@Override
+	public NetflixTvDto netflixtvdetail(Long id) {
+		return session.selectOne(ns+"netflixtvdetail", id);
 	}
 
 	

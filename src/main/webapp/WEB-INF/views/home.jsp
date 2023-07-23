@@ -1,3 +1,4 @@
+<%@page import="ssg.com.a.dto.NetflixTvDto"%>
 <%@page import="ssg.com.a.dto.NetflixContentDto"%>
 <%@page import="java.util.List"%>
 <%@page import="ssg.com.a.util.NetflixUtil"%>
@@ -7,7 +8,11 @@
 <%
 	List<NetflixContentDto> list = NetflixUtil.getNetflixMovie();
 	List<NetflixContentDto> list2 = NetflixUtil.getNetflixTv();
-	List<NetflixContentDto> listJson = NetflixUtil.getNetflixMovieJson();
+	List<NetflixContentDto> listMovieJson = NetflixUtil.getNetflixMovieJson();
+	List<NetflixTvDto> listTvJson = NetflixUtil.getNetflixTvJson();
+
+	//System.out.println("json: "+listTvJson);
+	//System.out.println("json: "+listMovieJson);
 	//String imgUrl = "https://image.tmdb.org/t/p/w500" + list.get(0).getPosterUrl();
 	//System.out.println("https://image.tmdb.org/t/p/w500"+list.get(0).getPosterUrl());
 %>
@@ -27,7 +32,7 @@
         
         <!-- TOP20 Movie JSON 컨트롤러에 넘겨주기 -->
         <script type="text/javascript">
-        	let contentList = {"contentList": JSON.stringify(<%=listJson%>)}
+        	let contentList = {"contentList": JSON.stringify(<%=listMovieJson%>)}
 	        $.ajax({
 	            url : "insertNetflixcontent.do",
 	            type : "POST",
@@ -37,11 +42,28 @@
 	            },
 	            
 	            error : function(e) {
-	            	alert("실패");
+	            	alert("movie 실패");
 	            }
 	         });
         </script>
         
+        <!-- TOP20 TV JSON 컨트롤러에 넘겨주기 -->
+        <script type="text/javascript">
+        	let tvcontentList = {"tvcontentList": JSON.stringify(<%=listTvJson%>)}
+	        $.ajax({
+	            url : "insertNetflixtvcontent.do",
+	            type : "POST",
+	            data : tvcontentList,
+	            success : function(data) {
+	            	alert("TV JSON 보내기 성공 [home.jsp]");
+	            },
+	            
+	            error : function(e) {
+	            	alert("TV 실패");
+	            	//console.log(tvcontentList);
+	            }
+	         });
+        </script> 
 		
 		<br><br>
 	    <div style="width: 1800px; height:500px;">
@@ -77,7 +99,7 @@
 		    		for (NetflixContentDto content : list2) { 
 			    	%>
 			        	<div class="poster-container">
-			        		<a href=""> <!-- 클릭시 이동할 페이지 -->
+			        		<a href="netflixtvdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
 			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
