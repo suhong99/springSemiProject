@@ -129,7 +129,12 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
     <!-- Modal -->
     <div class="modal-container" id="modal">
       <div id="modalContent">
-        <jsp:include page="member/login.jsp" flush="false" />
+      	<div id="loginForm">
+	        <jsp:include page="member/login.jsp" flush="false"/>
+      	</div>
+      	<div id="regiForm" style="display: none;">
+	        <jsp:include page="member/regi.jsp" flush="false"/>
+      	</div>
       </div>
     </div>
     <script>
@@ -149,6 +154,18 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
           }
         });
       });
+      
+      // 로그인 및 회원가입 폼 이동
+	   function toggleForm(formName) {
+	    if (formName === 'login') {
+	      document.getElementById('loginForm').style.display = 'block';
+	      document.getElementById('regiForm').style.display = 'none';
+	    } else if (formName === 'regi') {
+	      document.getElementById('loginForm').style.display = 'none';
+	      document.getElementById('regiForm').style.display = 'block';
+	    }
+	  }
+  
     </script>
   </body>
 </html>

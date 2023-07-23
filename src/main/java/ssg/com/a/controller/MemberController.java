@@ -51,23 +51,23 @@ public class MemberController {
 		return msg;
 	}
 	
+	@ResponseBody
 	@PostMapping("regiAf.do")
-	public String regiAf(MemberDto mem, Model model) {
+	public String regiAf(MemberDto mem) {
 		System.out.println("MemberController regiAf() " + new Date());
-		
+		System.out.println("회원가입에서 mem"+ mem);
 		boolean isS = service.addmember(mem);
-		String message = "MEMBER_YES";
+		String regimsg = "MEMBER_YES";
 		if(isS == false) {
-			message = "MEMBER_NO";
+			regimsg = "MEMBER_NO";
 		}
-		model.addAttribute("message", message);
 		
-		return "message";
+		return regimsg;
 	}	
 	
 	@ResponseBody
 	@PostMapping("loginAf.do")
-	public String login(MemberDto mem, Model model, HttpServletRequest request) {
+	public String login(MemberDto mem, HttpServletRequest request) {
 		System.out.println("MemberController login() " + new Date());
 		
 		MemberDto dto = service.login(mem);
@@ -78,6 +78,13 @@ public class MemberController {
 		}
 		
 		return loginmsg;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "logout.do")
+	public void logout(HttpServletRequest request) {
+		System.out.println("MemberController logout() " + new Date());		
+		request.getSession().removeAttribute("login");		
 	}
 }
 

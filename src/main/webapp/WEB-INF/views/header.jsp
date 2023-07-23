@@ -29,7 +29,7 @@
 
 <body>
 <div class="header">
-	<div style="height: 220px;" class="center">
+	<div style="height: 220px;" >
 	<h1>header</h1><br><br><br><br><br><br>
 		<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->
 			<div class="headerLogin">
@@ -38,10 +38,28 @@
 		<% }else{ %>	<!-- 로그인이 된 경우 -->
 			
 			<div class="headerLogin">
-			 	<a href="./logout.do">logout</a>		
+			 	<a href="#" id="logoutBtn">logout</a>		
 			</div> 
 		<%	} %>
 	</div>
 </div>
+
+<script>
+ 	 //로그아웃
+    document.getElementById("logoutBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        $.ajax({
+	        url: "logout.do",
+	        type: "get",
+	        success: function() {
+	           alert("로그아웃 되었습니다.");
+	           location.reload();
+	        },
+	        error: function() {
+	            alert("서버와 통신 중 에러가 발생했습니다.");
+	        }
+	    });
+    });
+</script>
 </body>
 </html>

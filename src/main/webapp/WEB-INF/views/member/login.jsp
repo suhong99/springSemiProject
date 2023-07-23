@@ -53,10 +53,10 @@
 <div class="authContainer">
 <section class="sec-100">
 
-  <div class="container-fluid h-custom">
+  <div class="container-fluid h-custom" >
 		<h1 class="authHeader"> 로그인</h1>
   		
-      <form id="loginForm">
+      <form >
         <!-- ID input -->
         <div>
             <input class="authInput" type="text" id="loginId" name="loginId" placeholder="아이디" />            
@@ -68,7 +68,7 @@
         </div>
 
         <div>
-            <button class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" type="button" onclick="login()">Login</button>
+            <button class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">Login</button>
             <!-- Checkbox -->
             <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
                 <div>
@@ -78,7 +78,7 @@
                     </label>
                 </div>
                 <p class="small fw-bold mt-2 pt-1 mb-0">
-                    <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;">회원가입</a>
+                    <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('regi')">회원가입</a>
                 </p>
             </div>
         </div>
@@ -108,7 +108,8 @@
 		             if (loginMsg === "LOGIN_NO") {
 		                 alert("아이디나 비밀번호를 확인해 주십시오");
 		             } else if (loginMsg === "LOGIN_YES") {
-		                 alert("로그인 되었습니다.");	            
+		                 alert("로그인 되었습니다.");
+		                 location.reload();
 		             } else {
 		                 alert("로그인 처리 중 에러가 발생했습니다.");
 		             }
