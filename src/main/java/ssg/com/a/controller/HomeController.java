@@ -26,7 +26,7 @@ public class HomeController {
 	@GetMapping("netflixlist.do")
 	public String netflixlist(Model model) {
 		System.out.println("HomeController netflixlist() " + new Date());
-
+		
 		return "netflixlist";
 	}
 }

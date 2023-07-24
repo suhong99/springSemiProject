@@ -3,5 +3,52 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Netflix">
+	 
+	 <!-- top 20 movie정보 db에 넣기 -->
+	 <insert id="insertNetflixcontent" parameterType="java.util.List">
+        insert into movie (id, title, overview, posterpath, popularity, releasedate)
+        values 
+		<foreach collection="list" item="content" separator=","> <!-- 리스트 넘겨받아서 저장 -->
+            (
+            #{content.id},
+            #{content.title},
+            #{content.overview},
+            #{content.posterpath},
+            #{content.popularity},
+            #{content.releasedate}
+            )
+        </foreach>
+         on duplicate key update id = id; <!-- 중복된 키가 발생하면 아무 동작도 수행하도록 한다 --> 
+    </insert>
+    
+    <!-- top 20 tv정보 db에 넣기 -->
+	 <insert id="insertNetflixtvcontent" parameterType="java.util.List">
+        insert into tv (id, title, overview, posterpath, popularity, releasedate)
+        values 
+		<foreach collection="list" item="content" separator=","> <!-- 리스트 넘겨받아서 저장 -->
+            (
+            #{content.id},
+            #{content.title},
+            #{content.overview},
+            #{content.posterpath},
+            #{content.popularity},
+            #{content.releasedate}
+            )
+        </foreach>
+         on duplicate key update id = id; <!-- 중복된 키가 발생하면 아무 동작도 수행하도록 한다 --> 
+    </insert>
+    
+    <!-- movie 정보 디테일 -->
+    <select id="netflixdetail" parameterType="java.lang.Long" resultType="ssg.com.a.dto.NetflixContentDto">
+		select id, title, overview, posterpath, popularity, releasedate
+		from movie
+		where id = #{id}	
+	</select>
 	
+	<!-- TV 정보 디테일 -->
+    <select id="netflixtvdetail" parameterType="java.lang.Long" resultType="ssg.com.a.dto.NetflixTvDto">
+		select id, title, overview, posterpath, popularity, releasedate
+		from tv
+		where id = #{id}	
+	</select>
 </mapper>

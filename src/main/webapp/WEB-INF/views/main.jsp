@@ -48,7 +48,7 @@
 	</head>
 	<body>
 		<div align="center">
-			<table style="width:100%">
+			<table>
 				<tr>
 					<td>
 						<jsp:include page="header.jsp" flush="false" />

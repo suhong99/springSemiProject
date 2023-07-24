@@ -1,13 +1,13 @@
 package ssg.com.a.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true) // 만약 JSON 파일에 모르는 파라미터가 들어오면 무시하는 annotation
-public class NetflixContentDto {
+public class NetflixTvDto {
 	private Long id; // 컨텐츠 고유 아이디 
 	
+	@JsonProperty("name")
     private String title;
 	
     private String overview;
@@ -17,13 +17,14 @@ public class NetflixContentDto {
     
     private Double popularity;
     
-    @JsonProperty("release_date") // json null값으로 들어가서 key값 매핑시켜주기위해서
+    @JsonProperty("first_air_date")
     private String releasedate;
     
-    public NetflixContentDto() {
+    public NetflixTvDto() {
+    	
     }
 
-	public NetflixContentDto(Long id, String title, String overview, String posterpath, Double popularity,
+	public NetflixTvDto(Long id, String title, String overview, String posterpath, Double popularity,
 			String releasedate) {
 		super();
 		this.id = id;
@@ -33,8 +34,7 @@ public class NetflixContentDto {
 		this.popularity = popularity;
 		this.releasedate = releasedate;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -47,16 +47,13 @@ public class NetflixContentDto {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
 	public String getOverview() {
 		return overview;
 	}
-
 
 	public void setOverview(String overview) {
 		this.overview = overview;
@@ -70,29 +67,26 @@ public class NetflixContentDto {
 		this.posterpath = posterpath;
 	}
 
-	public Object getPopularity() {
+	public Double getPopularity() {
 		return popularity;
 	}
-
 
 	public void setPopularity(Double popularity) {
 		this.popularity = popularity;
 	}
 
-
-	public String getReleaseDate() {
+	public String getReleasedate() {
 		return releasedate;
 	}
 
-
-	public void setReleaseDate(String releasedate) {
+	public void setReleasedate(String releasedate) {
 		this.releasedate = releasedate;
 	}
 
 	@Override
 	public String toString() {
-		return "NetflixContentDto [id=" + id + ", title=" + title + ", overview=" + overview + ", posterpath="
-				+ posterpath + ", popularity=" + popularity + ", releasedate=" + releasedate + "]";
+		return "NetflixTvDto [id=" + id + ", title=" + title + ", overview=" + overview + ", posterpath=" + posterpath
+				+ ", popularity=" + popularity + ", releasedate=" + releasedate + "]";
 	}
 
 }

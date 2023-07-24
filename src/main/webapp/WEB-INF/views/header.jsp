@@ -7,40 +7,50 @@
 %>
 
 <html>
-<head>
-<style type="text/css">
-.header {
-	background: none;
-	margin: 0;
-	color: white;
-	height: 160px;
-}
-.headerLogin{	
-	text-align:right;
-	height: 60px;	
-	font-size: 24px;		
-}
-.headerLogin a:hover {
-	color: white;
-	text-decoration: none;
-}
-</style>
-</head>
+	<head>
+		<style type="text/css">
+		.header {
+			background: none;
+			background-color: black;
+			margin: 0;
+			color: white;
+			height: 160px;
+		}
+		.headerLogin{	
+			text-align:right;
+			height: 60px;	
+			font-size: 24px;		
+		}
+		.headerLogin a:hover {
+			color: white;
+			text-decoration: none;
+		}
+		#logo{
+			width: auto;
+			height: 140px;
+		}
+		</style>
+	</head>
 
-<body>
-<div class="header">
-	<div style="height: 220px;" class="center">
-	<h1>header</h1><br><br><br><br><br><br>
-		<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->
-			<div class="headerLogin">
-				<a href="./login.do">login</a>		
-			</div>
-		<% }else{ %>	<!-- 로그인이 된 경우 -->
-			<div class="headerLogin">
-			 	<a href="./logout.do">logout</a>		
-			</div>
-		<%	} %>
+	<body>
+	<div class="header">
+		<div>
+			<img alt="로고입니다" src="./images/netflixreview.png" id="logo">
+		</div>
+		<div style="height: 220px;" class="center">
+				<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->
+					<div class="headerLogin">
+						<a href="./login.do">login</a>		
+					</div>
+				<% }
+				
+				else{ %>	<!-- 로그인이 된 경우 -->
+					<div class="headerLogin">
+					 	<a href="./logout.do">logout</a>		
+					</div>
+				<%	
+				} %>
+		</div>
 	</div>
-</div>
-</body>
+	</body>
 </html>

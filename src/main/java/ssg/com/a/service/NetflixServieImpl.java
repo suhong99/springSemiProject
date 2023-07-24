@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ssg.com.a.dao.NetflixDao;
 import ssg.com.a.dto.NetflixContentDto;
+import ssg.com.a.dto.NetflixTvDto;
 
 @Service
 public class NetflixServieImpl implements NetflixService{
@@ -15,8 +16,24 @@ public class NetflixServieImpl implements NetflixService{
 	NetflixDao dao;
 
 	@Override
-	public List<NetflixContentDto> getNetflixKoreanContent() {
-		return dao.getNetflixKoreanContent();
+	public void insertNetflixcontent(List<NetflixContentDto> contentList) {
+		dao.insertNetflixcontent(contentList);
 	}
 
+	@Override
+	public void insertNetflixtvcontent(List<NetflixTvDto> contentList) {
+		dao.insertNetflixtvcontent(contentList);
+	}
+	
+	@Override
+	public NetflixContentDto netflixdetail(Long id) {
+		return dao.netflixdetail(id);
+	}
+
+	@Override
+	public NetflixTvDto netflixtvdetail(Long id) {
+		return dao.netflixtvdetail(id);
+	}
+
+	
 }
