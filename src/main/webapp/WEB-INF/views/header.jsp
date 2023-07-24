@@ -14,16 +14,27 @@
 			background-color: black;
 			margin: 0;
 			color: white;
-			height: 160px;
+			height: 180px;
+			display: flex;
+		    flex-direction: row;
+		    align-items: flex-end;
+		    justify-content: space-between;
+		    padding-right: 2%;
 		}
 		.headerLogin{	
 			text-align:right;
-			height: 60px;	
-			font-size: 24px;		
+			font-size: 24px;
+			padding-bottom: 20px;
+		 	font-weight: 900;				
 		}
+		.headerLogin a {
+		  color: white;
+		}
+		
 		.headerLogin a:hover {
-			color: white;
+			color: #F28888;
 			text-decoration: none;
+			font-size: 26px;
 		}
 		#logo{
 			width: auto;
@@ -37,16 +48,15 @@
 	<div>
 		<img alt="로고입니다" src="./images/netflixreview.png" id="logo">
 	</div>
-	<div style="height: 220px;" >
-	<h1>header</h1><br><br><br><br><br><br>
+	<div>
 		<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->
 			<div class="headerLogin">
-				<a href="#" id="loginBtn">login</a>		
+				<a href="#" id="loginBtn">로그인</a>		
 			</div>
 		<% }else{ %>	<!-- 로그인이 된 경우 -->
 			
 			<div class="headerLogin">
-			 	<a href="#" id="logoutBtn">logout</a>		
+			 	<a href="#" id="logoutBtn">로그아웃</a>		
 			</div> 
 		<%	} %>
 	</div>

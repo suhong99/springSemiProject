@@ -35,6 +35,7 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
         width: 1000px;
         text-align: center;
       }
+/*       // 필요 없을듯? */
       th {
         background: royalblue;
         color: white;
@@ -100,7 +101,7 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
   </head>
   <body>
     <div align="center">
-      <table style="width: 100%">
+      <table style="width: 100%;display: flex; justify-content: center; align-items: center;">
         <tr>
           <td>
             <jsp:include page="header.jsp" flush="false" />

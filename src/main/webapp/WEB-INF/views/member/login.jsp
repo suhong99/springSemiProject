@@ -130,7 +130,7 @@
 
 let user_id = $.cookie("user_id");
 if(user_id != null){	// 저장한 아이디가 있음
-	$("#id").val( user_id );
+	$("#loginId").val( user_id );
 	$("#chk_save_id").prop("checked", true);	// 첵크박스에 첵크가 되게 해준다
 }
 
@@ -140,12 +140,12 @@ $("#chk_save_id").click(function(){
 	
 	if( $("#chk_save_id").is(":checked") == true ){	// id를 저장 -> cookie
 		
-		if( $("#id").val().trim() == "" ){	// 빈문자열이었을 경우
+		if( $("#loginId").val().trim() == "" ){	// 빈문자열이었을 경우
 			alert('id를 입력해 주십시오');
 			$("#chk_save_id").prop("checked", false);
 		}else{	
 			// cookie 저장
-			$.cookie("user_id", $("#id").val().trim(), { expires:7, path:'./' });
+			$.cookie("user_id", $("#loginId").val().trim(), { expires:7, path:'./' });
 		}		
 		
 	}else{	// cookie에 저장하지 않음(삭제)
