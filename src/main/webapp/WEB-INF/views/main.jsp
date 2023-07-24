@@ -152,6 +152,11 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
         window.addEventListener("click", function (event) {
           if (event.target === modal) {
             modal.classList.remove("show-modal");
+            // 로그인화면으로 돌아가기	
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("regiForm").style.display = "none";
+            // 회원가입 p태그 비우기
+            $("#idcheck").text("");
           }
         });
       });

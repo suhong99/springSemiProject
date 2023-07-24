@@ -53,7 +53,7 @@
 <div class="authContainer">
 <section class="sec-100">
 
-  <div class="container-fluid h-custom" >
+  <div class="container-fluid" >
 		<h1 class="authHeader"> 로그인</h1>
   		
       <form>
