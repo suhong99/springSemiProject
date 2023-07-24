@@ -26,28 +26,26 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <style type="text/css">
-      *{
-      	margin: 0;
-      	padding: 0;
+      * {
+        margin: 0;
+        padding: 0;
       }
-      .center{
-      	margin: auto;
-      	width: 1000px;
-      	text-align: center;
+      .center {
+        margin: auto;
+        width: 1000px;
+        text-align: center;
       }
-      th{
-      	background: royalblue;
-      	color: white;
+      th {
+        background: royalblue;
+        color: white;
       }
       tr {
-         line-height: 12px;
+        line-height: 12px;
       }
       td {
-      	margin-top: 0px;
-      	padding-top: 0px;
+        margin-top: 0px;
+        padding-top: 0px;
       }
-
-
 
       /* 모달 */
       .modal-container {
@@ -71,20 +69,19 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
         left: 50%;
         transform: translate(-50%, -50%);
         max-width: 100%;
-        background-color: rgba(0,0,0,.75);
-    	border-radius: 4px;
-    	box-sizing: border-box;
-		margin: 0;
-    	min-height: 515px;
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin: 0;
+        min-height: 515px;
         animation-name: modalopen;
         animation-duration: var(--modal-duration);
-		display: flex;
-    	flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width:600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
       }
-
 
       @keyframes modalopen {
         from {
@@ -94,6 +91,7 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
         to {
           opacity: 1;
         }
+      }
     </style>
     <link
       rel="stylesheet"
@@ -129,26 +127,26 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
     <!-- Modal -->
     <div class="modal-container" id="modal">
       <div id="modalContent">
-      	<div id="loginForm">
-	        <jsp:include page="member/login.jsp" flush="false"/>
-      	</div>
-      	<div id="regiForm" style="display: none;">
-	        <jsp:include page="member/regi.jsp" flush="false"/>
-      	</div>
+        <div id="loginForm">
+          <jsp:include page="member/login.jsp" flush="false" />
+        </div>
+        <div id="regiForm" style="display: none">
+          <jsp:include page="member/regi.jsp" flush="false" />
+        </div>
       </div>
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("modal");
-    	const loginBtn = document.getElementById("loginBtn");
-		
-    	if(loginBtn){    		
-	        document
-	          .getElementById("loginBtn")
-	          .addEventListener("click", function () {
-	            modal.classList.add("show-modal");
-	          });
-    	}
+        const loginBtn = document.getElementById("loginBtn");
+
+        if (loginBtn) {
+          document
+            .getElementById("loginBtn")
+            .addEventListener("click", function () {
+              modal.classList.add("show-modal");
+            });
+        }
 
         // 외부 클릭 시 모달 숨기기
         window.addEventListener("click", function (event) {
@@ -157,18 +155,17 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
           }
         });
       });
-      
+
       // 로그인 및 회원가입 폼 이동
-	   function toggleForm(formName) {
-	    if (formName === 'login') {
-	      document.getElementById('loginForm').style.display = 'block';
-	      document.getElementById('regiForm').style.display = 'none';
-	    } else if (formName === 'regi') {
-	      document.getElementById('loginForm').style.display = 'none';
-	      document.getElementById('regiForm').style.display = 'block';
-	    }
-	  }
-  
+      function toggleForm(formName) {
+        if (formName === "login") {
+          document.getElementById("loginForm").style.display = "block";
+          document.getElementById("regiForm").style.display = "none";
+        } else if (formName === "regi") {
+          document.getElementById("loginForm").style.display = "none";
+          document.getElementById("regiForm").style.display = "block";
+        }
+      }
     </script>
   </body>
 </html>
