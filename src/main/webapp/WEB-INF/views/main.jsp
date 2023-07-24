@@ -140,12 +140,15 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("modal");
-
-        document
-          .getElementById("loginBtn")
-          .addEventListener("click", function () {
-            modal.classList.add("show-modal");
-          });
+    	const loginBtn = document.getElementById("loginBtn");
+		
+    	if(loginBtn){    		
+	        document
+	          .getElementById("loginBtn")
+	          .addEventListener("click", function () {
+	            modal.classList.add("show-modal");
+	          });
+    	}
 
         // 외부 클릭 시 모달 숨기기
         window.addEventListener("click", function (event) {

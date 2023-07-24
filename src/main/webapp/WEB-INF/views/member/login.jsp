@@ -56,7 +56,7 @@
   <div class="container-fluid h-custom" >
 		<h1 class="authHeader"> 로그인</h1>
   		
-      <form >
+      <form>
         <!-- ID input -->
         <div>
             <input class="authInput" type="text" id="loginId" name="loginId" placeholder="아이디" />            
@@ -68,7 +68,7 @@
         </div>
 
         <div>
-            <button class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">Login</button>
+            <button type="button" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">Login</button>
             <!-- Checkbox -->
             <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
                 <div>
@@ -90,7 +90,8 @@
 
 
 <script type="text/javascript">
-		function login() {
+		function login(event) {
+			// event.preventDefault();
 		    // 폼 데이터 가져오기
 		    const formData = {
 		        id: $("#loginId").val(),

@@ -45,21 +45,24 @@
 </div>
 
 <script>
- 	 //로그아웃
-    document.getElementById("logoutBtn").addEventListener("click", function(e) {
-        e.preventDefault();
-        $.ajax({
-	        url: "logout.do",
-	        type: "get",
-	        success: function() {
-	           alert("로그아웃 되었습니다.");
-	           location.reload();
-	        },
-	        error: function() {
-	            alert("서버와 통신 중 에러가 발생했습니다.");
-	        }
+	const logoutBtn = document.getElementById("logoutBtn");
+	if (logoutBtn) {
+	 	 //로그아웃
+	    document.getElementById("logoutBtn").addEventListener("click", function(e) {
+	        e.preventDefault();
+	        $.ajax({
+		        url: "logout.do",
+		        type: "get",
+		        success: function() {
+		           alert("로그아웃 되었습니다.");
+		           location.reload();
+		        },
+		        error: function() {
+		            alert("서버와 통신 중 에러가 발생했습니다.");
+		        }
+		    });
 	    });
-    });
+ 	 }
 </script>
 </body>
 </html>
