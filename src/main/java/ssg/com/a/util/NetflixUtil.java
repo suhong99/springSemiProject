@@ -61,7 +61,7 @@ public class NetflixUtil {
 			    String title = (String) movie.get("title");
 			    String overview = (String) movie.get("overview");
 			    String posterPath = (String) movie.get("poster_path"); // https://image.tmdb.org/t/p/w500" + posterPath
-			    Double popularity = (Double) movie.get("popularity"); 
+			    Double popularity = Double.parseDouble(movie.get("popularity").toString()); 
 			    String releaseDate = (String) movie.get("release_date");
 			    
 
@@ -72,7 +72,7 @@ public class NetflixUtil {
 			return contentList;
     }
     
-    public static List<NetflixContentDto> getNetflixTv() throws UnsupportedEncodingException, IOException, ParseException  {
+    public static List<NetflixTvDto> getNetflixTv() throws UnsupportedEncodingException, IOException, ParseException  {
     	// API를 통해 추출한 JSON형태 결과를 저장할 변수
     	String result = "";
     	
@@ -107,7 +107,7 @@ public class NetflixUtil {
 			JSONArray list = (JSONArray) jsonObject.get("results");
 			
 			// DTO로 저장할 리스트
-	        List<NetflixContentDto> contentList = new ArrayList<>();
+	        List<NetflixTvDto> contentList = new ArrayList<>();
 			
 			// JSON 출력
 			for (Object obj : list) {
@@ -116,11 +116,11 @@ public class NetflixUtil {
 			    String title = (String) movie.get("name");
 			    String overview = (String) movie.get("overview");
 			    String posterPath = (String) movie.get("poster_path"); // https://image.tmdb.org/t/p/w500" + posterPath
-			    Double popularity = (Double) movie.get("popularity"); 
+			    Double popularity = Double.parseDouble(movie.get("popularity").toString()); 
 			    String releaseDate = (String) movie.get("first_air_date");
 			    
 
-			    NetflixContentDto content = new NetflixContentDto(id, title, overview, posterPath, popularity, releaseDate);
+			    NetflixTvDto content = new NetflixTvDto(id, title, overview, posterPath, popularity, releaseDate);
 	            contentList.add(content);
 			}
 			

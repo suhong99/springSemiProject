@@ -28,7 +28,11 @@
 	          
 	          <li class="nav-item" class="nav-link">
 	            <a href="./home2.do" class="nav-link">자유게시판</a>
-	          </li>        
+	          </li>   
+	          
+	          <li class="nav-item" class="nav-link">
+	            <a href="" class="nav-link">즐겨찾기</a>
+	          </li>     
 			</ul>
 		</div>
 		

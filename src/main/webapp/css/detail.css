@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+body{
+	margin: 0px;
+}
+
+.outside{
+	background-color: #0D0D0D;
+	
+}
+
+.container{
+	padding-left: 200px;
+	padding-right: 200px;
+	padding-top: 200px;
+	color: #F2F2F2;
+
+	display: flex; /* 컨테이너 안의 div들 좌우정렬 */
+	justify-content: flex-start; /* 중앙 정렬 */
+}
+
+.comment{
+	height: auto;
+	padding-left: 200px;
+	padding-right: 200px;
+	color: #F2F2F2;
+}
+
+.score{
+	height: 100px;
+}
+
+.button{
+	height: 50px;
+}
+
+/* 제목 부분 */
+.title {
+	height:75px;
+}
+
+.title > span{
+	font-size: 40px;
+	font-weight: bold;
+}
+
+/* 텍스트 전체 크기 */
+.text{
+	width: 1000px;
+	height: 600px;
+	padding-left: 40px;
+}
+
+/* 줄거리 */
+.content {
+	height: 350px;
+	font-size: 18px;
+}
+
+.content > span{
+	font-size: 25px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+/* 목록 버튼*/
+#back{
+	height: 50px; 
+	width: 200px;
+	border-radius: 5px;
+	color: #F2F2F2;
+	font-weight: bold;
+	font-size: 15px;
+	background: #D91E1E;
+	border: none;
+}
+
+#back:hover{
+	cursor: pointer;
+}
+
+.button {
+	margin-top: auto; 
+}

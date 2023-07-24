@@ -7,10 +7,10 @@
    
 <%
 	List<NetflixContentDto> list = NetflixUtil.getNetflixMovie();
-	List<NetflixContentDto> list2 = NetflixUtil.getNetflixTv();
+	List<NetflixTvDto> list2 = NetflixUtil.getNetflixTv();
 	List<NetflixContentDto> listMovieJson = NetflixUtil.getNetflixMovieJson();
 	List<NetflixTvDto> listTvJson = NetflixUtil.getNetflixTvJson();
-
+	
 	//System.out.println("json: "+listTvJson);
 	//System.out.println("json: "+listMovieJson);
 	//String imgUrl = "https://image.tmdb.org/t/p/w500" + list.get(0).getPosterUrl();
@@ -96,7 +96,7 @@
 		    </div>
 	        <div class="slider-container">
 	        	<% 
-		    		for (NetflixContentDto content : list2) { 
+		    		for (NetflixTvDto content : list2) { 
 			    	%>
 			        	<div class="poster-container">
 			        		<a href="netflixtvdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
