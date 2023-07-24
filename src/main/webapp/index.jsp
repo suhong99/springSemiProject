@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
 <%
-response.sendRedirect("home.do");
+	response.sendRedirect("home.do");
 %>

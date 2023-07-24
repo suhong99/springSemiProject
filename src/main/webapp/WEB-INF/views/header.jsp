@@ -7,28 +7,36 @@
 %>
 
 <html>
-<head>
-<style type="text/css">
-.header {
-	background: none;
-	margin: 0;
-	color: white;
-	height: 160px;
-}
-.headerLogin{	
-	text-align:right;
-	height: 60px;	
-	font-size: 24px;		
-}
-.headerLogin a:hover {
-	color: white;
-	text-decoration: none;
-}
-</style>
-</head>
+	<head>
+		<style type="text/css">
+		.header {
+			background: none;
+			background-color: black;
+			margin: 0;
+			color: white;
+			height: 160px;
+		}
+		.headerLogin{	
+			text-align:right;
+			height: 60px;	
+			font-size: 24px;		
+		}
+		.headerLogin a:hover {
+			color: white;
+			text-decoration: none;
+		}
+		#logo{
+			width: auto;
+			height: 140px;
+		}
+		</style>
+	</head>
 
 <body>
 <div class="header">
+	<div>
+		<img alt="로고입니다" src="./images/netflixreview.png" id="logo">
+	</div>
 	<div style="height: 220px;" >
 	<h1>header</h1><br><br><br><br><br><br>
 		<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->
@@ -64,5 +72,6 @@
 	    });
  	 }
 </script>
+
 </body>
 </html>

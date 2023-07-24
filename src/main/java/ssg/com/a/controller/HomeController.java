@@ -22,4 +22,11 @@ public class HomeController {
 		model.addAttribute("content", "home2");
 		return "main";
 	}
+	
+	@GetMapping("netflixlist.do")
+	public String netflixlist(Model model) {
+		System.out.println("HomeController netflixlist() " + new Date());
+		
+		return "netflixlist";
+	}
 }
