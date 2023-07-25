@@ -1,3 +1,4 @@
+<%@page import="ssg.com.a.dto.MemberDto"%>
 <%@page import="ssg.com.a.dto.NetflixTvDto"%>
 <%@page import="ssg.com.a.dto.NetflixContentDto"%>
 <%@page import="java.util.List"%>
@@ -10,6 +11,8 @@
 	List<NetflixTvDto> list2 = NetflixUtil.getNetflixTv();
 	List<NetflixContentDto> listMovieJson = NetflixUtil.getNetflixMovieJson();
 	List<NetflixTvDto> listTvJson = NetflixUtil.getNetflixTvJson();
+	
+	MemberDto mem = (MemberDto)session.getAttribute("login");
 	
 	//System.out.println("json: "+listTvJson);
 	//System.out.println("json: "+listMovieJson);

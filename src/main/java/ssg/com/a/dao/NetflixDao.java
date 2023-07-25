@@ -26,4 +26,7 @@ public interface NetflixDao {
 	
 	// 컨텐츠 평균평점
 	Double avg(Long seq);
+	
+	// 넷플릭스 댓글지우기
+	int commentDelete(NetflixComment comment);
 }

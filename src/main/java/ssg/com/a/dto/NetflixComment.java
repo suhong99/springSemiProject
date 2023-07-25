@@ -11,6 +11,13 @@ public class NetflixComment {
 	public NetflixComment() {
 		
 	}
+	
+	// 삭제용
+	public NetflixComment(int comment_id, int seq) {
+		super();
+		this.comment_id = comment_id;
+		this.seq = seq;
+	}
 
 	public NetflixComment(int comment_id, int seq, String id, String content, String wdate, Double rating) {
 		super();

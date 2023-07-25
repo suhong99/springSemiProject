@@ -53,6 +53,10 @@ public class NetflixDaoImpl implements NetflixDao{
 		return session.selectOne(ns + "avg", seq);
 	}
 
+	@Override
+	public int commentDelete(NetflixComment comment) {
+		return session.delete(ns + "commentDelete", comment);
+	}
 	
 	
 }

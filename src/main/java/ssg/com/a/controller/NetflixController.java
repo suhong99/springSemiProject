@@ -125,7 +125,7 @@ public class NetflixController {
 		else {
 			System.out.println("댓글 작성 실패");
 		}
-		
+
 		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
 		return "redirect:/netflixtvdetail.do?id=" + NetflixComment.getSeq();
 	}
@@ -137,6 +137,24 @@ public class NetflixController {
 		System.out.println("NetflixController commentList()" + new Date());
 		
 		return service.commentList(seq);
+	}
+	
+	/* 넷플릭스 디테일창 댓글 삭제 */
+	@PostMapping("commentDeleteAf.do") 
+	public String commentDeleteAf(NetflixComment comment) {
+		System.out.println("NetflixController commentDeleteAf()" + new Date());
+		System.out.println(comment);
+		boolean isS = service.commentDelete(comment);
+
+		if (isS) {
+			System.out.println("댓글 삭제 성공");
+		}
+		else {
+			System.out.println("댓글 삭제 실패");
+		}
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/netflixdetail.do?id=" + comment.getSeq();
 	}
 	
 }	

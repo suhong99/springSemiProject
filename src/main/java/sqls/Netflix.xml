@@ -61,11 +61,17 @@
 	
 	<!-- 넷플릭스 디테일창 댓글 리스트, 최신순으로 (인기 댓글순이나 다른걸로 바꿔도됨) -->
 	<select id="commentList" parameterType="java.lang.Long" resultType="ssg.com.a.dto.NetflixComment">
-		select seq, id, content, wdate, rating
+		select comment_id, seq, id, content, wdate, rating
 		from netflixcomment
 		where seq = #{seq}
 		order by wdate desc 
 	</select>
+	
+	<!-- 넷플릭스 댓글 삭제 -->
+	<delete id="commentDelete" parameterType="ssg.com.a.dto.NetflixComment">
+		delete from netflixcomment
+		where comment_id = #{comment_id}
+	</delete>
 	
 	<!-- 평균 평점 불러오기 -->
 	<select id="avg" parameterType="java.lang.Long" resultType="Double">
@@ -73,4 +79,5 @@
 		from netflixcomment
 		where seq = #{seq};
 	</select>
+	
 </mapper>

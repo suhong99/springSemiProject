@@ -15,4 +15,5 @@ public interface NetflixService {
 	boolean commentWrite(NetflixComment comment);
 	List<NetflixComment> commentList(Long seq);
 	Double avg(Long seq);
+	boolean commentDelete(NetflixComment comment);
 }

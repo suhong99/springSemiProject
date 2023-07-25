@@ -19,6 +19,31 @@
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./css/detail.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+		<style>
+			/* 스핀 버튼 없애기 */
+		    input[type="number"]::-webkit-inner-spin-button,
+		    input[type="number"]::-webkit-outer-spin-button {
+		        appearance: none; 
+		    }
+		    
+		    /* input number 클릭시 focus 효과 없애기 */
+			input[type="number"]:focus {
+			  outline: none; 
+			}
+		  
+		  .delete-btn
+	      {
+	        padding: 5px 10px;
+	        border: none;
+	        background-color: #D91E1E;
+	        color: #FFF;
+	        font-weight: bold;
+	        cursor: pointer;
+	        margin-right: 10px;
+	      }
+	
+		</style>
 	</head>
 	<body>
 		<div class="outside">
@@ -43,7 +68,6 @@
 						<!-- 별점 7점 이상일때 인기, 3점 이하일때 최악 넣기 -->
 					    <% 
 					    	if (avg >= 7.0) { 
-					    		System.out.println(avg);
 					    	%>
 					        <span style="font-size: 24px; color: #FF4500;">🔥인기🔥</span>
 					    	<% 
@@ -91,18 +115,44 @@
 					<div class="commentwrite">
 						<div>
 							<input type="hidden" name="seq" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
-							<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!--<%//mem.getId()%>로그인한 사람 (댓글 단 사람) -->		
-							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span>&nbsp;&nbsp;
+							<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!-- 로그인한 사람 (댓글 단 사람) -->
+							
+							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span>&nbsp;&nbsp;&nbsp;
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">평점 입력</span>
-							<input type="number" name="rating" 
-							min="0.0" max="10.0" step="0.1" height="30px"><br><br> <!-- 평점 -->
-							<textarea name="content" placeholder="댓글을 입력하세요" spellcheck="false"></textarea>
+							<input type="number" id="rating" name="rating" min="0.0" max="10.0" 
+							step="0.1" style="margin-bottom: 3px;"><br>
+							<textarea id="content" name="content" placeholder="댓글을 입력하세요" spellcheck="false"></textarea>
 						</div>
-						<div style="padding-top: 50px; padding-left: 5px">
-							<button type="submit" id="submitBtn">작성</button>
+						<div style="padding-top: 32px; padding-left: 5px">
+							<button type="submit" id="submitBtn" style="height: 85px;" >작성</button>
 							<br><br>
 						</div>
 					</div>
+					
+					<!-- 빈 댓글, 평점 제출 못하게 만들기 -->
+					<script type="text/javascript">
+						/* 빈 댓글, 평점은 폼 제출 못하게 */
+						$(document).ready(function(){
+							$("#submitBtn").prop("disabled", true); // 처음에는 공백이므로 댓글 제출 못하도록
+							$("#submitBtn").css("background-color", "#F28888"); // 제출 못할때는 색 연하게 
+							
+							$('#content, #rating').on('input', function() {
+								let content = $("#content").val();
+								let rating = $("#rating").val();
+								
+								// 공백이면 제출 x
+								if (content.trim() == "" || rating.trim() === ""){ 
+									$("#submitBtn").prop("disabled", true);
+									$("#submitBtn").css("background-color", "#F28888"); 
+								}
+								
+								else{
+									$("#submitBtn").prop("disabled", false);
+									$("#submitBtn").css("background-color", "#D91E1E");
+								}
+							});
+						});
+					</script>
 				</form>	
 				
 				<!-- 댓글 리스트 -->
@@ -113,59 +163,108 @@
 				</table>
 				
 				<script type="text/javascript">
-					$(document).ready(function(){
-						$.ajax({
-							url: "commentList.do",
-							type: "get",
-							data: { seq: <%=dto.getId()%> }, // Long타입으로 변환
-							success:function(list){
-								//alert("댓글 불러오기 성공");
-								
-								$("#tbody").html(""); // 똑같은 댓글 계속 추가되므로 비워주기
-								
-								/* jquery for each문 */
-								$.each(list, function(i, item){
+						$(document).ready(function(){
+							$.ajax({
+								url: "commentList.do",
+								type: "get",
+								data: { seq: <%=dto.getId()%> }, // Long타입으로 변환
+								success:function(list){
+									//alert("댓글 불러오기 성공");
 									
-									// 공백 댓글 빼고 넣어주기 (안전장치)
-									if(item.content.trim() != ""){
-										let str = "<div>";
+									$("#tbody").html(""); // 똑같은 댓글 계속 추가되므로 비워주기
+
+									/* jquery for each문 */
+									$.each(list, function(i, item){
+
+										//console.log(item);
 										
-										// 작성자와 댓글 작성자가 동일하면 (글쓴이) 추가
-										if(item.id == $("#writer").val()){
-											str += "<span style='font-weight: bold; color: #F2F2F2;'>작성자: "+ item.id + "(글쓴이) </span>";
+										// 공백 댓글 빼고 넣어주기 (안전장치)
+										if(item.content.trim() != ""){
+											let str = "<hr>"+"<div>";
+											
+											// 작성자와 댓글 작성자가 동일하면 (글쓴이) 추가
+											if(item.id == $("#writer").val()){
+												str += "<span style='font-weight: bold; color: #F2F2F2;'>"+ item.id + "(글쓴이) </span><br>";
+											}
+											else {
+				                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.id + " </span><br>";
+				                            }
+											
+											// 매긴 점수에 따라 이모지 추가
+											if(item.rating >= 7){
+												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
+												str += "<span style='font-weight: bold; color: red;'>🔥추천🔥 </span>"
+											}
+											
+											else if (item.rating <= 3){
+												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
+												str += "<span style='font-weight: bold; color: green;'>🤮최악🤮 </span>" 
+											}
+											
+											else{
+												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
+												str += "<span style='font-weight: bold; color: yellow;'>😐평범😐 </span>"
+												
+											}
+
+											
+											
+											str += "<br><br><div>"
+											str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.content + "</span><br><br>"
+											str += "<span style='font-weight: bold; color: gray;'>"+ item.wdate + " </span>"
+											str += "</div>"
+											
+											/* 삭제버튼 (작성자만 삭제 버튼 활성화) */
+											if(item.id == $("#writer").val()){
+												str += "<form action='commentDeleteAf.do' method='post'>"
+												str += "<input type='hidden' name='seq' value="+item.seq+">"
+												str += "<input type='hidden' name='comment_id' value="+item.comment_id+">"
+												str += "<button type='submit' class='delete-btn'> ❌삭제</button>"
+												str += "</form>"
+												str += "</div>"
+											}
+											else{
+												str += "</div>"
+											}	 
+											
+											// 댓글 간격
+											str += "<hr><br><br>";
+											//console.log(str_full);
+											
+											// tbody에 넣어주기
+											$("#tbody").append(str); 
 										}
-										else {
-			                                str += "<span style='font-weight: bold; color: #F2F2F2;'>작성자: " + item.id + " </span>";
-			                            }
-										
-										// 작성자까지 넣은 것
-										let str_full = str
-										
-										+"<span style='font-weight: bold; color: #F2F2F2;'>작성일: "+ item.wdate + "</span>"
-										+"</div>"
-										
-										+"<span style='font-weight: bold; color: #F2F2F2;'>평점: "+ item.rating + "</span>"
-										+"</div>"
-											 
-										+"<div>"
-										+"<span style='font-weight: bold; color: #F2F2F2;'>" + item.content + "</span>"
-										+"</div>"
-											 
-										// 댓글 간격
-										+"<br><br>";
-										//console.log(str_full);
-										
-										// tbody에 넣어주기
-										$("#tbody").append(str_full); 
-									}
-								});
-							},
-							error:function(){
-								alert("댓글 불러오기 실패");
-							}
-						});
-					})
-				</script>
+									});
+								},
+								error:function(){
+									alert("댓글 불러오기 실패");
+								}
+							});
+							
+							/* 삭제 버튼 클릭 시 SweetAlert를 통해 확인 후 삭제 요청 */
+							// 나도 잘모름 챗 gpt 활용
+					        $(document).on('click', '.delete-btn', function(e) {
+					            e.preventDefault(); // 버튼의 기본 동작 방지 (페이지 이동 등)
+					            const form = $(this).closest('form'); // 가장 가까운 form 요소를 찾음
+
+					            // SweetAlert를 통해 삭제 여부를 확인
+					            Swal.fire({
+					                title: '댓글을 삭제하시겠습니까?',
+					                icon: 'question',
+					                showCancelButton: true,
+					                confirmButtonColor: '#3085d6',
+					                cancelButtonColor: '#d33',
+					                confirmButtonText: '삭제',
+					                cancelButtonText: '취소'
+					            }).then((result) => {
+					                if (result.isConfirmed) {
+					                    // 확인 버튼을 누르면 삭제 요청
+					                    form.submit();
+					                }
+					            });
+					        });
+						})
+					</script>
 			</div>
 
 		</div>
