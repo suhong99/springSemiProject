@@ -55,4 +55,5 @@ public class NetflixServieImpl implements NetflixService{
 	public boolean commentDelete(NetflixComment comment) {
 		return dao.commentDelete(comment) > 0 ? true : false;
 	}
+	
 }

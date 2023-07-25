@@ -57,6 +57,5 @@ public class NetflixDaoImpl implements NetflixDao{
 	public int commentDelete(NetflixComment comment) {
 		return session.delete(ns + "commentDelete", comment);
 	}
-	
-	
+
 }

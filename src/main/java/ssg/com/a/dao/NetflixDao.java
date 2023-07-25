@@ -29,4 +29,5 @@ public interface NetflixDao {
 	
 	// 넷플릭스 댓글지우기
 	int commentDelete(NetflixComment comment);
+
 }

@@ -114,6 +114,7 @@ public class NetflixController {
 	}
 	
 	/* 넷플릭스 디테일창 TV 댓글 작성 */
+	// 위랑 똑같은데 넘겨주는 창만 다르게 
 	@PostMapping("commentTvWriteAf.do") 
 	public String commentTvWriteAf(NetflixComment NetflixComment) {
 		System.out.println("NetflixController commentWriteAf()" + new Date());
@@ -155,6 +156,25 @@ public class NetflixController {
 		
 		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
 		return "redirect:/netflixdetail.do?id=" + comment.getSeq();
+	}
+	
+	/* 넷플릭스 디테일창 TV 댓글 삭제 */
+	// 위랑 똑같은데 넘겨주는 창만 다르게
+	@PostMapping("commentTvDeleteAf.do") 
+	public String commentTvDeleteAf(NetflixComment comment) {
+		System.out.println("NetflixController commentTvDeleteAf()" + new Date());
+		System.out.println(comment);
+		boolean isS = service.commentDelete(comment);
+
+		if (isS) {
+			System.out.println("댓글 삭제 성공");
+		}
+		else {
+			System.out.println("댓글 삭제 실패");
+		}
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/netflixtvdetail.do?id=" + comment.getSeq();
 	}
 	
 }	

@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //moive
+	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //tv
 	Double avg = (Double)request.getAttribute("avg"); // 평균 평점
 	if (avg == null){
 		avg = 0.00; 
@@ -172,6 +172,14 @@
 									//alert("댓글 불러오기 성공");
 									
 									$("#tbody").html(""); // 똑같은 댓글 계속 추가되므로 비워주기
+									
+									// 불러온게 아무것도 없을경우
+									if (list.length == 0){
+										let str = "<div>";
+										str += "<span style='font-weight: bold; color: #F2F2F2;'>🔥아직 댓글이 없습니다.🔥</span><br><br>";
+										str += "<span style='font-weight: bold; color: #F2F2F2;'>🔥첫 댓글을 남겨주세요!🔥</span></div><br><br>";
+										$("#tbody").append(str); 
+									}
 
 									/* jquery for each문 */
 									$.each(list, function(i, item){
@@ -193,17 +201,17 @@
 											// 매긴 점수에 따라 이모지 추가
 											if(item.rating >= 7){
 												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
-												str += "<span style='font-weight: bold; color: red;'>🔥추천🔥 </span>"
+												str += "<span style='font-weight: bold; color: red;'>🔥추천해요🔥 </span>"
 											}
 											
 											else if (item.rating <= 3){
 												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
-												str += "<span style='font-weight: bold; color: green;'>🤮최악🤮 </span>" 
+												str += "<span style='font-weight: bold; color: green;'>🤮별로에요🤮 </span>" 
 											}
 											
 											else{
 												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
-												str += "<span style='font-weight: bold; color: yellow;'>😐평범😐 </span>"
+												str += "<span style='font-weight: bold; color: yellow;'>😐평범해요😐 </span>"
 												
 											}
 
@@ -216,7 +224,7 @@
 											
 											/* 삭제버튼 (작성자만 삭제 버튼 활성화) */
 											if(item.id == $("#writer").val()){
-												str += "<form action='commentDeleteAf.do' method='post'>"
+												str += "<form action='commentTvDeleteAf.do' method='post'>"
 												str += "<input type='hidden' name='seq' value="+item.seq+">"
 												str += "<input type='hidden' name='comment_id' value="+item.comment_id+">"
 												str += "<button type='submit' class='delete-btn'> ❌삭제</button>"

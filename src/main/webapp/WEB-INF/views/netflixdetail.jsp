@@ -171,14 +171,19 @@
 								type: "get",
 								data: { seq: <%=dto.getId()%> }, // Long타입으로 변환
 								success:function(list){
-									//alert("댓글 불러오기 성공");
-									
 									$("#tbody").html(""); // 똑같은 댓글 계속 추가되므로 비워주기
+									
+									// 불러온게 아무것도 없을경우
+									if (list.length == 0){
+										let str = "<div>";
+										str += "<span style='font-weight: bold; color: #F2F2F2;'>🔥아직 댓글이 없습니다.🔥</span><br><br>";
+										str += "<span style='font-weight: bold; color: #F2F2F2;'>🔥첫 댓글을 남겨주세요!🔥</span></div><br><br>";
+										$("#tbody").append(str); 
+									}
 
 									/* jquery for each문 */
 									$.each(list, function(i, item){
-
-										//console.log(item);
+										
 										
 										// 공백 댓글 빼고 넣어주기 (안전장치)
 										if(item.content.trim() != ""){
@@ -195,17 +200,17 @@
 											// 매긴 점수에 따라 이모지 추가
 											if(item.rating >= 7){
 												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
-												str += "<span style='font-weight: bold; color: red;'>🔥추천🔥 </span>"
+												str += "<span style='font-weight: bold; color: red;'>🔥추천해요🔥 </span>"
 											}
 											
 											else if (item.rating <= 3){
 												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
-												str += "<span style='font-weight: bold; color: green;'>🤮최악🤮 </span>" 
+												str += "<span style='font-weight: bold; color: green;'>🤮별로에요🤮 </span>" 
 											}
 											
 											else{
 												str += "<span style='font-weight: bold; color: #F2F2F2;'>평점 : "+ item.rating + " </span>"
-												str += "<span style='font-weight: bold; color: yellow;'>😐평범😐 </span>"
+												str += "<span style='font-weight: bold; color: yellow;'>😐평범해요😐 </span>"
 												
 											}
 
