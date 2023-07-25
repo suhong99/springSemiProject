@@ -2,6 +2,7 @@ package ssg.com.a.dao;
 
 import java.util.List;
 
+import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
 
@@ -17,5 +18,9 @@ public interface NetflixDao {
 	// 넷플릭스 tv 디테일
 	NetflixTvDto netflixtvdetail(Long id);
 
+	// 넷플릭스 댓글달기
+	int commentWrite(NetflixComment comment);
 	
+	// 넷플릭스 댓글리스트 불러오기
+	List<NetflixComment> commentList(Long seq);
 }

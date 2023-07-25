@@ -1,8 +1,11 @@
+<%@page import="ssg.com.a.dto.MemberDto"%>
 <%@page import="ssg.com.a.dto.NetflixTvDto"%>
+<%@page import="ssg.com.a.dto.NetflixContentDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //tv
+	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //moive
+	//MemberDto mem = (MemberDto)session.getAttribute("login");
 %>
 <!DOCTYPE html>
 <html>
@@ -10,28 +13,31 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./css/detail.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="outside">
+			
+			<!-- 정보 표시창 -->
 			<div class="container">
 				<div class="image">
-					<img src="https://image.tmdb.org/t/p/w500<%= dto.getPosterpath() %>"
+					<img src="https://image.tmdb.org/t/p/w500<%=dto.getPosterpath() %>"
 					width="400px" height="575px">
 				</div>
 				<div class="text">
 					<div class="title">
-						<!-- tv 제목과 개봉일 연도 표시 -->
+						<!-- 영화 제목과 개봉일 연도 표시 -->
 						<span><%= dto.getTitle() %></span>&nbsp;
 						<span style="color: gray;">(<%=dto.getReleasedate().substring(0, 4) %>)</span>
 						<br><br>
 					</div>
 					<div class="score">
-						<button id="back">즐겨찾기 추가</button>
-						<button id="back">미정 버튼</button>
-						<button id="back">미정 버튼</button>
+						<button class="btn">즐겨찾기 추가</button>
+						<button class="btn">미정 버튼</button>
+						<button class="btn">미정 버튼</button>
 						<br><br><br>	
 					</div>
-					<div class="content">
+					<div class="content">	
 						<span>줄거리</span><br>
 						<p>
 						<%
@@ -45,20 +51,98 @@
 								%>
 								<span id="overviewSpan"><%= dto.getOverview() %></span><br><br>
 								<% 
-							}
+							}	
 						
 						
 						%>
 						</p>
-						<b>인기도:</b> <%= dto.getPopularity() %><br>
+						<b>현재 인기 점수: </b> <%= dto.getPopularity() %><br>
 				        <b>개봉일:</b> <%= dto.getReleasedate() %><br><br>
-						<button id="back" onclick="back()">Back to home</button>
+						
+					</div>
+					<div class="button">
+						<button class="btn" onclick="back()">Back to home</button>
 					</div>
 				</div>
 			</div>
+			
+			<!-- 댓글 파트 -->
 			<div class="comment">
-				댓글 div
+				<form action="commentWriteAf.do" method="post">
+					<div class="commentwrite">
+						<div>
+							<input type="hidden" name="seq" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
+							<input type="hidden" id="writer" name="id" value="abc">  <!--<%//mem.getId()%>로그인한 사람 (댓글 단 사람) -->		
+							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span><br><br>
+							<textarea name="content" style="height: 80px; width: 1100px;"></textarea>
+						</div>
+						<div style="padding-top: 50px; padding-left: 5px">
+							<button type="submit" id="submitBtn">작성</button>
+							<br><br>
+						</div>
+					</div>
+				</form>	
+				
+				<!-- 댓글 리스트 -->
+				<table style="width: 1106px; margin: 0px;">
+					<!-- Ajax는 id에 그냥 끼워넣기 -->
+					<tbody id="tbody">
+					</tbody>
+				</table>
+				
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$.ajax({
+							url: "commentList.do",
+							type: "get",
+							data: { seq: <%=dto.getId()%> }, // Long타입으로 변환
+							success:function(list){
+								//alert("댓글 불러오기 성공");
+								
+								$("#tbody").html(""); // 똑같은 댓글 계속 추가되므로 비워주기
+								
+								/* jquery for each문 */
+								$.each(list, function(i, item){
+									// 공백 댓글 빼고 넣어주기 (안전장치)
+									if(item.content.trim() != ""){
+										let str = "<div>";
+										console.log(item.id);
+										console.log($("writer").val());
+										// 작성자와 댓글 작성자가 동일하면 (글쓴이) 추가
+										if(item.id == $("writer").val()){
+											str += "<span style='font-weight: bold; color: #F2F2F2;'>작성자: "+ item.id + "(글쓴이) </span>";
+										}
+										else {
+			                                str += "<span style='font-weight: bold; color: #F2F2F2;'>작성자: " + item.id + " </span>";
+			                            }
+										
+										// 작성자까지 넣은 것
+										let str_full = str
+										
+										+"<span style='font-weight: bold; color: #F2F2F2;'>작성일: "+ item.wdate + "</span>"
+										+"</div>"
+											 
+										+"<div>"
+										+"<span style='font-weight: bold; color: #F2F2F2;'>" + item.content + "</span>"
+										+"</div>"
+											 
+										// 댓글 간격
+										+"<br><br>";
+										//console.log(str_full);
+										
+										// tbody에 넣어주기
+										$("#tbody").append(str_full); 
+									}
+								});
+							},
+							error:function(){
+								alert("댓글 불러오기 실패");
+							}
+						});
+					})
+				</script>
 			</div>
+
 		</div>
 		<!-- 한글자씩 줄거리 읽어주기 
 	    <script type="text/javascript">

@@ -1,4 +1,3 @@
-
 create table netflixcomment(
 	seq int not null,
 	id varchar(50) not null,
@@ -9,5 +8,4 @@ create table netflixcomment(
 alter table netflixcomment
 add foreign key(id) references member(id);
 
-alter table netflixcomment
-add foreign key(id) references member(id);
+select * from netflixcomment;
