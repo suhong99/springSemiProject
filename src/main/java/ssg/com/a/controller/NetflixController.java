@@ -72,8 +72,11 @@ public class NetflixController {
 		System.out.println("NetflixController netflixdetail() " + new Date());
 		
 		NetflixContentDto dto = service.netflixdetail(id);
-		//System.out.println(dto);
 		model.addAttribute("netflixDto",dto); 
+		
+		// 평균 평점 넘겨주기
+		Double avg = service.avg(id);
+		model.addAttribute("avg", avg);
 		
 		return "netflixdetail";
 	}
@@ -84,8 +87,11 @@ public class NetflixController {
 		System.out.println("NetflixController netflixtvdetail() " + new Date());
 		
 		NetflixTvDto dto = service.netflixtvdetail(id);
-		System.out.println(dto);
 		model.addAttribute("netflixtvDto",dto); 
+		
+		// 평균 평점 넘겨주기
+		Double avg = service.avg(id);
+		model.addAttribute("avg", avg);
 		
 		return "netflixtvdetail";
 	}
@@ -103,12 +109,25 @@ public class NetflixController {
 			System.out.println("댓글 작성 실패");
 		}
 		
-		// 댓글은 컨트롤러 -> 컨트롤러 과정 필요 --> detail로 보내기 위해
-		// return "bbsdetail.do"; bbsdetail.do.jsp로 가버림, 실패
-		// controller는 원래 servlet --> sendredirect or foward로 보냈었음
-		
 		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
 		return "redirect:/netflixdetail.do?id=" + NetflixComment.getSeq();
+	}
+	
+	/* 넷플릭스 디테일창 TV 댓글 작성 */
+	@PostMapping("commentTvWriteAf.do") 
+	public String commentTvWriteAf(NetflixComment NetflixComment) {
+		System.out.println("NetflixController commentWriteAf()" + new Date());
+		boolean isS = service.commentWrite(NetflixComment);
+		
+		if (isS) {
+			System.out.println("댓글 작성 성공");
+		}
+		else {
+			System.out.println("댓글 작성 실패");
+		}
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/netflixtvdetail.do?id=" + NetflixComment.getSeq();
 	}
 	
 	/* 디테일창 댓글 불러오기 */
@@ -119,4 +138,5 @@ public class NetflixController {
 		
 		return service.commentList(seq);
 	}
+	
 }	
