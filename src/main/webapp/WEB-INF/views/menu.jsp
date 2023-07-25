@@ -6,7 +6,7 @@
 	<head>
 		<style type="text/css">
 		.navbar-nav > li > a { padding-top:15px; padding-bottom: 15px; font-size: 20px }
-		.nav-link > li > a { color:#F2F2F2; font-size: 20px; font-weight: bold;}
+		.nav-link > li > a { color:#F2F2F2; font-size: 24px; font-weight: bold;}
 		.bg-company-blue {	background-color: #D91E1E; }
 		.nav-link > li > a:hover { color: yellow; text-decoration: none; }
 		.centered {	 margin: auto;	}	/* navbar에 ul을 중앙배치함. 왼쪽 배치시에는 <-이 부분 삭제 */

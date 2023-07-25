@@ -38,7 +38,7 @@
 	            type : "POST",
 	            data : contentList,
 	            success : function(data) {
-	            	alert("movie JSON 보내기 성공 [home.jsp]");
+	            	// alert("movie JSON 보내기 성공 [home.jsp]");
 	            },
 	            
 	            error : function(e) {
@@ -55,7 +55,7 @@
 	            type : "POST",
 	            data : tvcontentList,
 	            success : function(data) {
-	            	alert("TV JSON 보내기 성공 [home.jsp]");
+	            	// alert("TV JSON 보내기 성공 [home.jsp]");
 	            },
 	            
 	            error : function(e) {

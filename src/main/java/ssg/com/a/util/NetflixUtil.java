@@ -11,14 +11,13 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
 
 public class NetflixUtil {
     
-    public static List<NetflixContentDto> getNetflixMovie() throws UnsupportedEncodingException, IOException, ParseException  {
+    public static List<NetflixContentDto> getNetflixMovie() throws Exception  {
     	// API를 통해 추출한 JSON형태 결과를 저장할 변수
     	String result = "";
     	
@@ -72,7 +71,7 @@ public class NetflixUtil {
 			return contentList;
     }
     
-    public static List<NetflixTvDto> getNetflixTv() throws UnsupportedEncodingException, IOException, ParseException  {
+    public static List<NetflixTvDto> getNetflixTv() throws Exception  {
     	// API를 통해 추출한 JSON형태 결과를 저장할 변수
     	String result = "";
     	
@@ -127,7 +126,7 @@ public class NetflixUtil {
 			return contentList;
     }
     
-    public static List<NetflixContentDto> getNetflixMovieJson() throws UnsupportedEncodingException, IOException, ParseException  {
+    public static List<NetflixContentDto> getNetflixMovieJson() throws Exception  {
     	// API를 통해 추출한 JSON형태 결과를 저장할 변수
     	String result = "";
     	
@@ -163,7 +162,7 @@ public class NetflixUtil {
 			return list;
     }
     
-    public static List<NetflixTvDto> getNetflixTvJson() throws UnsupportedEncodingException, IOException, ParseException  {
+    public static List<NetflixTvDto> getNetflixTvJson() throws Exception  {
     	// API를 통해 추출한 JSON형태 결과를 저장할 변수
     	String result = "";
     	
