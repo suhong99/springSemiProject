@@ -8,7 +8,7 @@
 	NetflixContentDto dto = (NetflixContentDto)request.getAttribute("netflixDto"); //moive
 	Double avg = (Double)request.getAttribute("avg"); // 평균 평점
 	if (avg == null){
-		avg = 0.00;
+		avg = 0.00; // 평점 기록이 없을경우 0점으로 넘기기 
 	}
 	MemberDto mem = (MemberDto)session.getAttribute("login");
 %>
@@ -40,11 +40,24 @@
 					<div class="score">
 						<button class="btn">즐겨찾기 추가</button>
 						<button class="btn">미정 버튼</button>
-						<button class="btn">미정 버튼</button><br>
-						<span style="color: gray; font-weight: bold; ">사이트 리뷰 평점: <%=NetflixUtil.round(avg) %></span>
-						<br><br><br>	
+						<button class="btn">미정 버튼</button><br><br>
+						<!-- 별점 8점 이상일때 인기, 3점 이하일때 최악 넣기 -->
+					    <% 
+					    	if (avg >= 7.0) { 
+						    	%>
+						        <span style="font-size: 24px; color: #FF4500;">🔥인기🔥</span>
+						    	<% 
+					    	}
+					    	else if (avg <= 3.0 && avg != 0){
+					    		%>
+						        <span style="font-size: 24px; color: green;">🤮최악🤮</span>
+						    	<%	
+					    	}
+					    %>
+						<span style="color: gray; font-weight: bold;">사이트 리뷰 평점: <%=NetflixUtil.round(avg) %></span>	
 					</div>
-					<div class="content">	
+					<div class="content">
+						<br>	
 						<span>줄거리</span><br>
 						<p>
 						<%
@@ -62,7 +75,6 @@
 
 						%>
 						</p>
-						<b>현재 인기 점수: </b> <%= dto.getPopularity() %><br><br>
 				        <b>개봉일:</b> <%= dto.getReleaseDate() %><br><br>
 						
 					</div>

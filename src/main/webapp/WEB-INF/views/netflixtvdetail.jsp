@@ -7,6 +7,9 @@
 <%
 	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //moive
 	Double avg = (Double)request.getAttribute("avg"); // 평균 평점
+	if (avg == null){
+		avg = 0.00; 
+	}
 	MemberDto mem = (MemberDto)session.getAttribute("login");
 %>
 <!DOCTYPE html>
@@ -36,11 +39,25 @@
 					<div class="score">
 						<button class="btn">즐겨찾기 추가</button>
 						<button class="btn">미정 버튼</button>
-						<button class="btn">미정 버튼</button><br>
-						<span style="color: gray; font-weight: bold; ">사이트 리뷰 평점: <%=NetflixUtil.round(avg)%></span>
-						<br><br><br>	
+						<button class="btn">미정 버튼</button><br><br>
+						<!-- 별점 7점 이상일때 인기, 3점 이하일때 최악 넣기 -->
+					    <% 
+					    	if (avg >= 7.0) { 
+					    		System.out.println(avg);
+					    	%>
+					        <span style="font-size: 24px; color: #FF4500;">🔥인기🔥</span>
+					    	<% 
+					    	} 
+					    	else if (avg <= 3.0 && avg != 0){
+					    		%>
+						        <span style="font-size: 24px; color: green;">🤮최악🤮</span>
+						    	<%	
+					    	}
+					    %>
+						<span style="color: gray; font-weight: bold; ">사이트 리뷰 평점: <%=NetflixUtil.round(avg)%></span>	
 					</div>
 					<div class="content">	
+						<br>
 						<span>줄거리</span><br>
 						<p>
 						<%
@@ -59,7 +76,6 @@
 						
 						%>
 						</p>
-						<b>현재 인기 점수: </b> <%= dto.getPopularity() %><br><br>
 				        <b>개봉일:</b> <%= dto.getReleasedate() %><br><br>
 						
 					</div>
@@ -76,7 +92,10 @@
 						<div>
 							<input type="hidden" name="seq" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
 							<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!--<%//mem.getId()%>로그인한 사람 (댓글 단 사람) -->		
-							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span><br><br>
+							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span>&nbsp;&nbsp;
+							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">평점 입력</span>
+							<input type="number" name="rating" 
+							min="0.0" max="10.0" step="0.1" height="30px"><br><br> <!-- 평점 -->
 							<textarea name="content" placeholder="댓글을 입력하세요" spellcheck="false"></textarea>
 						</div>
 						<div style="padding-top: 50px; padding-left: 5px">
@@ -123,6 +142,9 @@
 										let str_full = str
 										
 										+"<span style='font-weight: bold; color: #F2F2F2;'>작성일: "+ item.wdate + "</span>"
+										+"</div>"
+										
+										+"<span style='font-weight: bold; color: #F2F2F2;'>평점: "+ item.rating + "</span>"
 										+"</div>"
 											 
 										+"<div>"
