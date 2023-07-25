@@ -51,4 +51,19 @@
 		from tv
 		where id = #{id}	
 	</select>
+	
+	<!-- 넷플릭스 디테일 댓글 추가 -->
+	<insert id="commentWrite" parameterType="ssg.com.a.dto.NetflixComment">
+		insert into netflixcomment(seq, id, content, wdate)
+		values (#{seq}, #{id}, #{content}, now())
+	</insert>
+	
+	
+	<!-- 넷플릭스 디테일창 댓글 리스트, 최신순으로 (인기 댓글순이나 다른걸로 바꿔도됨) -->
+	<select id="commentList" parameterType="java.lang.Long" resultType="ssg.com.a.dto.NetflixComment">
+		select seq, id, content, wdate
+		from netflixcomment
+		where seq = #{seq}
+		order by wdate desc 
+	</select>
 </mapper>

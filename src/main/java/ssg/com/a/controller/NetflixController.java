@@ -10,16 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
 import ssg.com.a.service.NetflixService;
@@ -87,4 +90,33 @@ public class NetflixController {
 		return "netflixtvdetail";
 	}
 	
+	/* 넷플릭스 디테일창 댓글 작성 */
+	@PostMapping("commentWriteAf.do") 
+	public String commentWriteAf(NetflixComment NetflixComment) {
+		System.out.println("NetflixController commentWriteAf()" + new Date());
+		boolean isS = service.commentWrite(NetflixComment);
+		
+		if (isS) {
+			System.out.println("댓글 작성 성공");
+		}
+		else {
+			System.out.println("댓글 작성 실패");
+		}
+		
+		// 댓글은 컨트롤러 -> 컨트롤러 과정 필요 --> detail로 보내기 위해
+		// return "bbsdetail.do"; bbsdetail.do.jsp로 가버림, 실패
+		// controller는 원래 servlet --> sendredirect or foward로 보냈었음
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/netflixdetail.do?id=" + NetflixComment.getSeq();
+	}
+	
+	/* 디테일창 댓글 불러오기 */
+	@ResponseBody // AJAX
+	@GetMapping("commentList.do")
+	public List<NetflixComment> commentList(Long seq){
+		System.out.println("NetflixController commentList()" + new Date());
+		
+		return service.commentList(seq);
+	}
 }	

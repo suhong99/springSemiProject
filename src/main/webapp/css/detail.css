@@ -23,6 +23,7 @@ body{
 	height: auto;
 	padding-left: 200px;
 	padding-right: 200px;
+	background-color: #0D0D0D;
 	color: #F2F2F2;
 }
 
@@ -63,8 +64,8 @@ body{
 	font-weight: bold;
 }
 
-/* 목록 버튼*/
-#back{
+/* 버튼 통일 */
+.btn{
 	height: 50px; 
 	width: 200px;
 	border-radius: 5px;
@@ -75,7 +76,26 @@ body{
 	border: none;
 }
 
-#back:hover{
+/* 디테일 제출 버튼 */
+#submitBtn{
+	height: 80px; 
+	width: 200px;
+	margin-bottom: 26px;
+	border-radius: 5px;
+	color: #F2F2F2;
+	font-weight: bold;
+	font-size: 15px;
+	background: #D91E1E;
+	border: none;
+}
+
+/* comment 컨테이너 */
+.commentwrite{
+	display: flex; /* 컨테이너 안의 div들 좌우정렬 */
+	justify-content: flex-start; /* 중앙 정렬 */
+}
+
+#submitBtn:hover{
 	cursor: pointer;
 }
 
