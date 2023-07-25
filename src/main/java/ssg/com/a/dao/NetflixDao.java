@@ -23,7 +23,4 @@ public interface NetflixDao {
 	
 	// 넷플릭스 댓글리스트 불러오기
 	List<NetflixComment> commentList(Long seq);
-	
-	// 컨텐츠 평균평점
-	Double avg(Long seq);
 }

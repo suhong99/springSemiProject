@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.math.RoundingMode;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,19 +200,5 @@ public class NetflixUtil {
 			JSONArray list = (JSONArray) jsonObject.get("results");
 			
 			return list;
-    }
-    
-    /* 소수 두자리 수 까지 출력 */
-    public static Double round(Double num) {
-    	if(num == 0) {
-    		return 0.00;
-    	}
-    	
-    	DecimalFormat df = new DecimalFormat("#.##"); // 소수 2자리수 
-        df.setRoundingMode(RoundingMode.FLOOR);
-    	
-        String num_str = df.format(num);
-        Double rating = Double.parseDouble(num_str);
-    	return rating;
     }
 }
