@@ -85,7 +85,9 @@
                 </p>
             </div>
             <!-- 카카오로그인  -->
-            <div onclick="kakaoLogin()">카카오 로그인</div>
+           <div style="width: 100%; display: flex; justify-content: center;margin-top: 10px">
+				<img onclick="kakaoLogin()" alt="카카오 로그인" src="./images/kakao_login.png" style="width:250px;">
+            </div>
         </div>
     </form>
         
