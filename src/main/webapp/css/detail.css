@@ -2,6 +2,7 @@
 
 body{
 	margin: 0px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .outside{
@@ -10,6 +11,7 @@ body{
 }
 
 .container{
+	margin: 0px;
 	padding-left: 200px;
 	padding-right: 200px;
 	padding-top: 200px;
@@ -74,6 +76,7 @@ body{
 	font-size: 15px;
 	background: #D91E1E;
 	border: none;
+	cursor: pointer;
 }
 
 /* 디테일 제출 버튼 */
@@ -95,10 +98,26 @@ body{
 	justify-content: flex-start; /* 중앙 정렬 */
 }
 
-#submitBtn:hover{
-	cursor: pointer;
-}
-
 .button {
 	margin-top: auto; 
 }
+
+textarea{
+	height: 80px;
+	width: 1100px;
+	outline: none;
+    border: none;
+    resize: none;
+    
+    font-family:'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    
+}
+
+/* 구글폰트 */
+@font-face {
+	font-family: 'Noto Sans KR', sans-serif;
+	src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+}
+

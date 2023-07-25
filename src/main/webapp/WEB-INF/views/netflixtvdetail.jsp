@@ -1,3 +1,4 @@
+<%@page import="ssg.com.a.util.NetflixUtil"%>
 <%@page import="ssg.com.a.dto.MemberDto"%>
 <%@page import="ssg.com.a.dto.NetflixTvDto"%>
 <%@page import="ssg.com.a.dto.NetflixContentDto"%>
@@ -5,7 +6,8 @@
     pageEncoding="UTF-8"%>
 <%
 	NetflixTvDto dto = (NetflixTvDto)request.getAttribute("netflixtvDto"); //moive
-	//MemberDto mem = (MemberDto)session.getAttribute("login");
+	Double avg = (Double)request.getAttribute("avg"); // 평균 평점
+	MemberDto mem = (MemberDto)session.getAttribute("login");
 %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +36,8 @@
 					<div class="score">
 						<button class="btn">즐겨찾기 추가</button>
 						<button class="btn">미정 버튼</button>
-						<button class="btn">미정 버튼</button>
+						<button class="btn">미정 버튼</button><br>
+						<span style="color: gray; font-weight: bold; ">사이트 리뷰 평점: <%=NetflixUtil.round(avg)%></span>
 						<br><br><br>	
 					</div>
 					<div class="content">	
@@ -56,7 +59,7 @@
 						
 						%>
 						</p>
-						<b>현재 인기 점수: </b> <%= dto.getPopularity() %><br>
+						<b>현재 인기 점수: </b> <%= dto.getPopularity() %><br><br>
 				        <b>개봉일:</b> <%= dto.getReleasedate() %><br><br>
 						
 					</div>
@@ -68,13 +71,13 @@
 			
 			<!-- 댓글 파트 -->
 			<div class="comment">
-				<form action="commentWriteAf.do" method="post">
+				<form action="commentTvWriteAf.do" method="post">
 					<div class="commentwrite">
 						<div>
 							<input type="hidden" name="seq" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
-							<input type="hidden" id="writer" name="id" value="abc">  <!--<%//mem.getId()%>로그인한 사람 (댓글 단 사람) -->		
+							<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!--<%//mem.getId()%>로그인한 사람 (댓글 단 사람) -->		
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span><br><br>
-							<textarea name="content" style="height: 80px; width: 1100px;"></textarea>
+							<textarea name="content" placeholder="댓글을 입력하세요" spellcheck="false"></textarea>
 						</div>
 						<div style="padding-top: 50px; padding-left: 5px">
 							<button type="submit" id="submitBtn">작성</button>
@@ -103,13 +106,13 @@
 								
 								/* jquery for each문 */
 								$.each(list, function(i, item){
+									
 									// 공백 댓글 빼고 넣어주기 (안전장치)
 									if(item.content.trim() != ""){
 										let str = "<div>";
-										console.log(item.id);
-										console.log($("writer").val());
+										
 										// 작성자와 댓글 작성자가 동일하면 (글쓴이) 추가
-										if(item.id == $("writer").val()){
+										if(item.id == $("#writer").val()){
 											str += "<span style='font-weight: bold; color: #F2F2F2;'>작성자: "+ item.id + "(글쓴이) </span>";
 										}
 										else {
@@ -158,8 +161,8 @@
 		      }
 		    }
 		
-		    typeOverview(); // 함수 호출로 한 글자씩 출력 시작-->
-	    </script>	
+		    typeOverview(); // 함수 호출로 한 글자씩 출력 시작
+	    </script>	-->
 	   
 		<script type="text/javascript">
 			// 홈으로 돌아가기

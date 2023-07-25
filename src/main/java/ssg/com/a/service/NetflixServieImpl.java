@@ -46,5 +46,9 @@ public class NetflixServieImpl implements NetflixService{
 		return dao.commentList(seq);
 	}
 
-	
+	@Override
+	public Double avg(Long seq) {
+		return dao.avg(seq);
+	}
+
 }
