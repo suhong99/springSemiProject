@@ -45,7 +45,15 @@
 		       cursor: pointer;
 		       margin-right: 10px;
 		     }
-	      	
+		     
+		    /* sweetalert창 배경색 */
+	      	.swal2-popup {
+		      background-color: #f2f2f2; 
+		    }
+		    
+		    .swal2-confirm {
+        		border: none;
+        	}
 		</style>
 	</head>
 	<body>
@@ -117,8 +125,14 @@
 					<div class="commentwrite">
 						<div>
 							<input type="hidden" name="seq" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
-							<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!-- 로그인한 사람 (댓글 단 사람) -->
-							
+							<%
+								// 로그인 있으면 
+								if (mem != null) {
+									%>
+									<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!-- 로그인한 사람 (댓글 단 사람) -->
+									<%
+								}
+							%>
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span>&nbsp;&nbsp;&nbsp;
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">평점 입력</span>
 							<input type="number" id="rating" name="rating" min="0.0" max="10.0" 
@@ -138,6 +152,7 @@
 							$("#submitBtn").prop("disabled", true); // 처음에는 공백이므로 댓글 제출 못하도록
 							$("#submitBtn").css("background-color", "#F28888"); // 제출 못할때는 색 연하게 
 							
+
 							$('#content, #rating').on('input', function() {
 								let content = $("#content").val();
 								let rating = $("#rating").val();
@@ -154,10 +169,31 @@
 								}
 							});
 						});
+						
+						// 로그인 안되어있으면 제출 막고 홈으로 
+						$("form").on("submit", function(e) {
+				            <%
+				            	if(mem == null){
+				            		%>
+				            			e.preventDefault();
+					            		Swal.fire({
+					                        title: '로그인이 필요합니다!',
+					                        icon: 'error',
+					                        showConfirmButton: true,
+					                        confirmButtonColor: '#D91E1E',
+					                        confirmButtonText: '확인'
+					                    }).then(function() {
+					                        location.href = "home.do"; 
+					                    });
+						                
+				            		<%
+				            	}
+				            %>
+				        });
 					</script>
 				</form>	
 				
-				<!-- 댓글 리스트 -->
+				<!-- 댓글 리스트 불러오기 -->
 				<table style="width: 1106px; margin: 0px;">
 					<!-- Ajax로 id에 그냥 끼워넣기 -->
 					<tbody id="tbody">
@@ -214,8 +250,7 @@
 												
 											}
 
-											
-											
+											// 내용 + 날짜
 											str += "<br><br><div>"
 											str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.content + "</span><br><br>"
 											str += "<span style='font-weight: bold; color: gray;'>"+ item.wdate + " </span>"
@@ -236,7 +271,6 @@
 											
 											// 댓글 간격
 											str += "<hr><br><br>";
-											//console.log(str_full);
 											
 											// tbody에 넣어주기
 											$("#tbody").append(str); 
@@ -263,13 +297,16 @@
 					                cancelButtonColor: '#d33',
 					                confirmButtonText: '삭제',
 					                cancelButtonText: '취소'
-					            }).then((result) => {
+					            })
+					            
+					            .then((result) => {
 					                if (result.isConfirmed) {
 					                    // 확인 버튼을 누르면 삭제 요청
 					                    form.submit();
 					                }
 					            });
 					        });
+							
 						})
 					</script>
 				</div>

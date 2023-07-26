@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
-= (String)request.getAttribute("content"); if(content == null){ content =
-"home"; } %>
+pageEncoding="UTF-8"%> 
+<% 
+	request.setCharacterEncoding("utf-8"); 
+	String content = (String)request.getAttribute("content"); 
+	
+	if(content == null){ 
+		content = "home"; 
+	} 
+%>
 
 <!DOCTYPE html>
 <html>

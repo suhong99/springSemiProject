@@ -26,6 +26,14 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./css/NetflixContent.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+		<style type="text/css">
+			/* 이미지 갖다대면 조금 더 확대 */
+			div > a > img:hover {
+				transform: scale(1.2);
+				/* transition: all 0.1s linear; */
+			}
+		</style>
 	</head>
 	<body>
 		<div style="display: flex; justify-content: flex-end;"> <!-- 우측 정렬 -->
@@ -77,8 +85,8 @@
 	        	<% 
 		    		for (NetflixContentDto content : list) { 
 			    	%>
-			        	<div class="poster-container">
-			        		<a href="netflixdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
+			        	<div class="poster-container">	        		
+	        				<a href="netflixdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
 			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">

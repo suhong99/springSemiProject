@@ -115,8 +115,14 @@
 					<div class="commentwrite">
 						<div>
 							<input type="hidden" name="seq" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
-							<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!-- 로그인한 사람 (댓글 단 사람) -->
-							
+							<%
+								// 로그인 있으면 
+								if (mem != null) {
+									%>
+									<input type="hidden" id="writer" name="id" value="<%=mem.getId()%>">  <!-- 로그인한 사람 (댓글 단 사람) -->
+									<%
+								}
+							%>
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span>&nbsp;&nbsp;&nbsp;
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">평점 입력</span>
 							<input type="number" id="rating" name="rating" min="0.0" max="10.0" 
@@ -152,6 +158,19 @@
 								}
 							});
 						});
+						
+						// 로그인 안되어있으면 제출 막고 홈으로 
+						$("form").on("submit", function(e) {
+				            
+				            <%
+				            	if(mem == null){
+				            		%>
+					            		e.preventDefault();
+						                location.href = "home.do";
+				            		<%
+				            	}
+				            %>
+				        });
 					</script>
 				</form>	
 				
