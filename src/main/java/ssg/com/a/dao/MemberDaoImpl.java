@@ -12,7 +12,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Autowired
 	SqlSession session;
-//	SqlSessionTemplate session;
+	//SqlSessionTemplate session;
 	
 	String ns = "Member.";
 
