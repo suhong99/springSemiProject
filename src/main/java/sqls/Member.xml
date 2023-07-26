@@ -20,8 +20,19 @@
 	select id, name, email, auth
 	from member
 	where id=#{id} and pwd=#{pwd}
+</select> 
+
+<select id="kakaologin" parameterType="ssg.com.a.dto.MemberDto" 
+					resultType="ssg.com.a.dto.MemberDto">
+	select id, name, email, auth
+	from member
+	where   auth=10 and id=#{id}
 </select>
 
+<insert id="kakaoaddmember" parameterType="ssg.com.a.dto.MemberDto">
+	insert into member(id, pwd, name, email, auth)
+	values(#{id}, #{id}, #{name}, #{email}, 10)  
+</insert> 
 
 </mapper>
 

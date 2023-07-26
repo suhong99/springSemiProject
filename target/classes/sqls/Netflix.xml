@@ -54,8 +54,8 @@
 	
 	<!-- 넷플릭스 디테일 댓글 추가 -->
 	<insert id="commentWrite" parameterType="ssg.com.a.dto.NetflixComment">
-		insert into netflixcomment(seq, id, content, wdate, rating)
-		values (#{seq}, #{id}, #{content}, now(), #{rating})
+		insert into netflixcomment(seq, id, content, wdate)
+		values (#{seq}, #{id}, #{content}, now())
 	</insert>
 	
 	
