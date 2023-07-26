@@ -27,6 +27,7 @@ import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
 import ssg.com.a.service.NetflixService;
 import ssg.com.a.service.NetflixServieImpl;
+import ssg.com.a.util.NetflixUtil;
 
 @Controller
 public class NetflixController {
@@ -175,6 +176,24 @@ public class NetflixController {
 		
 		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
 		return "redirect:/netflixtvdetail.do?id=" + comment.getSeq();
+	}
+	
+	@GetMapping("searchNetflix.do")
+	public String searchNetflix(@RequestParam(name = "query") String query, Model model) {
+	    try {
+	        List<NetflixContentDto> movieList = NetflixUtil.searchNetflixMovie(query);
+	        List<NetflixTvDto> tvList = NetflixUtil.searchNetflixTV(query);
+	        
+	        model.addAttribute("movieList", movieList);
+	        model.addAttribute("tvList", tvList);
+	        model.addAttribute("query", query);
+	        
+	        return "searchResult"; // 검색 결과를 보여줄 JSP 페이지 이름
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // 에러 처리 (예를 들어, 에러 페이지로 이동하거나 오류 메시지를 표시하는 등의 방법)
+	        return "errorPage"; // 에러 페이지를 보여줄 JSP 페이지 이름
+	    }
 	}
 	
 }	
