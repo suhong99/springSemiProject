@@ -23,7 +23,7 @@
 		<div class="collapse navbar-collapse" id="navbar-content">
 	       <ul class="navbar-nav mr-auto centered">       
 	          <li class="nav-item" class="nav-link">
-	            <a href="./netflixlist.do" class="nav-link">넷플릭스 컨텐츠</a>
+	            <a href="./home.do" class="nav-link">넷플릭스 컨텐츠</a>
 	          </li>
 	          
 	          <li class="nav-item" class="nav-link">
