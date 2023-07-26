@@ -22,24 +22,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <style type="text/css">
-body {
-	background-color: #F2F2F2;
-	color: #F2F2F2;
-}
+* {
+    margin: 0;
+    padding: 0;
+      }   
 .center{
 	margin: auto;
-	width: 800px;			
+	width: 1000px;
+
 }
 th{
-	background: gray;
+	background-color: #0D0D0D;
 	color: white;
-}
-.container{
-background: #F2F2F2;
-	color: white;
-	font-family: 50px;
-	font-weight: 500;
-}
+} 
 tr {
    line-height: 20px;   
 }
@@ -96,15 +91,15 @@ tr {
 	</td>
 </tr>
 <tr>
-	<th style="text-align: center; vertical-align: middle;">제목</th>
+	<th style="text-align: center; vertical-align: middle;" >제목</th>
 	<td>
-		<input type="text" id="title" name="title" class="form-control" size="50">
+		<input type="text" id="title" name="title" class="form-control" size="50" placeholder="제목을 입력하세요" >
 	</td>
 </tr>
 <tr>
-	<th style="text-align: center; center; vertical-align: middle;">내용</th>
+	<th style="text-align: center; center; vertical-align: middle;" >내용</th>
 	<td>
-		<textarea rows="10" cols="50" id="content" name="content" class="form-control" ></textarea>
+		<textarea rows="10" cols="50" id="content" name="content" class="form-control" placeholder="제목을 입력하세요" placeholder="제목을 입력하세요" ></textarea>
 	</td>
 </tr>
 <tr>

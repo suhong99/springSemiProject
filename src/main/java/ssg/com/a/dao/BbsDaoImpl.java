@@ -73,7 +73,7 @@ public class BbsDaoImpl implements BbsDao {
 	// 댓글 리스트
 	@Override
 	public List<BbsComment> commentList(int seq) {
-		return session.selectList(ns + "commentList", seq);
+		return session.selectList(ns + "commentListBoard", seq);
 	}
 
 	// 조회수
