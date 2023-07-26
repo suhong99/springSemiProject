@@ -32,17 +32,7 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne(ns + "login", dto);
 	}
 	
-	@Override
-	public MemberDto kakaoLogin(MemberDto dto) {
-		return session.selectOne(ns + "kakaologin", dto);
-
-	}
-
-	@Override
-	public MemberDto kakaoAddmember(MemberDto dto) {
-		session.insert(ns + "kakaoaddmember", dto);
-		return 	session.selectOne(ns + "kakaologin", dto);	
-	}
+	
 }
 
 

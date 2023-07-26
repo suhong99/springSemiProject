@@ -47,10 +47,7 @@
 	padding: 20px;
 }
 </style>
-<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
-
 </head>
 <body>
 <div class="authContainer">
@@ -84,72 +81,13 @@
                     <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('regi')">회원가입</a>
                 </p>
             </div>
-            <!-- 카카오로그인  -->
-           <div style="width: 100%; display: flex; justify-content: center;margin-top: 10px">
-				<img onclick="kakaoLogin()" alt="카카오 로그인" src="./images/kakao_login.png" style="width:250px;">
-            </div>
         </div>
     </form>
         
   </div>  
 </section>
 </div>
-<script type="text/javascript">
-    Kakao.init('822d3eac697dcc5530d84f54ee93e535');
-    function kakaoLogin() {
-        Kakao.Auth.login({
-            success: function (response) {
-                Kakao.API.request({
-                    url: '/v2/user/me',
-                    success: function (response) {
-                         // console.log(JSON.stringify(response))
-                         //	console.log(response.id);
-                         // console.log(response.properties.nickname);
-                         // console.log(response.kakao_account.email);
-                          const formData = {
-					        id: response.id+'',
-					        pwd : response.id+'',
-					        name: response.properties.nickname,
-					        email : response.kakao_account.email,
-					        auth : 10
-					   		 };
-                          console.log(formData);
-                          $.ajax({
-              		        url: "kakaoLogin.do",
-              		        type: "post",
-              		        data: formData,
-              		        async : false,
-              		        success: function(response) {
-              		        	 const kakaoMsg = response.trim();
-              		             if (kakaoMsg === "MEMBER_NO") {
-              		                 alert("회원가입에 실패하셨습니다.");
-              		             } else if (kakaoMsg === "LOGIN_YES") {
-              		                 alert("로그인 되었습니다.");
-              		                 location.reload();
-              		             } else if(kakaoMsg ==="MEMBER_YES"){
-              		            	 alert("회원가입 되었습니다.")
-              		                 location.reload();
-              		             }else {
-              		                 alert("로그인 처리 중 에러가 발생했습니다.");
-              		             }
-              		        },
-              		        error: function() {
-              		            alert("서버와 통신 중 에러가 발생했습니다.");
-              		        }
-              		    });
-                       	 
-                    },
-                    fail: function (error) {
-                        alert(JSON.stringify(error))
-                    },
-                })
-            },
-            fail: function (error) {
-                alert(JSON.stringify(error))
-            },
-        })
-    }
-</script>
+
 
 <script type="text/javascript">
 		function login(event) {
@@ -159,6 +97,7 @@
 		        id: $("#loginId").val(),
 		        pwd: $("#loginPwd").val()
 		    };
+			console.log(formData);
 		    // Ajax로 서버에 POST 요청 보내기
 		    $.ajax({
 		        url: "loginAf.do",

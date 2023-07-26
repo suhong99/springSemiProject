@@ -8,7 +8,4 @@ public interface MemberService {
 	boolean addmember(MemberDto dto);
 	
 	MemberDto login(MemberDto dto);
-	
-	MemberDto kakaoLogin(MemberDto dto);
-	MemberDto kakaoAddmember(MemberDto dto);
 }

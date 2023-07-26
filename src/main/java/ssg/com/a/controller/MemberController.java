@@ -86,28 +86,6 @@ public class MemberController {
 		System.out.println("MemberController logout() " + new Date());		
 		request.getSession().removeAttribute("login");		
 	}
-	
-	@ResponseBody
-	@PostMapping("kakaoLogin.do")
-	public String kakaoLogin(MemberDto mem, HttpServletRequest request) {
-		System.out.println("MemberController kakaoLogin() " + new Date());
-		
-		MemberDto dto = service.kakaoLogin(mem);
-		String kakaomsg = "LOGIN_NO";
-		if(dto != null) {
-			request.getSession().setAttribute("login", dto);	// session에 저장			
-			kakaomsg = "LOGIN_YES";
-		}	else if(dto==null){
-			dto = service.kakaoAddmember(mem);
-			kakaomsg = "MEMBER_NO";
-			if(dto != null) {
-				request.getSession().setAttribute("login", dto);			
-				kakaomsg = "MEMBER_YES";
-			}
-		}
-		
-		return kakaomsg;
-	}
 }
 
 

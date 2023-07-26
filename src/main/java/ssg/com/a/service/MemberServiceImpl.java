@@ -27,14 +27,5 @@ public class MemberServiceImpl implements MemberService{
 		return dao.login(dto);
 	}
 	
-	@Override
-	public MemberDto kakaoLogin(MemberDto dto) {
-		return dao.kakaoLogin(dto);
-	}
-
-	@Override
-	public MemberDto kakaoAddmember(MemberDto dto) {
-		return dao.kakaoAddmember(dto);
-	}
 	
 }

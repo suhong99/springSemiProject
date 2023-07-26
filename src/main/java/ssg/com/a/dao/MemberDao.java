@@ -10,7 +10,5 @@ public interface MemberDao {
 	int idcheck(String id);	
 	int addmember(MemberDto dto);
 	MemberDto login(MemberDto dto);
-	
-	MemberDto kakaoLogin(MemberDto dto);
-	MemberDto kakaoAddmember(MemberDto dto);
+
 }
