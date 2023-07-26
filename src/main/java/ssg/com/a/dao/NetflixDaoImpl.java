@@ -48,11 +48,6 @@ public class NetflixDaoImpl implements NetflixDao{
 		return session.selectList(ns +"commentList", seq);
 	}
 
-	@Override
-	public Double avg(Long seq) {
-		return session.selectOne(ns + "avg", seq);
-	}
-
 	
 	
 }
