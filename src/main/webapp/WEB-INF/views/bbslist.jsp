@@ -43,7 +43,10 @@
 	background-color: #0D0D0D;
 	color: #F2F2F2;
 	        } */
-	        
+* {
+    margin: 0;
+    padding: 0;
+      }   
 .center{
 	margin: auto;
 	width: 1000px;
@@ -142,6 +145,7 @@ if(list == null || list.size() == 0){
 
 
 <br><br>
+
 <div class="form-row align-items-center d-flex justify-content-center align-items-center container">
 <select id="choice" class="form-control" style="width:auto;">
 	<option value="start">검색</option>

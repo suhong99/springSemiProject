@@ -27,15 +27,19 @@
 	color: #F2F2F2;
 	        } */
 	        
+* {
+    margin: 0;
+    padding: 0;
+      }   
 .center{
 	margin: auto;
-	width: 800px;
-	text-align: center;		
+	width: 1000px;
+	text-align: center;
 }
 th{
-	background: gray;
+	background-color: #0D0D0D;
 	color: white;
-}
+} 
 tr {
    line-height: 20px;   
 }	        

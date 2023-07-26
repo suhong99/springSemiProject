@@ -24,17 +24,21 @@
 
 /* body {
 	background-color: #0D0D0D;
-	color: #F2F2F2; */
-	        }
+	color: #F2F2F2;} */
+
+* {
+    margin: 0;
+    padding: 0;
+      }   
 .center{
 	margin: auto;
-	width: 800px;
-	text-align: center;		
+	width: 1000px;
+	text-align: center;
 }
 th{
-	background: gray;
+	background-color: #0D0D0D;
 	color: white;
-}
+} 
 tr {
    line-height: 20px;   
 }
@@ -61,14 +65,14 @@ tr {
 <tr>
 	<th>제목</th>
 	<td>
-		<input type="text" id="title" name="title" class="form-control" placeholder="제목을 기입">
+		<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요">
 	</td>
 </tr>
 
 <tr>
 	<th>내용</th>
 	<td>
-		<textarea rows="15" cols="50" class="form-control" id="content" name="content" placeholder="내용을 기입"></textarea>
+		<textarea rows="15" cols="50" class="form-control" id="content" name="content" placeholder="내용을 입력하세요"></textarea>
 	</td>
 </tr>
 

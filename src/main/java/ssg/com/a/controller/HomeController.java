@@ -13,22 +13,6 @@ public class HomeController {
 	public String home() {
 		System.out.println("HomeController home() " + new Date());
 		return "main";
-	}
-	
-	@GetMapping("home2.do")
-	public String home2(Model model) {
-		System.out.println("HomeController home() " + new Date());
-		
-		model.addAttribute("content", "home2");
-		return "main";
-	}
-	
-	@GetMapping("netflixlist.do")
-	public String netflixlist(Model model) {
-		System.out.println("HomeController netflixlist() " + new Date());
-		
-		return "netflixlist";
-	}
-	
+	}			
 	
 }
