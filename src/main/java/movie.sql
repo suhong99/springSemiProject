@@ -14,3 +14,6 @@ select * from movie;
 insert into 
 
 select * from member;
+
+delete from member
+where auth = 10;
