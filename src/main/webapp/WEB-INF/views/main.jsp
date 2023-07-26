@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> 
-<% 
-	request.setCharacterEncoding("utf-8"); 
-	String content = (String)request.getAttribute("content"); 
-	
-	if(content == null){ 
-		content = "home"; 
-	} 
-%>
+pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
+= (String)request.getAttribute("content"); if(content == null){ content =
+"home"; } %>
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +14,8 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     />
     <title>main</title>
+    <link rel="stylesheet" type="text/css" href="./css/Modal.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
@@ -41,64 +37,6 @@ pageEncoding="UTF-8"%>
         width: 1000px;
         text-align: center;
       }
-	/* // 필요 없을듯? */
-      th {
-        background: royalblue;
-        color: white;
-      }
-      tr {
-        line-height: 12px;
-      }
-      td {
-        margin-top: 0px;
-        padding-top: 0px;
-      }
-
-      /* 모달 */
-      .modal-container {
-        background-color: rgba(0, 0, 0, 0.6);
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-
-      .modal-container.show-modal {
-        display: block;
-      }
-
-      #modalContent {
-        position: absolute;
-        overflow: hidden;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 100%;
-        background-color: rgba(0, 0, 0, 0.75);
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin: 0;
-        min-height: 515px;
-        animation-name: modalopen;
-        animation-duration: var(--modal-duration);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 600px;
-      }
-
-      @keyframes modalopen {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
     </style>
     <link
       rel="stylesheet"
@@ -107,7 +45,14 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div align="center">
-      <table style="width: 100%;display: flex; justify-content: center; align-items: center;">
+      <table
+        style="
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
         <tr>
           <td>
             <jsp:include page="header.jsp" flush="false" />
@@ -159,7 +104,7 @@ pageEncoding="UTF-8"%>
         window.addEventListener("click", function (event) {
           if (event.target === modal) {
             modal.classList.remove("show-modal");
-            // 로그인화면으로 돌아가기	
+            // 로그인화면으로 돌아가기
             document.getElementById("loginForm").style.display = "block";
             document.getElementById("regiForm").style.display = "none";
             // 회원가입 p태그 비우기
@@ -181,4 +126,3 @@ pageEncoding="UTF-8"%>
     </script>
   </body>
 </html>
-
