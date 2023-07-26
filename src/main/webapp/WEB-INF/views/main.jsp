@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
         width: 1000px;
         text-align: center;
       }
-/*       // 필요 없을듯? */
+	/* // 필요 없을듯? */
       th {
         background: royalblue;
         color: white;

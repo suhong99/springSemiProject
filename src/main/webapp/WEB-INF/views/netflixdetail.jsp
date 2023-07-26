@@ -54,6 +54,7 @@
 		    .swal2-confirm {
         		border: none;
         	}
+        	
 		</style>
 	</head>
 	<body>
@@ -89,12 +90,14 @@
 						    	<%	
 					    	}
 					    %>
-						<span style="color: gray; font-weight: bold;">사이트 리뷰 평점: <%=NetflixUtil.round(avg) %></span>	
+						<span style="color: gray; font-weight: bold;">사이트 리뷰 평점 : <%=NetflixUtil.round(avg) %></span>	
 					</div>
 					<div class="content">
-						<br>	
-						<span>줄거리</span><br>
-						<p>
+						<div>
+							<span style="font-size: 16px; color: gray; font-weight: bold;">개봉일 : <%= dto.getReleaseDate() %></span><br><br>
+						</div>
+						<div>
+						<span style="font-size: 24px; font-weight: bold;">줄거리</span><br><br>
 						<%
 							if(dto.getOverview() == null || dto.getOverview().equals("")) {
 								%>
@@ -104,16 +107,15 @@
 							
 							else{
 								%>
-								<span id="overviewSpan"><%= dto.getOverview() %></span><br><br>
+								<span id="overviewSpan"></span><br><br>
 								<% 
 							}	
 
 						%>
-						</p>
-				        <b>개봉일:</b> <%= dto.getReleaseDate() %><br><br>
-						
+						</div>
 					</div>
 					<div class="button">
+						
 						<button class="btn" onclick="back()">Back to home</button>
 					</div>
 				</div>
@@ -136,7 +138,7 @@
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">댓글 작성</span>&nbsp;&nbsp;&nbsp;
 							<span style="font-size: 20px; font-weight: bold; color: #F2F2F2;">평점 입력</span>
 							<input type="number" id="rating" name="rating" min="0.0" max="10.0" 
-							step="0.1" style="margin-bottom: 3px;"><br>
+							step="0.1" value="10" style="margin-bottom: 3px;"><br>
 							<textarea id="content" name="content" placeholder="댓글을 입력하세요" spellcheck="false"></textarea>
 						</div>
 						<div style="padding-top: 32px; padding-left: 5px">
@@ -170,22 +172,17 @@
 							});
 						});
 						
-						// 로그인 안되어있으면 제출 막고 홈으로 
+						// 로그인 안되어있으면 제출 막고 모달창으로 
 						$("form").on("submit", function(e) {
 				            <%
 				            	if(mem == null){
 				            		%>
 				            			e.preventDefault();
-					            		Swal.fire({
-					                        title: '로그인이 필요합니다!',
-					                        icon: 'error',
-					                        showConfirmButton: true,
-					                        confirmButtonColor: '#D91E1E',
-					                        confirmButtonText: '확인'
-					                    }).then(function() {
-					                        location.href = "home.do"; 
-					                    });
-						                
+				            		<%
+				            	}
+				            	else{
+				            		%>
+				            			$("form").submit();
 				            		<%
 				            	}
 				            %>
@@ -225,9 +222,10 @@
 										if(item.content.trim() != ""){
 											let str = "<hr>"+"<div>";
 											
-											// 작성자와 댓글 작성자가 동일하면 (글쓴이) 추가
+											// 작성자와 댓글 작성자가 동일하면 (내 댓글) 추가
 											if(item.id == $("#writer").val()){
-												str += "<span style='font-weight: bold; color: #F2F2F2;'>"+ item.id + "(글쓴이) </span><br>";
+												str += "<span style='font-weight: bold; color: #F2F2F2;'>"+ star(item.id) + "</span>";
+												str += "<span style='font-weight: bold; color: #3085d6;'>(내 댓글)</span><br>";
 											}
 											else {
 				                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.id + " </span><br>";
@@ -252,7 +250,7 @@
 
 											// 내용 + 날짜
 											str += "<br><br><div>"
-											str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.content + "</span><br><br>"
+											str += hasBadword(item.content)
 											str += "<span style='font-weight: bold; color: gray;'>"+ item.wdate + " </span>"
 											str += "</div>"
 											
@@ -281,6 +279,7 @@
 									alert("댓글 불러오기 실패");
 								}
 							});
+							
 							
 							/* 삭제 버튼 클릭 시 SweetAlert를 통해 확인 후 삭제 요청 */
 							// 나도 잘모름 챗 gpt 활용
@@ -312,10 +311,10 @@
 				</div>
 
 		</div>
-		<!-- 한글자씩 줄거리 읽어주기 
+		<!-- 한글자씩 줄거리 읽어주기 -->
 	    <script type="text/javascript">
 		    let overviewSpan = document.getElementById('overviewSpan');
-		    let overviewText = '<%= dto.getOverview() %>'; // 줄거리 텍스트를 가져옵니다.
+		    let overviewText = "<%= dto.getOverview() %>"; 
 		    let currentIndex = 0;
 		
 		    function typeOverview() {
@@ -326,7 +325,7 @@
 		      }
 		    }
 		
-		    typeOverview(); // 함수 호출로 한 글자씩 출력 시작-->
+		    typeOverview(); // 함수 호출로 한 글자씩 출력 시작
 	    </script>	
 	   
 		<script type="text/javascript">
@@ -335,5 +334,108 @@
 				location.href = "home.do"; 
 			}
 		</script>
+		
+		<script type="text/javascript">
+			// 아이디 익명성
+			function star(id) {
+			  if (id === null || id.length <= 2) {
+				  let maskedId = id.substring(0, 1) + "*".repeat(6);
+			      return id;
+			  }
+		
+			  let maskedId = id.substring(0, 2) + "*".repeat(6);
+			  return maskedId;
+			}
+		</script>
+		
+		<script type="text/javascript">
+			function hasBadword(content) {
+				  // 비속어 리스트 
+				  const list = [
+				    "시발",
+				    "병신",
+				    "개새끼",
+				    "fuck",
+				    "shit",
+				    "ㅅㅂ",
+				    "좆"
+				    // 추가 가능..
+				  ];
+	
+				  // content를 소문자로 변환하여 비속어를 체크합니다.
+				  const lowerCaseContent = content.toLowerCase();
+	
+				  // list에 포함되어있는지 체크
+				  for (const word of list) {
+					    if (lowerCaseContent.includes(word.toLowerCase())) {
+					      return "<span style='font-weight: bold; color: red;'>**욕설 및 부적절한 단어가 포함되어있습니다. 클린한 댓글 문화를 지켜주세요!**</span><br><br>"; 
+					    }
+				  }
+	
+				  return "<span style='font-weight: bold; color: #F2F2F2;'>" + content + "</span><br><br>"; // 비속어가 포함되지 않은 경우 그대로 반환
+			}
+		</script>
+		
+		
+		<!-- Modal -->
+	    <div class="modal-container" id="modal">
+	      <div id="modalContent">
+	        <div id="loginForm">
+	          <jsp:include page="member/login.jsp" flush="false" />
+	        </div>
+	        <div id="regiForm" style="display: none">
+	          <jsp:include page="member/regi.jsp" flush="false" />
+	        </div>
+	      </div>
+	    </div>
+	    <script>
+	      document.addEventListener("DOMContentLoaded", function () {
+	        const modal = document.getElementById("modal");
+	        const submitBtn = document.getElementById("submitBtn");
+	
+	        if (submitBtn) {
+	          document
+	            .getElementById("submitBtn")
+	            .addEventListener("click", function () {
+	            	// 만약 로그인 되어있으면 모달창 안나타나게 
+	            	<%
+	            		if(mem != null){
+	            			%>
+	            			modal.classList.remove("show-modal");
+	            			<%
+	            		}
+	            		else{
+	            			%>
+	            			modal.classList.add("show-modal");
+	            			<%
+	            		}
+	            	%>
+	            });
+	        }
+	
+	        // 외부 클릭 시 모달 숨기기
+	        window.addEventListener("click", function (event) {
+	          if (event.target === modal) {
+	            modal.classList.remove("show-modal");
+	            // 로그인화면으로 돌아가기	
+	            document.getElementById("loginForm").style.display = "block";
+	            document.getElementById("regiForm").style.display = "none";
+	            // 회원가입 p태그 비우기
+	            $("#idcheck").text("");
+	          }
+	        });
+	      });
+	
+	      // 로그인 및 회원가입 폼 이동
+	      function toggleForm(formName) {
+	        if (formName === "login") {
+	          document.getElementById("loginForm").style.display = "block";
+	          document.getElementById("regiForm").style.display = "none";
+	        } else if (formName === "regi") {
+	          document.getElementById("loginForm").style.display = "none";
+	          document.getElementById("regiForm").style.display = "block";
+	        }
+	      }
+	    </script>
 	</body>
 </html>
