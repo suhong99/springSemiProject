@@ -217,7 +217,7 @@
 												str += "<span style='font-weight: bold; color: #3085d6;'>(내 댓글)</span><br>";
 											}
 											else {
-				                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.id + " </span><br>";
+				                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + star(item.id) + " </span><br>";
 				                            }
 											
 											// 매긴 점수에 따라 이모지 추가

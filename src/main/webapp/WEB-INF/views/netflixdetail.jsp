@@ -19,7 +19,6 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./css/detail.css">
-		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 		<style>
@@ -228,7 +227,7 @@
 												str += "<span style='font-weight: bold; color: #3085d6;'>(내 댓글)</span><br>";
 											}
 											else {
-				                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + item.id + " </span><br>";
+				                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + star(item.id) + " </span><br>";
 				                            }
 											
 											// 매긴 점수에 따라 이모지 추가
