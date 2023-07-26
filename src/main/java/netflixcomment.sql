@@ -17,3 +17,6 @@ select * from netflixcomment;
 select avg(rating) 
 		from netflixcomment
 		where seq = 667538;
+		
+delete from netflixcomment
+		where comment_id = 1;

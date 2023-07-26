@@ -12,3 +12,5 @@ drop table movie;
 select * from movie;
 
 insert into 
+
+select * from member;

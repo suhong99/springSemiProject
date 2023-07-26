@@ -81,9 +81,9 @@ body{
 
 /* 디테일 제출 버튼 */
 #submitBtn{
-	height: 80px; 
+	height: 82px; 
 	width: 200px;
-	margin-bottom: 26px;
+	margin-bottom: 24px;
 	border-radius: 5px;
 	color: #F2F2F2;
 	font-weight: bold;
@@ -91,6 +91,11 @@ body{
 	background: #D91E1E;
 	border: none;
 }
+
+#submitBtn:hover{
+	cursor: pointer;
+}
+
 
 /* comment 컨테이너 */
 .commentwrite{
@@ -121,3 +126,34 @@ textarea{
 	src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 }
 
+/* rating number 이쁘게 */
+.rating-input {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.rating-input input[type="number"] {
+    appearance: none; /* Remove default arrow buttons */
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: #555;
+    width: 60px;
+    text-align: center;
+}
+
+.rating-input input[type="number"]::-webkit-inner-spin-button,
+.rating-input input[type="number"]::-webkit-outer-spin-button {
+    appearance: none; /* Remove spin buttons for Chrome */
+}
+
+.rating-input input[type="number"]::-moz-number-spin-box {
+    display: none; /* Remove spin buttons for Firefox */
+}
+
+.rating-input input[type="number"]::-webkit-textfield-decoration-container {
+    display: none; /* Remove textfield decorations for Chrome */
+}
