@@ -27,7 +27,7 @@
 	          </li>
 	          
 	          <li class="nav-item" class="nav-link">
-	            <a href="./home2.do" class="nav-link">자유게시판</a>
+	            <a href="./bbslist.do" class="nav-link">자유게시판</a>
 	          </li>   
 	          
 	          <li class="nav-item" class="nav-link">
