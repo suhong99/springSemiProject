@@ -127,26 +127,22 @@
     <div class="row">  
       <div class="col-md-3 col-sm-6">  
         <div class="footer-pad">  
-          <h4>게시판</h4>  
+          <h4 style="font-weight: bold">사이트 제작자</h4>  
           <ul class="list-unstyled">  
             <li><a href="#"></a></li>
-            <li><a href="#">공지사항</a></li>
-            <li><a href="#">상품정보</a></li>  
-            <li><a href="#">자유게시판</a></li>  
-            <li><a href="#">Q&A게시판</a></li>                         
+            <li><a href="#">김수홍(팀장)</a></li>
+            <li><a href="#">강창희</a></li>  
+            <li><a href="#">정재원</a></li>  
+            <li><a href="#">최민규</a></li>                         
           </ul>  
         </div>  
       </div>  
       <div class="col-md-3 col-sm-6">  
         <div class="footer-pad">  
-          <h4>Footer Heading 2</h4>  
+          <h4 style="font-weight: bold">개발 기록 일지</h4>  
           <ul class="list-unstyled">  
-            <li><a href="#">Blog</a></li>  
-            <li><a href="#">Accessibility</a></li>  
-            <li><a href="#">Disclaimer</a></li>  
-            <li><a href="#">Privacy Policy</a></li>  
-            <li><a href="#">FAQs</a></li>  
-            <li><a href="#">Webmaster</a></li>  
+            <li><a href="https://github.com/suhong99/springSemiProject" target="_blank">깃허브</a></li>  
+            <li><a href="https://github.com/suhong99/springSemiProject/issues" target="_blank">개발 이슈들</a></li>  
           </ul>  
         </div>  
       </div>  
@@ -154,7 +150,7 @@
         <div class="footer-pad">  
           <h4> Footer Heading 3 </h4>  
           <ul class="list-unstyled">  
-            <li><a href="#">Parks and Recreation</a></li>  
+            <li><a href="https://github.com/suhong99/springSemiProject" target="_blank">깃허브</a></li>  
             <li><a href="#">Public Works</a></li>  
             <li><a href="#">Police Department</a></li>  
             <li><a href="#">Fire</a></li>  
@@ -169,8 +165,8 @@
              	<li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"> </i> </a> </li>  
     			<li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>  
             </ul>               
-    </div>  
-    </div>  
+    	</div>  
+    	</div>  
     <br>
     <div class="row">  
     <div class="col-md-12 copy">  

@@ -16,8 +16,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>Insert title here</title>	
 		<link rel="stylesheet" type="text/css" href="./css/detail.css">
+		<link rel="stylesheet" type="text/css" href="./css/Modal.css">
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 		<style>
@@ -27,7 +29,7 @@
 		        appearance: none; 
 		    }
 		    
-		    /* input number 클릭시 focus 효과 없애기 */
+		    /* input number 클릭시 focus 효과 없애기 *	/
 			input[type="number"]:focus {
 			  outline: none; 
 			}
@@ -41,8 +43,7 @@
 	        font-weight: bold;
 	        cursor: pointer;
 	        margin-right: 10px;
-	      }
-	
+	      }	
 		</style>
 	</head>
 	<body>
