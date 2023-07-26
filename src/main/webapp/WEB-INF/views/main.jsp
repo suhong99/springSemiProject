@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> 
-<% 
-	request.setCharacterEncoding("utf-8"); 
-	String content = (String)request.getAttribute("content"); 
-	
-	if(content == null){ 
-		content = "home"; 
-	} 
-%>
+pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
+= (String)request.getAttribute("content"); if(content == null){ content =
+"home"; } %>
 
 <!DOCTYPE html>
 <html>
@@ -20,8 +14,8 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     />
     <title>main</title>
-  	<link rel="stylesheet" type="text/css" href="./css/Modal.css">
-    
+    <link rel="stylesheet" type="text/css" href="./css/Modal.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
@@ -43,7 +37,6 @@ pageEncoding="UTF-8"%>
         width: 1000px;
         text-align: center;
       }
-
     </style>
     <link
       rel="stylesheet"
@@ -52,7 +45,14 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div align="center">
-      <table style="width: 100%;display: flex; justify-content: center; align-items: center;">
+      <table
+        style="
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
         <tr>
           <td>
             <jsp:include page="header.jsp" flush="false" />
@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
         window.addEventListener("click", function (event) {
           if (event.target === modal) {
             modal.classList.remove("show-modal");
-            // 로그인화면으로 돌아가기	
+            // 로그인화면으로 돌아가기
             document.getElementById("loginForm").style.display = "block";
             document.getElementById("regiForm").style.display = "none";
             // 회원가입 p태그 비우기
@@ -126,4 +126,3 @@ pageEncoding="UTF-8"%>
     </script>
   </body>
 </html>
-
