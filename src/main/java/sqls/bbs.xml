@@ -126,7 +126,7 @@
 </insert>
 
 <!-- 목록 -->
-<select id="commentList" parameterType="Integer" resultType="ssg.com.a.dto.BbsComment">
+<select id="commentListBoard" parameterType="Integer" resultType="ssg.com.a.dto.BbsComment">
 	select seq, id, content, wdate
 	from bbscomment
 	where seq=#{seq}

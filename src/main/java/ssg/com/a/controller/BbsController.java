@@ -52,14 +52,17 @@ public class BbsController {
 		model.addAttribute("pageBbs", pageBbs);
 		model.addAttribute("param", param);
 		
-	//	model.addAttribute("content", "bbs/bbslist");
-		return "bbslist";
+		model.addAttribute("content", "bbslist");
+	
+		return "main";
 	}
 	
 	@GetMapping("bbswrite.do")
-	public String bbswrite() {
+	public String bbswrite(Model model) {
 		System.out.println("BbsController bbswrite() " + new Date());
-		return "bbswrite";
+		
+		model.addAttribute("content", "bbswrite");
+		return "main";
 	}
 	
 	@PostMapping("bbswriteAf.do")
@@ -72,8 +75,9 @@ public class BbsController {
 		if(isS == false) {
 			bbswrite = "BBS_ADD_NO";	
 		}
+		model.addAttribute("content", "bbswrite");
 		model.addAttribute("bbswrite", bbswrite);
-		return "message";
+		return "bbswrite";
 	}
 	/*
 	// 상세글보기
@@ -84,11 +88,13 @@ public class BbsController {
 		service.readcount(seq);		// 조회수 
 		BbsDto dto= service.bbsdetail(seq);
 		
+		model.addAttribute("content", "bbsdetail");
 		model.addAttribute("bbsdto", dto);
-		return "bbsdetail";
+		// return "bbsdetail";
+		 return "main";
 	}*/
 	
-	//조회수 중복 방지
+	//상세글 보기 - 조회수 중복 방지
 
 	@GetMapping("bbsdetail.do")
 	public String bbsdetail(int seq, Model model) {
@@ -97,8 +103,9 @@ public class BbsController {
 		//service.readcount(seq);		// 조회수 
 		BbsDto dto= service.bbsdetail(seq);
 		
+		model.addAttribute("content", "bbsdetail");
 		model.addAttribute("bbsdto", dto);
-		return "bbsdetail";
+		return "main";
 	}
 	
 	private void readcount(Long id, HttpServletRequest request, HttpServletResponse response) {
@@ -238,7 +245,9 @@ public class BbsController {
 	 
 	     BbsDto dto = service.bbsdetail(seq); 
 		 model.addAttribute("bbsdto", dto);
-		 return "bbsupdate"; 
+		 
+		 model.addAttribute("content", "bbsupdate");
+		 return "main"; 
 	 }
 	 
 	@GetMapping("bbsupdateAf.do")
@@ -251,7 +260,7 @@ public class BbsController {
 	if(isS == false) {
 		bbsupdate = "BBS_UPDATE_NO";		
 	}
-	
+	model.addAttribute("content", "bbsupdate");
 	model.addAttribute("bbsupdate", bbsupdate);
 	//return "bbsdetil";
 	return "redirect:/bbsdetail.do?seq=" + dto.getSeq();
@@ -278,7 +287,9 @@ public class BbsController {
 			BbsDto dto = service.bbsdetail(seq);		
 			model.addAttribute("bbsdto", dto);
 			
-			return "bbsanswer";
+			model.addAttribute("content", "bbsanswer");
+			return "main";
+		//	return "bbsanswer";
 		}
 		
 		@GetMapping("bbsanswerAf.do")
@@ -292,6 +303,7 @@ public class BbsController {
 			}
 			model.addAttribute("bbsanswer", bbsanswer);
 			model.addAttribute("seq", dto.getSeq());
+			
 			
 			return "redirect:/bbsdetail.do?seq=" + dto.getSeq();
 		}
