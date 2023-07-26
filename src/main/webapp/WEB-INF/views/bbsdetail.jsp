@@ -5,16 +5,16 @@
     pageEncoding="UTF-8"%>
 
 	<%
-	MemberDto login = (MemberDto)session.getAttribute("login");
-	if(login == null || login.getId().equals("")){
+	MemberDto login = (MemberDto)session.getAttribute("login");%> 
+	<%-- if(login == null || login.getId().equals("")){
 	%>  
 		<script>
 		alert("로그인 해 주십시오");
-		location.href = "login.do";
+		location.href = "home.do";
 		</script>
 	<%
 	}
-	%>
+	%> --%>
 
 	<%	
 		BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
@@ -39,25 +39,24 @@
 
 <style type="text/css">
 
-body {
+/* body {
 	background-color: #F2F2F2;
 	color: #F2F2F2;
-}
-
+} */
+* {
+    margin: 0;
+    padding: 0;
+      }   
 .center{
 	margin: auto;
-	width: 800px;			
-}
+	width: 1000px;
+	}
+
 th{
-	background: gray;
+	background:  #0D0D0D;
 	color: white;
 }
-.container{
-background: #F2F2F2;
-	color: white;
-	font-family: 50px;
-	font-weight: 500;
-}
+
 tr {
    line-height: 20px;   
 }
@@ -105,7 +104,6 @@ cols="20" class="form-control" ><%=dto.getContent() %></textarea>
 <% } %>
 <br>
 
-<%-- <button type="button" onclick="answerBbs(<%=dto.getSeq() %>)">답글</button> --%>
 <button type="button" class="btn btn-dark" onclick ="detailBbs(<%=dto.getSeq() %>)">목록</button>
 <button type="button" class="btn btn-dark" onclick="answerBbs(<%=dto.getSeq() %>)">답글</button>
 <%
