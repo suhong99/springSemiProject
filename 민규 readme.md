@@ -1,4 +1,3 @@
-# 7/25 
 #### 0. MVC 모델 2 복습 
 
 https://min-it.tistory.com/7
@@ -67,7 +66,6 @@ input[type='number']::-webkit-inner-spin-button {
 
 --> 수홍님이 짠 모달창으로 바로 넘어가게 스크립트 내가 수정 mem ==null이면 보이게 
 
-# 7/27
 #### 18. 검색결과 json db넣으려는데 the method is undefined for the type 오류 
 
 --> servers --> server options --> serve modules without publishing --> 해결! ajax로 그리고 보내주기 
