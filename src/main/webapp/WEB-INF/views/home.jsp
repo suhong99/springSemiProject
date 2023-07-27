@@ -29,18 +29,45 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 		<style type="text/css">
 			/* 이미지 갖다대면 조금 더 확대 */
-			div > a > img:hover {
+			.poster-container > a > img:hover {
 				transform: scale(1.2);
 				/* transition: all 0.1s linear; */
 			}
 		</style>
 	</head>
 	<body>
-		<div style="display: flex; justify-content: flex-end;"> <!-- 우측 정렬 -->
-            <input type="text" class="input" placeholder="검색어를 입력하세요.">
-            <button id="searchBtn" onclick="searchMovies()">검색</button>
-        </div>
-        
+		<form action="searchNetflix.do" method="get"style="display: flex; justify-content: flex-end;">
+    <input type="text" class="input" placeholder="검색어를 입력하세요." id="searchInput" name="query">
+    <button id="searchBtn" type="submit">검색</button>
+</form>
+		
+		<!-- 검색 결과를 표시할 영역 -->
+		<div id="searchResults"></div>
+		
+		<script type="text/javascript">
+		    // 검색 버튼 클릭 시 실행할 함수
+		    function searchMovies() {
+		    // 검색어를 입력하는 input 요소 참조
+		    const searchInput = document.getElementById("searchInput");
+		    // 검색어 값을 가져옴
+		    const query = searchInput.value;
+		
+		    // 서버로 검색어를 전송하고 결과를 받아옴 (Ajax 사용)
+		    $.ajax({
+		        url: "searchNetflix.do", // 검색 요청을 처리하는 서블릿 또는 컨트롤러 URL
+		        type: "GET", // GET 메서드로 변경
+		        data: { query: query }, // 검색어를 GET 파라미터로 전송
+		        success: function (data) {
+		        	console.log(data);
+		        	$("#searchResults").html(data);
+		        },
+		        error: function (e) {
+		            alert("검색 실패");
+		        }
+		    });
+		}
+		</script>
+		        
         <!-- TOP20 Movie JSON 컨트롤러에 넘겨주기 -->
         <script type="text/javascript">
         	let contentList = {"contentList": JSON.stringify(<%=listMovieJson%>)}
@@ -87,7 +114,9 @@
 			    	%>
 			        	<div class="poster-container">	        		
 	        				<a href="netflixdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
-			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
+	        					<!-- 없을 경우 로고  -->
+			        			<img onerror="this.onerror=null; this.src='./images/netflixreview.png'" 
+			        			src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
 			        			<%= content.getTitle() %> <!-- 제목 표시 -->
@@ -111,7 +140,9 @@
 			    	%>
 			        	<div class="poster-container">
 			        		<a href="netflixtvdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
-			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
+			        			<!-- 없을 경우 로고 -->
+			        			<img onerror="this.onerror=null; this.src='./images/netflixreview.png'"
+			        			src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
 			        			<%= content.getTitle() %>
@@ -195,5 +226,7 @@
 	            sliderContainer.style.transform = `translateX(${prevTranslate}px)`;
 	        }
 	    </script>
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	    
 	</body>
 </html>

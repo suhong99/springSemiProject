@@ -46,7 +46,9 @@
 <body>
 <div class="header">
 	<div>
-		<img alt="로고입니다" src="./images/netflixreview.png" id="logo">
+		<a href="home.do">
+			<img alt="로고입니다" src="./images/netflixreview.png" id="logo">
+		</a>
 	</div>
 	<div>
 		<% 	if(login == null){ %>	<!-- 로그인이 안된 경우 -->

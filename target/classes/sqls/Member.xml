@@ -31,7 +31,7 @@
 
 <insert id="kakaoaddmember" parameterType="ssg.com.a.dto.MemberDto">
 	insert into member(id, pwd, name, email, auth)
-	values(#{id}, #{id}, #{name}, #{email}, 10)  
+	values(#{id}, #{pwd}, #{name}, #{email}, 10)  
 </insert> 
 
 </mapper>
