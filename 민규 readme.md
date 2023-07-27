@@ -69,3 +69,29 @@ input[type='number']::-webkit-inner-spin-button {
 #### 18. 검색결과 json db넣으려는데 the method is undefined for the type 오류 
 
 --> servers --> server options --> serve modules without publishing --> 해결! ajax로 그리고 보내주기 
+
+#### 19. 이미지 없을경우 
+
+--> onerror="this.onerror=null; this.src='./images/netflixreview.png'" 로 로고 이미지 보이도록
+
+#### 20. 재원이형 검색 결과 페이지 main에서 표시 
+
+--> netflixcontroller에서 model.addattr("content", "searchResult")로 main.jsp에 넘겨줌
+
+#### 21. 이모지 추가 이전페이지 버튼
+
+--> window.history.back으로 버튼 구현
+
+#### 22. 마이페이지 구현 시작 
+
+--> 즐겨찾기 기능 추가 + 마이페이지에서 즐겨찾기 리스트 받기
+
+#### 23. 즐겨찾기는 중복되면?
+
+--> pk를 id, content_id 쌍으로해서 중복되면 ignore 연산 
+
+#### 24. 즐겨찾기 후 tv, movie detail따로 
+
+--> redirect 컨트롤러 두개 나눠서
+
+
