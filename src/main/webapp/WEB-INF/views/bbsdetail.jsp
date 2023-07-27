@@ -10,7 +10,7 @@
 	
 	%>
 	
-	 <%-- if(login == null || login.getId().equals("")){
+	 <% if(login == null || login.getId().equals("")){
 	%>  
 	<script>
 	document.addEventListener("DOMContentLoaded", function () {
@@ -20,7 +20,7 @@
 	});
 	</script>
 	<%
-	} --%>
+	} %>
 
 
 	<%	
@@ -78,6 +78,14 @@ tr {
 <p></p>
 
 <div class="center">
+ <%if(login != null){
+
+	%>
+ <span style = 'font-weight: bold; color:#0D0D0D; font-size:25px;'><%=login.getId() %>님 환영합니다</span>
+ 
+<% } %>
+
+ <br><br><br>
  
 <%if(dto != null){ %>
 <table class="table table-striped">
@@ -112,8 +120,6 @@ cols="20" class="form-control" ><%=dto.getContent() %></textarea>
 </table>
 
 <br>
-<!-- if(login != null || login.getId().equals(dto.getId())|| login.getAuth()==1){ -->
-
 
 <button type="button" class="btn btn-dark" onclick ="detailBbs(<%=dto.getSeq() %>)">목록</button>
 
@@ -122,7 +128,7 @@ cols="20" class="form-control" ><%=dto.getContent() %></textarea>
 <button type="button" class="btn btn-dark" onclick="answerBbs(<%=dto.getSeq() %>)">답글</button>
 	<% } %>
 	
-<%
+<%if(login != null){
 if( login== null || login.getId().equals(dto.getId()) || login.getAuth()==1 ){
 	%>
 	<button type="button" class="btn btn-dark" onclick="updateBbs(<%=dto.getSeq() %>)">글수정</button>
@@ -132,6 +138,7 @@ if( login== null || login.getId().equals(dto.getId()) || login.getAuth()==1 ){
 	}
 	%>
 
+<% } %>
 <% } %>
 </div>
 
@@ -171,6 +178,7 @@ function deleteBbs( seq ) {
 			<%
 			}
 			%>
+			</div>
 			</div>
 
 <div>

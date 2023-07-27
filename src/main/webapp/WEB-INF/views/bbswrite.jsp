@@ -6,6 +6,8 @@
     
 <%
 	MemberDto login = (MemberDto)session.getAttribute("login");
+
+%> <%
  	if(login == null || login.getId().equals("")){
 	%>  
 	<script>
@@ -67,9 +69,13 @@ tr {
 
 <div class="center">
 
-<%-- <%
+
+<% if(login != null){
 if(login == null || login.getId()!=null || login.getAuth()==1){
-	%> --%>
+	%>
+<span style = 'font-weight: bold; color:#0D0D0D; font-size:25px;'><%=login.getId() %>님 환영합니다</span>	
+	
+<br><br><br>
 	
 <%-- <%if(dto != null){ %> --%>
 <form id="frm" method="post" action="bbswrite.do">
@@ -103,8 +109,9 @@ if(login == null || login.getId()!=null || login.getAuth()==1){
 <button type="button" class="btn btn-dark">글쓰기</button>
 
 </form>
-<%-- <% } %>
- --%>
+
+<% }} %>
+
 </div>
 
 <script type="text/javascript">

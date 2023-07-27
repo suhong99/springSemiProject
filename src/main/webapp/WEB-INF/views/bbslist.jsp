@@ -67,7 +67,12 @@ tr {
 
 
 <div class="center">
+ <%if(login != null){
 
+	%>
+ <span style = 'font-weight: bold; color:#0D0D0D; font-size:25px;'><%=login.getId() %>님 환영합니다</span>
+ 
+<% } %><br><br><br>
 <table class="table table-hover">
 <col width="70"><col width="500"><col width="100"><col width="200">
 <thead>
