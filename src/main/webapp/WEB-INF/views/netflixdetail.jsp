@@ -64,7 +64,8 @@
 			<!-- 정보 표시창 -->
 			<div class="container">
 				<div class="image">
-					<img src="https://image.tmdb.org/t/p/w500<%=dto.getPosterpath() %>"
+					<!-- 이미지 없을경우 로고 -->
+					<img onerror="this.onerror=null; this.src='./images/netflixreview.png'" src="https://image.tmdb.org/t/p/w500<%=dto.getPosterpath() %>"
 					width="400px" height="575px">
 				</div>
 				<div class="text">

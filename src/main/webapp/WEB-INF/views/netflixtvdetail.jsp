@@ -17,7 +17,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>	
-		<link rel="stylesheet" type="text/css" href="./css/detail.css">
+		<link rel="stylesheet" type="text/css" href="./css/detail.css?after">
 		<link rel="stylesheet" type="text/css" href="./css/Modal.css">
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -34,16 +34,6 @@
 			  outline: none; 
 			}
 		  
-		  .delete-btn
-	      {
-	        padding: 5px 10px;
-	        border: none;
-	        background-color: #D91E1E;
-	        color: #FFF;
-	        font-weight: bold;
-	        cursor: pointer;
-	        margin-right: 10px;
-	      }	
 		</style>
 	</head>
 	<body>
@@ -52,7 +42,8 @@
 			<!-- 정보 표시창 -->
 			<div class="container">
 				<div class="image">
-					<img src="https://image.tmdb.org/t/p/w500<%=dto.getPosterpath() %>"
+					<!-- 이미지 없을 경우 로고 -->
+					<img onerror="this.onerror=null; this.src='./images/netflixreview.png'" src="https://image.tmdb.org/t/p/w500<%=dto.getPosterpath() %>"
 					width="400px" height="575px">
 				</div>
 				<div class="text">

@@ -114,7 +114,9 @@
 			    	%>
 			        	<div class="poster-container">	        		
 	        				<a href="netflixdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
-			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
+	        					<!-- 없을 경우 로고  -->
+			        			<img onerror="this.onerror=null; this.src='./images/netflixreview.png'" 
+			        			src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
 			        			<%= content.getTitle() %> <!-- 제목 표시 -->
@@ -138,7 +140,9 @@
 			    	%>
 			        	<div class="poster-container">
 			        		<a href="netflixtvdetail.do?id=<%=content.getId()%>"> <!-- 클릭시 이동할 페이지 -->
-			        			<img src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
+			        			<!-- 없을 경우 로고 -->
+			        			<img onerror="this.onerror=null; this.src='./images/netflixreview.png'"
+			        			src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
 			        			<%= content.getTitle() %>
