@@ -89,12 +89,29 @@
 	where seq=#{seq}
 </delete>
 
-<!-- 조회수 -->
-<update id="readcount">
-	update bbs
-	set readcount=readcount+1
-	where seq=#{seq}
+
+
+
+<!-- -->
+<select id="readcountSelect" parameterType="ssg.com.a.dto.BbsDto"
+						resultType="Integer">
+	select count(*)
+	from readcount
+	where id=#{id} and seq=#{seq}
+</select>
+<!-- count= 0일때 추가 -->
+<insert id="readcountInsert"   parameterType="ssg.com.a.dto.BbsDto" >
+	insert into readcount(id, seq)
+	values (#{id},#{seq})
+</insert>
+
+<update id="readcount" parameterType="java.lang.Integer">
+		update bbs
+		set readcount= readcount+1
+		where seq=#{seq}
 </update>
+
+
 
 
 <!-- 답글 -->

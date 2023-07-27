@@ -77,15 +77,35 @@ public class BbsDaoImpl implements BbsDao {
 	}
 
 	// 조회수
-	@Override
-	public void readcount(Long seq) {
-		session.update(ns + "readcount", seq); 
-	}
+	
+	
+		@Override
+		public int readcountSelect(BbsDto dto) {
+			return session.selectOne(ns + "readcountSelect", dto);
+		}
+		@Override
+		public int readcount(int seq) {
+			return session.update(ns + "readcount", seq);
+		}
 
-	@Override
-	public void commnetcount(int seq, int amount) {
-		session.update(ns + "commentcount", seq); 
-	}
+		@Override
+		public int readcountInsert(BbsDto dto) {
+			return session.insert(ns + "readcountInsert", dto);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		@Override
+		public void commnetcount(int seq, int amount) {
+			// TODO Auto-generated method stub
+			
+		}
 
 	
 	

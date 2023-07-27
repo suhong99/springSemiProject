@@ -16,7 +16,7 @@
 	String search = param.getSearch();
 	
 	MemberDto login = (MemberDto)session.getAttribute("login");
-	
+	BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
 %>    
     
 <!DOCTYPE html>
@@ -69,10 +69,10 @@ tr {
 <div class="center">
 
 <table class="table table-hover">
-<col width="70"><col width="600"><col width="100"><col width="150">
+<col width="70"><col width="500"><col width="100"><col width="200">
 <thead>
 <tr>
-	<th>번호</th>	<th>제목</th>	<th>작성자</th><th>조회수</th>
+	<th>번호</th>	<th>제목</th>	<th>작성자</th><th>조회수</th><th>작성일</th>
 </tr>
 </thead>
 
@@ -125,6 +125,8 @@ if(list == null || list.size() == 0){
 			%>
 			<td><%=bbs.getId() %></td>
 			<td><%=bbs.getReadcount() %></td>
+			
+			<td><%=bbs.getWdate() %></td>
 			
 		</tr>
 		<% 

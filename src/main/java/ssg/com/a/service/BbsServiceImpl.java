@@ -70,13 +70,20 @@ public class BbsServiceImpl implements BbsService{
 	public List<BbsComment> commentList(int seq) {		
 		return dao.commentList(seq);
 	}
-
-	@Override
-	public void readcount(Long seq) {
-		dao.readcount(seq);
+	
+	
+	
+	
+	
+	
+	// 조회수
 		
-	}
-
+		
+		
+		
+		
+		
+		
 	@Override
 	public void commnetcount(int seq, int amount) {
 		dao.commnetcount(seq, amount);
@@ -98,5 +105,23 @@ public class BbsServiceImpl implements BbsService{
 		return mapper.delete(seq);
 	}
 	*/
+
+	@Override
+	public void readcount(int seq) {
+		dao.readcount(seq);
+		
+	}
+
+	@Override
+	public int readcountSelect(BbsDto dto) {
+		return dao.readcountSelect(dto);
+		
+	}
+
+	@Override
+	public void readcountInsert(BbsDto dto) {
+		dao.readcountInsert(dto);
+		
+	}
 
 }

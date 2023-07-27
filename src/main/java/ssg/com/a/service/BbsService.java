@@ -24,7 +24,11 @@ public interface BbsService {
 	boolean commentWrite(BbsComment comment);
 	List<BbsComment> commentList(int seq);
 
-	void readcount(Long id);
+	void readcount(int seq);
+	int readcountSelect(BbsDto dto);					
+	void readcountInsert(BbsDto dto);					// 조회수
+	
+	
 	
 	void commnetcount(							// 댓글 수 추가
 			@Param("seq") int seq,

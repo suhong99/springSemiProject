@@ -19,3 +19,17 @@ update bbs
 set commentcount =( select count(seq) 
 					from bbscomment
 					where bbs.seq = bbscomment.seq);
+					
+
+					
+					
+					
+					
+drop table readcount;
+
+create table readcount(
+id varchar(50),
+seq int
+);
+
+select * from readcount;					

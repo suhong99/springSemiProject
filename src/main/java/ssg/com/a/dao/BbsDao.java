@@ -26,7 +26,9 @@ public interface BbsDao {
 	int commentWrite(BbsComment comment);		// 댓글
 	List<BbsComment> commentList(int seq);		// 댓글리스트
 	
-	void readcount(Long seq);					// 조회수
+	int readcount(int seq);
+	int readcountSelect(BbsDto dto);					// 조회수
+	int readcountInsert(BbsDto dto);			
 	
 	void commnetcount(							// 댓글 수 추가- 보류
 			@Param("seq") int seq,

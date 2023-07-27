@@ -5,16 +5,21 @@
     pageEncoding="UTF-8"%>
 
 	<%
-	MemberDto login = (MemberDto)session.getAttribute("login");%> 
-	<%-- if(login == null || login.getId().equals("")){
+	
+	
+	MemberDto login = (MemberDto)session.getAttribute("login");
+	 if(login == null || login.getId().equals("")){
 	%>  
 		<script>
 		alert("로그인 해 주십시오");
-		location.href = "home.do";
+		const modal = document.getElementById("modal");
+		modal.classList.add("show-modal");
+		
+	//	modal.classList.add("show-modal");
 		</script>
 	<%
 	}
-	%> --%>
+	%>
 
 	<%	
 		BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
@@ -23,6 +28,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+
 <meta charset="UTF-8">
 <title>상세 글보기</title>
 
@@ -67,10 +75,9 @@ tr {
 
 <p></p>
 
-
 <div class="center">
  
-<% if(login != null){ %>
+<%if(dto != null){ %>
 <table class="table table-striped">
 <col width="150"><col width="200"><col width="150"><col width="200">
 
@@ -101,22 +108,23 @@ cols="20" class="form-control" ><%=dto.getContent() %></textarea>
 	</td>
 </tr>
 </table>
-<% } %>
+
 <br>
 
 <button type="button" class="btn btn-dark" onclick ="detailBbs(<%=dto.getSeq() %>)">목록</button>
 <button type="button" class="btn btn-dark" onclick="answerBbs(<%=dto.getSeq() %>)">답글</button>
+	
 <%
-if(login != null && login.getId().equals(dto.getId()) || login.getAuth()==1){
+if(login == null || login.getId().equals(dto.getId())|| login.getAuth()==1){
 	%>
 	<button type="button" class="btn btn-dark" onclick="updateBbs(<%=dto.getSeq() %>)">글수정</button>
 	
 	<button type="button" class="btn btn-dark" onclick="deleteBbs(<%=dto.getSeq() %>)">글삭제</button>
 	<%
-}
-%>
+	}
+	%>
 
-
+<% } %>
 </div>
 
 <br><br>
@@ -137,12 +145,28 @@ function deleteBbs( seq ) {
 </script>
 
 <br><br>
-<%-- 댓글 --%>
+
+
+
+
+<%-- 댓글 --%> 
 <div id="app" class="container">
 
 <form action="commentWriteAfBoard.do" method="post">
-<input type="hidden" name="seq" value="<%=dto.getSeq() %>"> <!-- 글에 대한 정보 -->
-<input type="hidden" name="id" value="<%=login.getId() %>"> <!-- 세션에 로그인한 사람 정보 -->
+<div class="commentwrite">
+	<div>
+		<input type="hidden" name="seq" value="<%=dto.getSeq() %>"> <!-- 글에 대한 정보 -->
+		<%
+			// 로그인 있으면 
+			if (login != null) {
+				%>
+		
+		<input type="hidden" id="wirter" name="id" value="<%=login.getId() %>"> <!-- 세션에 로그인한 사람 정보 -->
+		<%
+	}
+	%>
+</div>
+
 
 <table class="table table-hover">
 <col width="1000px"><col width="150px">
@@ -161,6 +185,8 @@ function deleteBbs( seq ) {
 
 </form>
 
+
+<!-- 댓글 리스트 불러오기 -->
 <table class="table table-bordered">
 <col width="400"><col width="400">
 
@@ -179,11 +205,12 @@ $(document).ready(function(){
 		data:{ seq:<%=dto.getSeq() %> },
 		success:function( list ){
 	
-			$("#tbody").html("");			
+			$("#tbody").html("");	
+			
 			$.each(list, function(i, item){
 				let str = 	"<tr class='table-light'>"	
 					+		"<td>아이디: " + item.id + "</td>"
-					+		"<td>: " + item.wdate + "</td>"
+					+		"<td>등록일: " + item.wdate + "</td>"
 					+	"</tr>"
 					+	"<tr>"
 					+		"<td colspan='2'>" + item.content + "</td>"								
@@ -194,9 +221,11 @@ $(document).ready(function(){
 		error:function(){
 			alert('error');
 		}
-	});
-})
+	})
+});
+
 </script>
+
 
 </div>
 
