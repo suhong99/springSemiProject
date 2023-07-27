@@ -1,5 +1,7 @@
 package ssg.com.a.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.Date;
 
 import org.springframework.stereotype.Controller;

@@ -2,6 +2,7 @@ package ssg.com.a.service;
 
 import java.util.List;
 
+import ssg.com.a.dto.FavoriteDto;
 import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
@@ -16,4 +17,6 @@ public interface NetflixService {
 	List<NetflixComment> commentList(Long seq);
 	Double avg(Long seq);
 	boolean commentDelete(NetflixComment comment);
+	boolean favorite(FavoriteDto dto);
+	List<FavoriteDto> favoriteList(String id);
 }

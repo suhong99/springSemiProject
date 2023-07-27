@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ssg.com.a.dao.NetflixDao;
+import ssg.com.a.dto.FavoriteDto;
 import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
@@ -55,5 +56,16 @@ public class NetflixServieImpl implements NetflixService{
 	public boolean commentDelete(NetflixComment comment) {
 		return dao.commentDelete(comment) > 0 ? true : false;
 	}
+
+	@Override
+	public boolean favorite(FavoriteDto dto) {
+		return dao.favorite(dto) > 0 ? true : false;
+	}
+
+	@Override
+	public List<FavoriteDto> favoriteList(String id) {
+		return dao.favoriteList(id);
+	}
+	
 	
 }
