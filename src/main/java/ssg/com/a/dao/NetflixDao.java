@@ -2,6 +2,7 @@ package ssg.com.a.dao;
 
 import java.util.List;
 
+import ssg.com.a.dto.FavoriteDto;
 import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
@@ -29,5 +30,11 @@ public interface NetflixDao {
 	
 	// 넷플릭스 댓글지우기
 	int commentDelete(NetflixComment comment);
+	
+	// 넷플릭스 댓글달기
+	int favorite(FavoriteDto dto);
+	
+	// 넷플릭스 관심 리스트 불러오기
+	List<FavoriteDto> favoriteList(String id);
 
 }

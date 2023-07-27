@@ -69,3 +69,12 @@ input[type='number']::-webkit-inner-spin-button {
 #### 18. 검색결과 json db넣으려는데 the method is undefined for the type 오류 
 
 --> servers --> server options --> serve modules without publishing --> 해결! ajax로 그리고 보내주기 
+
+
+#### 19. 불러온 이미지 없을경우 
+
+--> onerror="this.onerror=null; this.src='./images/netflixreview.png'" 로 로고 이미지 보이도록
+
+#### 20. 재원님 검색 결과 페이지 main에서 표시 
+
+--> netflixcontroller에서 model.addattr("content", "searchResult")로 main.jsp에 넘겨줌
