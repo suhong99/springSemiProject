@@ -15,7 +15,6 @@
 	align-items: center;
 	padding: 10px;
 	width: 500px;	
-	height: 500px;
 }
 
 .innerContainer{
@@ -33,14 +32,8 @@
 	font-family: 15px;
 	font-weight: 700;
 }
-/* .h-custom {
-	height: calc(100% - 73px);
-}
-@media (max-width: 450px) {
-	.h-custom {
-		height: 100%;
-	}
-} */
+
+
 .sec-100{
 	width: 100%;
 	height: 100%;
