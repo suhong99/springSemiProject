@@ -316,5 +316,90 @@ public class NetflixUtil {
 
         return contentList;
     }
+    
+    /* 영화 검색결과 JSON */
+    public static List<NetflixContentDto> searchNetflixMovieJson(String query) throws Exception {
+    	// API를 통해 추출한 JSON형태 결과를 저장할 변수
+    	String result = "";
+    	String apiKey = "d5aa3423c1d19e90331f7ffda7962079";
+        String language = "ko-KR";
+        String netflixId = "8";
+        int currentPage = 1;
+        int totalPages = 1;
+        
+        List<NetflixContentDto> contentList = new JSONArray();
+        
+        do {
+            URL url = new URL("https://api.themoviedb.org/3/search/movie"
+                    + "?api_key=" + apiKey
+                    + "&with_watch_providers=" + netflixId
+                    + "&language=" + language
+                    + "&query=" + URLEncoder.encode(query, "UTF-8")
+                    + "&page=" + currentPage);
 
+            BufferedReader bf;
+
+            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+
+            result = bf.readLine();
+
+            // API 응답 JSON 파싱
+            JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
+			JSONArray list = (JSONArray) jsonObject.get("results");
+			
+			if (currentPage == 1) {
+                // 첫 페이지 검색 결과에서 총 페이지 수를 얻어옵니다.
+                totalPages = Integer.parseInt(jsonObject.get("total_pages").toString());
+            }
+			contentList.addAll(list);
+			currentPage++; // 다음 페이지로 이동합니다.
+        } 
+        while (currentPage <= totalPages);
+        
+        return contentList;
+    }
+    
+    /* TV 시리즈 검색결과 JSON */
+    public static List<NetflixTvDto> searchNetflixTvJson(String query) throws Exception {
+    	// API를 통해 추출한 JSON형태 결과를 저장할 변수
+    	String result = "";
+    	String apiKey = "d5aa3423c1d19e90331f7ffda7962079";
+        String language = "ko-KR";
+        String netflixId = "8";
+        int currentPage = 1;
+        int totalPages = 1;
+        
+        List<NetflixTvDto> contentList = new JSONArray();
+        
+        do {
+            URL url = new URL("https://api.themoviedb.org/3/search/tv"
+                    + "?api_key=" + apiKey
+                    + "&with_watch_providers=" + netflixId
+                    + "&language=" + language
+                    + "&query=" + URLEncoder.encode(query, "UTF-8")
+                    + "&page=" + currentPage);
+
+            BufferedReader bf;
+
+            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+
+            result = bf.readLine();
+
+            // API 응답 JSON 파싱
+            JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
+			JSONArray list = (JSONArray) jsonObject.get("results");
+			
+			if (currentPage == 1) {
+                // 첫 페이지 검색 결과에서 총 페이지 수를 얻어옵니다.
+                totalPages = Integer.parseInt(jsonObject.get("total_pages").toString());
+            }
+			contentList.addAll(list);
+			currentPage++; // 다음 페이지로 이동합니다.
+        } 
+        while (currentPage <= totalPages);
+        
+        return contentList;
+    }
 }
