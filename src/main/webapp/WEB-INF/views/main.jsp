@@ -93,6 +93,9 @@ pageEncoding="UTF-8"%>
         <div id="regiForm" style="display: none">
           <jsp:include page="member/regi.jsp" flush="false" />
         </div>
+        <div id="findPWForm" style="display: none">
+          <jsp:include page="member/findPW.jsp" flush="false" />
+        </div>
       </div>
     </div>
     <script>
@@ -115,6 +118,8 @@ pageEncoding="UTF-8"%>
             // 로그인화면으로 돌아가기
             document.getElementById("loginForm").style.display = "block";
             document.getElementById("regiForm").style.display = "none";
+            document.getElementById("findPWForm").style.display = "none";
+
             // 회원가입 p태그 비우기
             $("#idcheck").text("");
           }
@@ -126,10 +131,17 @@ pageEncoding="UTF-8"%>
         if (formName === "login") {
           document.getElementById("loginForm").style.display = "block";
           document.getElementById("regiForm").style.display = "none";
+          document.getElementById("findPWForm").style.display = "none";
+
         } else if (formName === "regi") {
           document.getElementById("loginForm").style.display = "none";
           document.getElementById("regiForm").style.display = "block";
-        }
+          document.getElementById("findPWForm").style.display = "none";
+        } else if (formName === "findPW") {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("regiForm").style.display = "none";
+            document.getElementById("findPWForm").style.display = "block";
+          } 
       }
     </script>
   </body>
