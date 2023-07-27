@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ssg.com.a.dto.BbsDto;
 import ssg.com.a.dto.BbsParam;
 import ssg.com.a.dto.MemberDto;
+import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.BbsComment;
 import ssg.com.a.service.BbsService;
 
@@ -226,16 +227,32 @@ public class BbsController {
 		}
 		// 컨트롤러에서 컨트롤러로 가야한다! [return "bbsdetail.do"; -> 이렇게 쓰면 안된다!!]
 		// redirect == SendRedirect
-		return "redirect:/bbsdetail.do?seq=" + bbsComment.getSeq();
+		return "redirect:/bbsdetail.do?id=" + bbsComment.getSeq();
 	}
 	
 	// 댓글용 리스트 뿌리기! Ajax로 해주자!
 	@ResponseBody
 	@GetMapping("commentListBoard.do")
-	public List<BbsComment> commentList(int seq){
+	public List<BbsComment> commentList(Long seq){
 		System.out.println("BbsController commentListBoard "+ new Date());
 		return service.commentList(seq);
 	}
 	
+	@PostMapping("commentDeleteAfBoard.do") 
+	public String commentDeleteAf(BbsComment comment) {
+		System.out.println("BBsController commentDeleteAfBoard()" + new Date());
+		System.out.println(comment);
+		boolean isS = service.commentDelete(comment);
+
+		if (isS) {
+			System.out.println("댓글 삭제에 성공하셨습니다");
+		}
+		else {
+			System.out.println("댓글 삭제에 실패하셨습니다");
+		}
+		// 컨트롤러에서 컨트롤러로 가야한다! [return "bbsdetail.do"; -> 이렇게 쓰면 안된다!!]
+		// redirect == SendRedirect
+		return "redirect:/bbsdetail.do?id=" + comment.getSeq();
+	}
 	
 }

@@ -6,12 +6,15 @@
     
 <%
 	MemberDto login = (MemberDto)session.getAttribute("login");
- if(login == null || login.getId().equals("")){
+ 	if(login == null || login.getId().equals("")){
 	%>  
-		<script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		const modal = document.getElementById("modal");
+		modal.classList.add("show-modal");
 		alert("로그인 해 주십시오");
-		location.href = "home.do";
-		</script>
+		});
+	</script>
 	<%
 	}
 	%>  
@@ -63,9 +66,12 @@ tr {
 <br>
 
 <div class="center">
-<%
+
+<%-- <%
 if(login == null || login.getId()!=null || login.getAuth()==1){
-	%>
+	%> --%>
+	
+<%-- <%if(dto != null){ %> --%>
 <form id="frm" method="post" action="bbswrite.do">
 
 <table class="table table-bordered">
@@ -97,7 +103,8 @@ if(login == null || login.getId()!=null || login.getAuth()==1){
 <button type="button" class="btn btn-dark">글쓰기</button>
 
 </form>
-<% } %>
+<%-- <% } %>
+ --%>
 </div>
 
 <script type="text/javascript">
@@ -120,6 +127,11 @@ $(document).ready(function(){
 	
 });
 </script>
+
+
+
+
+
 
 
 </body>
