@@ -27,6 +27,8 @@
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./css/NetflixContent.css">
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		
 		<style type="text/css">
 			/* 이미지 갖다대면 조금 더 확대 */
 			.poster-container > a > img:hover {
@@ -119,9 +121,32 @@
 			        			src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
-			        			<%= content.getTitle() %> <!-- 제목 표시 -->
+			        			<%= content.getTitle() %><span id="<%=content.getId()%>"> </span> <!-- 제목, 평점 같이 표시 -->
 			        		</div>
 			            </div>
+			            
+			            <!-- 사이트 자체 평점 제목옆에 표시 -->
+			            <script type="text/javascript">
+					        $(document).ready(function () {
+					            $.ajax({
+					                url: "getAvgRating.do",
+					                type: "get",
+					                data: { id: <%=content.getId()%> },
+					                success: function (avg) {
+					                	if(avg != null && avg !== ''){
+					                		let avg2 = avg.toFixed(2) // 소수 두자리
+					                		$("#"+<%=content.getId()%>+"").text("⭐"+ avg2);
+					                	}  
+					                	else{
+					                		$("#"+<%=content.getId()%>+"").text("");
+					                	}
+					                },
+					                error: function () {
+					                    alert("평균 평점 불러오기 실패");
+					                }
+					            });
+					        });
+					    </script>
 		            <% 
 			    	} 
 		    	%>
@@ -145,10 +170,31 @@
 			        			src="https://image.tmdb.org/t/p/w500<%= content.getPosterpath() %>">
 			        		</a>
 			        		<div class="poster-title">
-			        			<%= content.getTitle() %>
+			        			<%= content.getTitle() %><span id="<%=content.getId()%>"> </span> <!-- 제목, 평점 같이 표시 -->
 			        		</div>
 			            </div>
 			            
+			            <script type="text/javascript">
+					        $(document).ready(function () {
+					            $.ajax({
+					                url: "getAvgTvRating.do",
+					                type: "get",
+					                data: { id: <%=content.getId()%> },
+					                success: function (avg) {
+					                	if(avg != null && avg !== ''){
+					                		let avg2 = avg.toFixed(2) // 소수 두자리
+					                		$("#"+<%=content.getId()%>+"").text("⭐"+ avg2);
+					                	}  
+					                	else{
+					                		$("#"+<%=content.getId()%>+"").text("");
+					                	}
+					                },
+					                error: function () {
+					                    alert("평균 평점 불러오기 실패");
+					                }
+					            });
+					        });
+					    </script>
 		            <% 
 			    	} 
 		    	%>

@@ -252,4 +252,22 @@ public class NetflixController {
 		
 		return service.favoriteList(id);
 	}
+	
+	/* 평점만 불러오기 */
+	@ResponseBody
+	@GetMapping("getAvgRating.do")
+	public Double getAvgRating(Long id) {
+		System.out.println("NetflixController getAvgRating()" + new Date());
+	    Double avg = service.avg(id);
+	    return avg;
+	}
+	
+	/* TV 평점만 불러오기 */
+	@ResponseBody
+	@GetMapping("getAvgTvRating.do")
+	public Double getAvgTvRating(Long id) {
+		System.out.println("NetflixController getAvgTvRating()" + new Date());
+	    Double avg = service.avg(id);
+	    return avg;
+	}
 }	
