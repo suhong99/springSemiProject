@@ -1,16 +1,9 @@
 <%@page import="ssg.com.a.dto.BbsDto"%> <%@page
 import="ssg.com.a.dto.MemberDto"%> <%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <% MemberDto login
-= (MemberDto)session.getAttribute("login");%> <%-- if(login == null ||
-login.getId().equals("")){ %>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const modal = document.getElementById("modal");
-    modal.classList.add("show-modal");
-    alert("로그인 해 주십시오");
-  });
-</script>
-<% } %> <% BbsDto dto = (BbsDto)request.getAttribute("bbsdto"); %>
+= (MemberDto)session.getAttribute("login");%> 
+
+<% BbsDto dto = (BbsDto)request.getAttribute("bbsdto"); %>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +26,16 @@ login.getId().equals("")){ %>
       src="http://lab.alexcican.com/set_cookies/cookie.js"
       type="text/javascript"
     ></script>
-
+	<% if(login == null ||
+		login.getId().equals("")){ %>
+		<script>
+		  document.addEventListener("DOMContentLoaded", function () {
+		    const modal = document.getElementById("modal");
+		    modal.classList.add("show-modal");
+		    alert("로그인 해 주십시오");
+		  });
+	</script>
+	<% } %> 
     <style type="text/css">
       /* body {
 	background-color: #F2F2F2;
@@ -179,7 +181,8 @@ login.getId().equals("")){ %>
           <div>
             <input type="hidden" name="seq" value="<%=dto.getId() %>" />
             <!-- 글에 대한 정보 -->
-            <% // 로그인 있으면 if (login != null) { %>
+            <% // 로그인 있으면 
+            if (login != null) { %>
 
             <input
               type="hidden"
@@ -275,128 +278,69 @@ login.getId().equals("")){ %>
           <!-- Ajax는 비어있는 공간에 끼워넣기의 개념이다 -->
         </tbody>
       </table>
+    </div>
+     <script type="text/javascript">
+     $(document).ready(function(){
+    	 $.ajax({
+    		 url: "commentListBoard.do",
+ 		    type: "get",
+ 		    data: { seq: <%=dto.getId() %> },
+ 		    success: function(list) {
+ 		        $("#tbody").html("");
 
-      <script type="text/javascript">
-        $(document).ready(function(){
-        	$.ajax({
-        		url:"commentListBoard.do",			//
-        		type:"get",
-        		data:{ seq:<%=dto.getId() %> },
-        		success:function( list ){
+ 		       //
+      			/* jquery for each문 */
+      			$.each(list, function(i, item){
+      					// 공백 댓글 빼고 넣어주기 (안전장치)
+      					if(item.content.trim() != ""){
+      						let str = "<hr>"+"<div>";
+      					// 작성자와 댓글 작성자가 동일하면 (내 댓글) 추가
+      					if(item.id == $("#writer").val()){
+      						str += "<span style='font-weight: bold; color: #F2F2F2;'>"+ star(item.id) + "</span>";
+      						str += "<span style='font-weight: bold; color: #3085d6;'>(내 댓글)</span><br>";
+      					}
+      					else {
+                              str += "<span style='font-weight: bold; color: #F2F2F2;'>" + star(item.id) + " </span><br>";
+                          }
 
-        			$("#tbody").html("");
-
-
-        			//
-        			/* jquery for each문 */
-        			$.each(list, function(i, item){
-        					// 공백 댓글 빼고 넣어주기 (안전장치)
-        					if(item.content.trim() != ""){
-        						let str = "<hr>"+"<div>";
-        					// 작성자와 댓글 작성자가 동일하면 (내 댓글) 추가
-        					if(item.id == $("#writer").val()){
-        						str += "<span style='font-weight: bold; color: #F2F2F2;'>"+ star(item.id) + "</span>";
-        						str += "<span style='font-weight: bold; color: #3085d6;'>(내 댓글)</span><br>";
-        					}
-        					else {
-                                str += "<span style='font-weight: bold; color: #F2F2F2;'>" + star(item.id) + " </span><br>";
-                            }
-
-        					// 내용 + 날짜
-        					str += "<br><br><div>"
-        					str += hasBadword(item.content)
-        					str += "<span style='font-weight: bold; color: gray;'>"+ item.wdate + " </span>"
-        					str += "</div>"
+      					// 내용 + 날짜
+      					str += "<br><br><div>"
+      					str += hasBadword(item.content)
+      					str += "<span style='font-weight: bold; color: gray;'>"+ item.wdate + " </span>"
+      					str += "</div>"
 
 
 
 
-        					/* 삭제버튼 (작성자만 삭제 버튼 활성화) */
-        					if(item.id == $("#writer").val()){
-        						str += "<form action='commentDeleteAfBoard.do' method='post'>"
-        						str += "<input type='hidden' name='seq' value="+item.seq+">"
-        						str += "<input type='hidden' name='comment_id' value="+item.comment_id+">"
-        						str += "<button type='submit' class='delete-btn'> ❌삭제</button>"
-        						str += "</form>"
-        						str += "</div>"
-        					}
-        					else{
-        						str += "</div>"
-        					}
+      					/* 삭제버튼 (작성자만 삭제 버튼 활성화) */
+      					if(item.id == $("#writer").val()){
+      						str += "<form action='commentDeleteAfBoard.do' method='post'>"
+      						str += "<input type='hidden' name='seq' value="+item.seq+">"
+      						str += "<input type='hidden' name='comment_id' value="+item.comment_id+">"
+      						str += "<button type='submit' class='delete-btn'> ❌삭제</button>"
+      						str += "</form>"
+      						str += "</div>"
+      					}
+      					else{
+      						str += "</div>"
+      					}
 
-        					// 댓글 간격
-        					str += "<hr><br><br>";
+      					// 댓글 간격
+      					str += "<hr><br><br>";
 
-        					$("#tbody").append(str);
-        					}
-        				}); 	 /*append사용으로  윗줄에 $("#tbody").html(""); 이 코드가 필요하다 */
-        		},
-        		error:function(){
-        			alert('error');
-        		}
-        });
+      					$("#tbody").append(str);
+      					}
+      				}); 	 /*append사용으로  윗줄에 $("#tbody").html(""); 이 코드가 필요하다 */
+ 		    },
+	 		   error: function() {
+			        alert('error');
+			    }
+    		});
+      		
+     });
+        	
       </script>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal-container" id="modal">
-      <div id="modalContent">
-        <div id="loginForm">
-          <jsp:include page="member/login.jsp" flush="false" />
-        </div>
-        <div id="regiForm" style="display: none">
-          <jsp:include page="member/regi.jsp" flush="false" />
-        </div>
-      </div>
-    </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.getElementById("modal");
-        const submitBtn = document.getElementById("submitBtn");
-
-        if (submitBtn) {
-          document
-            .getElementById("submitBtn")
-            .addEventListener("click", function () {
-            	// 만약 로그인 되어있으면 모달창 안나타나게
-            	<%
-            		if(login != null){
-            			%>
-            			modal.classList.remove("show-modal");
-            			<%
-            		}
-            		else{
-            			%>
-            			modal.classList.add("show-modal");
-            			<%
-            		}
-            	%>
-            });
-        }
-
-        // 외부 클릭 시 모달 숨기기
-        window.addEventListener("click", function (event) {
-          if (event.target === modal) {
-            modal.classList.remove("show-modal");
-            // 로그인화면으로 돌아가기
-            document.getElementById("loginForm").style.display = "block";
-            document.getElementById("regiForm").style.display = "none";
-            // 회원가입 p태그 비우기
-            $("#idcheck").text("");
-          }
-        });
-      });
-
-      // 로그인 및 회원가입 폼 이동
-      function toggleForm(formName) {
-        if (formName === "login") {
-          document.getElementById("loginForm").style.display = "block";
-          document.getElementById("regiForm").style.display = "none";
-        } else if (formName === "regi") {
-          document.getElementById("loginForm").style.display = "none";
-          document.getElementById("regiForm").style.display = "block";
-        }
-      }
-    </script>
+	
+    
   </body>
 </html>

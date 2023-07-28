@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%> <% List<BbsDto>
     </head>
 
     <body>
-      <div style="width: 1800px; height: 800px">
+      <div style="width: 1800px; height: auto">
         <br />
         <div class="center">
           <%if(login != null){ %>
@@ -191,6 +191,7 @@ pageEncoding="UTF-8"%> <% List<BbsDto>
           <a href="bbswrite.do" id="submitBtn">글쓰기</a>
         </div>
       </div>
+      <br><br>
 
       <!-- 글쓰기 눌렀을 때 로그인하라고 하기 -->
       <form>
@@ -265,68 +266,6 @@ pageEncoding="UTF-8"%> <% List<BbsDto>
                location.href = "bbslist.do?&choice=" + choice + "&search=" + search + "&pageNumber=" + (page - 1);
              }
         });
-      </script>
-
-      <!-- Modal -->
-      <div class="modal-container" id="modal">
-        <div id="modalContent">
-          <div id="loginForm">
-            <jsp:include page="member/login.jsp" flush="false" />
-          </div>
-          <div id="regiForm" style="display: none">
-            <jsp:include page="member/regi.jsp" flush="false" />
-          </div>
-        </div>
-      </div>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const modal = document.getElementById("modal");
-          const submitBtn = document.getElementById("submitBtn");
-
-          if (submitBtn) {
-            document
-              .getElementById("submitBtn")
-              .addEventListener("click", function () {
-              	// 만약 로그인 되어있으면 모달창 안나타나게
-              	<%
-              		if(login != null){
-              			%>
-              			modal.classList.remove("show-modal");
-              			<%
-              		}
-              		else{
-              			%>
-              			modal.classList.add("show-modal");
-              			<%
-              		}
-              	%>
-              });
-          }
-
-          // 외부 클릭 시 모달 숨기기
-          window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-              modal.classList.remove("show-modal");
-              // 로그인화면으로 돌아가기
-              document.getElementById("loginForm").style.display = "block";
-              document.getElementById("regiForm").style.display = "none";
-              // 회원가입 p태그 비우기
-              $("#idcheck").text("");
-            }
-          });
-        });
-
-        // 로그인 및 회원가입 폼 이동
-        function toggleForm(formName) {
-          if (formName === "login") {
-            document.getElementById("loginForm").style.display = "block";
-            document.getElementById("regiForm").style.display = "none";
-          } else if (formName === "regi") {
-            document.getElementById("loginForm").style.display = "none";
-            document.getElementById("regiForm").style.display = "block";
-          }
-        }
-      </script>
+      </script>   
     </body>
-  </html></BbsDto
->
+  </html>
