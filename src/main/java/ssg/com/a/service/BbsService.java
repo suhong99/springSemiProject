@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import ssg.com.a.dto.BbsDto;
 import ssg.com.a.dto.BbsParam;
+import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.BbsComment;
 
 public interface BbsService {
@@ -22,9 +23,14 @@ public interface BbsService {
 	boolean BbsAnswer(BbsDto dto);
 	
 	boolean commentWrite(BbsComment comment);
-	List<BbsComment> commentList(int seq);
-
-	void readcount(Long id);
+	List<BbsComment> commentList(Long seq);
+	boolean commentDelete(BbsComment comment);
+	
+	void readcount(int seq);
+	int readcountSelect(BbsDto dto);					
+	void readcountInsert(BbsDto dto);					// 조회수
+	
+	
 	
 	void commnetcount(							// 댓글 수 추가
 			@Param("seq") int seq,

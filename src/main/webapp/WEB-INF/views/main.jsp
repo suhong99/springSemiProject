@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
     />
   </head>
   <body>
-    <div align="center">
+    <div align="center" style="background-color: #0D0D0D;">
       <table
         style="
           width: 100%;
@@ -72,7 +72,7 @@ pageEncoding="UTF-8"%>
           </td>
         </tr>
         <tr>
-          <td>
+          <td >
             <jsp:include page='<%=content + ".jsp" %>' flush="false" />
           </td>
         </tr>
