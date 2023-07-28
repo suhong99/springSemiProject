@@ -46,8 +46,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public MemberDto findMember(MemberDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(ns + "findmember", dto);
 	}
 	
 	

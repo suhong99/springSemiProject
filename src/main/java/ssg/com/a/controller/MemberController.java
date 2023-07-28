@@ -1,12 +1,17 @@
 package ssg.com.a.controller;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,7 +122,43 @@ public class MemberController {
 		return kakaomsg;
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("findMember.do")
+	public String findMember(MemberDto mem, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("MemberController findMember() " + new Date());
+		
+		MemberDto dto= service.findMember(mem);
+		if(dto != null) {
+			Random r = new Random();
+			int num = r.nextInt(999999); // 랜덤난수설정
+			session.setAttribute("email", dto.getEmail());
+
+			String setfrom = "ivedot@naver.com"; // naver 
+			String tomail = dto.getEmail(); //받는사람
+			String title = "[넷리뷰] 비밀번호변경 인증 이메일 입니다"; 
+			String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
+					+ "넷리뷰 비밀번호찾기(변경) 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); // 
+
+			try {
+				MimeMessage message = MailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+
+				messageHelper.setFrom(setfrom); 
+				messageHelper.setTo(tomail); 
+				messageHelper.setSubject(title);
+				messageHelper.setText(content); 
+
+				mailSender.send(message);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+			
+		}
+		String msg = "YES";
+		
+		return msg;
+	}
 }
 
 

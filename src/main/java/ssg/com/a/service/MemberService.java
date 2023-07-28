@@ -11,4 +11,7 @@ public interface MemberService {
 	
 	MemberDto kakaoLogin(MemberDto dto);
 	MemberDto kakaoAddmember(MemberDto dto);
+	
+	MemberDto findMember(MemberDto dto);
+
 }

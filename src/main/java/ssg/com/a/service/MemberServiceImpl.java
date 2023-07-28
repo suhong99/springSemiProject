@@ -36,5 +36,10 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDto kakaoAddmember(MemberDto dto) {
 		return dao.kakaoAddmember(dto);
 	}
+
+	@Override
+	public MemberDto findMember(MemberDto dto) {
+		return dao.findMember(dto);
+	}
 	
 }

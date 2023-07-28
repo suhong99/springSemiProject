@@ -34,6 +34,13 @@
 	values(#{id}, #{pwd}, #{name}, #{email}, 10)  
 </insert> 
 
+<select id="findmember" parameterType="ssg.com.a.dto.MemberDto" 
+					resultType="ssg.com.a.dto.MemberDto">
+	select id, name, email, auth
+	from member
+	where  id=#{id} and email=#{email}
+</select>
+
 </mapper>
 
 
