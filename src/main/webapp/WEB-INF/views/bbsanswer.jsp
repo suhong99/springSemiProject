@@ -5,6 +5,7 @@
 
 <%
 	BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
+	MemberDto login = (MemberDto)session.getAttribute("login");
 %>
 <!DOCTYPE html>
 <html>
@@ -25,6 +26,7 @@
 * {
     margin: 0;
     padding: 0;
+    color: white;
       }   
 .center{
 	margin: auto;
@@ -42,72 +44,74 @@ tr {
 </head>
 <body>
 
-<div class="center">
+	<div class="center">
+	<br/>
+		<span style ='font-weight: bold; color:#F2F2F2; font-size:25px;'>
+		😀<%=login.getId() %>님 좋은하루되세요😀</span>
+		
+	<br/><br/>
+	<table class="table table-hover" >
+		<col width="200"><col width="500">
+		
+		<tr>
+			<th style="text-align: center;">작성자</th>
+			<td><%=dto.getId() %></td>
+		</tr>
+		<tr>
+			<th style="text-align: center;">작성일</th>
+			<td><%=dto.getWdate() %></td>
+		</tr>
+		<tr>
+			<th style="text-align: center;">조회수</th>
+			<td><%=dto.getReadcount() %></td>
+		</tr>
+		<tr>
+			<th style="text-align: center;">제목</th>
+			<td><%=dto.getTitle() %></td>
+		</tr>
+		<tr>
+			<th style="text-align: center; vertical-align: middle;">내용</th>
+			<td><%=dto.getContent() %></td>
+		</tr>
+	</table>
+<br/><br/>
 
-<h2>기본글</h2>
 
-<table class="table table-striped">
-<col width="200"><col width="500">
-
-<tr>
-	<th style="text-align: center;">작성자</th>
-	<td><%=dto.getId() %></td>
-</tr>
-<tr>
-	<th style="text-align: center;">작성일</th>
-	<td><%=dto.getWdate() %></td>
-</tr>
-<tr>
-	<th style="text-align: center;">조회수</th>
-	<td><%=dto.getReadcount() %></td>
-</tr>
-<tr>
-	<th style="text-align: center;">제목</th>
-	<td><%=dto.getTitle() %></td>
-</tr>
-<tr>
-	<th style="text-align: center; vertical-align: middle;">내용</th>
-	<td><%=dto.getContent() %></td>
-</tr>
-</table>
-
-<%
-	MemberDto login = (MemberDto)session.getAttribute("login");
-%>
-
-<h2>답글</h2>
-
+<%-- <div style="text-align: center; vertical-align: middle; font-size: 25px;" ><%=login.getId() %>님 자유게시판 답글</div>
+<br/> --%>
 <!-- <form action="bbsanswerAf.do" method="get"> -->
 <form id="frm" method="post" action="bbsanswer.do">
 <input type="hidden" name="seq" value="<%=dto.getSeq() %>">
 
-<table class="table table-bordered">
-<col width="200"><col width="500">
-
-<tr>
-	<th style="text-align: center; vertical-align: middle;">아이디</th>
-	<td>
-		<input type="text" name="id" class="form-control" size="50" readonly="readonly" value="<%=login.getId() %>">
-	</td>
-</tr>
-<tr>
-	<th style="text-align: center; vertical-align: middle;" >제목</th>
-	<td>
-		<input type="text" id="title" name="title" class="form-control" size="50" placeholder="제목을 입력하세요" >
-	</td>
-</tr>
-<tr>
-	<th style="text-align: center; center; vertical-align: middle;" >내용</th>
-	<td>
-		<textarea rows="10" cols="50" id="content" name="content" class="form-control" placeholder="제목을 입력하세요" placeholder="제목을 입력하세요" ></textarea>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<button type="button" class="btn btn-dark">등록</button>
-	</td>
-</tr>
-</table>
+	<table class="table table-hover" >
+	<col width="200"><col width="500">
+	
+	<tr>
+		<th style="text-align: center; vertical-align: middle;">아이디</th>
+		<td>
+			<input type="text" name="id" class="form-control" size="50" readonly="readonly" value="<%=login.getId() %>">
+		</td>
+	</tr>
+	<tr>
+		<th style="text-align: center; vertical-align: middle;" >제목</th>
+		<td>
+			<input type="text" id="title" name="title" class="form-control" size="50" placeholder="제목을 입력하세요" >
+		</td>
+	</tr>
+	<tr>
+		<th style="text-align: center; center; vertical-align: middle;" >내용</th>
+		<td>
+			<textarea rows="10" cols="50" id="content" name="content" class="form-control" placeholder="내용을 입력하세요" ></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<button type="button" class="btn btn-dark">등록</button>
+			<input type=button value="취소" class="btn btn-dark"
+	              onclick="javascript:history.back()">
+		</td>
+	</tr>
+	</table>
 
 
 </form>

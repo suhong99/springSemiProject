@@ -40,10 +40,6 @@
 
 <style type="text/css">
 
-/* body {
-	background-color: #0D0D0D;
-	color: #F2F2F2;} */
-
 * {
     margin: 0;
     padding: 0;
@@ -52,6 +48,7 @@
 	margin: auto;
 	width: 1000px;
 	text-align: center;
+	font-size : 18px;
 }
 th{
 	background-color: #0D0D0D;
@@ -63,9 +60,9 @@ tr {
 </style>
 </head>
 <body>
+ <div style="width: 1800px; height: auto">
 
-<h1></h1>
-<br>
+<br/><br/>
 
 <div class="center">
 
@@ -73,47 +70,49 @@ tr {
 <% if(login != null){
 if(login == null || login.getId()!=null || login.getAuth()==1){
 	%>
-<span style = 'font-weight: bold; color:#0D0D0D; font-size:25px;'><%=login.getId() %>님 환영합니다</span>	
+<span style = 'font-weight: bold; color:#F2F2F2; font-size:25px;'>😀<%=login.getId() %>님 좋은하루되세요😀</span>	
 	
 <br><br><br>
 	
 <%-- <%if(dto != null){ %> --%>
 <form id="frm" method="post" action="bbswrite.do">
 
-<table class="table table-bordered">
+<table class="table table-hover">
 <col width="200"><col width="500">
 
 <tr>
-	<th>아이디</th>
+	<th style="text-align: center; vertical-align: middle;">아이디</th>
 	<td>
 		<input type="text" name="id" class="form-control" value="<%=login.getId() %>" readonly="readonly">
 	</td>
 </tr>
 <tr>
-	<th>제목</th>
+	<th style="text-align: center; vertical-align: middle">제목</th>
 	<td>
 		<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요">
 	</td>
 </tr>
 
 <tr>
-	<th>내용</th>
+	<th style="text-align: center; vertical-align: middle">내용</th>
 	<td>
-		<textarea rows="15" cols="50" class="form-control" id="content" name="content" placeholder="내용을 입력하세요"></textarea>
+		<textarea rows="15" cols="50" class="form-control" 
+		id="content" name="content" placeholder="내용을 입력하세요"></textarea>
 	</td>
 </tr>
 
 </table>
 <br>
 
-<button type="button" class="btn btn-dark">글쓰기</button>
-
+<button type="button" class="btn btn-dark">등록</button>
+<input type=button value="취소" class="btn btn-dark"
+              onclick="javascript:history.back()">
 </form>
 
 <% }} %>
-
 </div>
-
+</div>
+<br/>
 <script type="text/javascript">
 $(document).ready(function(){
 	

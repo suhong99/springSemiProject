@@ -5,7 +5,7 @@
     
     
 <%
-	MemberDto mem = (MemberDto)session.getAttribute("login");
+	MemberDto login = (MemberDto)session.getAttribute("login");
 	BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
 %> 
 <!DOCTYPE html>
@@ -46,17 +46,17 @@ tr {
 </style>
 </head>
 <body>
-<h2></h2>
 
 <br>
 
 <div class="center">
-
+<span style = 'font-weight: bold; color:#F2F2F2; font-size:25px;'>😀<%=login.getId() %>님 좋은하루되세요😀</span>
+<br/><br/>
 <!-- <form action="bbsupdateAf.do" method="get"> -->
 <form id="frm" method="get" action="bbsupdateAf.do">
 <input type="hidden" name="seq" value="<%=dto.getSeq() %>">
 
-<table class="table table-bordered">
+<table class="table table-hover">
 <col width="200"><col width="500">
 <tr>
 	<th style="text-align:center; vertical-align: middle;">작성자</th>
@@ -86,6 +86,8 @@ tr {
 <tr>
 	<td colspan="2">
 		<button type="button" class="btn btn-dark">수정완료</button>
+		<input type=button value="취소" class="btn btn-dark"
+              onclick="javascript:history.back()">
 	</td>
 </tr>
 

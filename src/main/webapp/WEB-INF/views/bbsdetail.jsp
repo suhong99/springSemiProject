@@ -1,14 +1,11 @@
-<%@page import="ssg.com.a.dto.BbsDto"%> <%@page
-import="ssg.com.a.dto.MemberDto"%> <%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <% MemberDto login
-= (MemberDto)session.getAttribute("login");%> <%-- if(login == null ||
-login.getId().equals("")){ %>
-<script>
-  alert("로그인 해 주십시오");
-  location.href = "home.do";
-</script>
-<% } %> --%> <% BbsDto dto = (BbsDto)request.getAttribute("bbsdto"); %>
+<%@page import="ssg.com.a.dto.BbsDto"%>
+<%@page import="ssg.com.a.dto.MemberDto"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 
+<%
+	MemberDto login = (MemberDto)session.getAttribute("login");
+	BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,20 +13,16 @@ login.getId().equals("")){ %>
     <title>상세 글보기</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <script
-      src="http://lab.alexcican.com/set_cookies/cookie.js"
-      type="text/javascript"
-    ></script>
+    <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript"></script>
+	
+	
     <% if(login == null || login.getId().equals("")){ %>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -39,12 +32,29 @@ login.getId().equals("")){ %>
       });
     </script>
     <% } %>
+    
     <style type="text/css">
-      /* body {
-	background-color: #F2F2F2;
-	color: #F2F2F2;
-} */
-      * {
+ /*-- page-top --*/
+
+	.Top-link {
+	    position: fixed;
+	    top: 55%;
+	    right: 0;
+	    background: url(./images/arrow3.jpg) no-repeat scroll 0 -86px;
+	}
+
+	.Top-link a {
+	    display: block;
+	    width: 150px;
+	    height: 300px;
+	    text-indent: 50%;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    opacity: 1.0;
+	    background: url(./images/up.jpg) no-repeat scroll 0 0;    
+	}
+
+	  * {
         margin: 0;
         padding: 0;
       }
@@ -61,103 +71,93 @@ login.getId().equals("")){ %>
       tr {
         line-height: 20px;
       }
+      /* a 태그 */
+        a {
+          color: #F2F2F2;
+          font-weight: bold;
+
+        }
     </style>
   </head>
   <body>
-    <p></p>
+  
 
+   <div class="Top-link"><a id="topLink" href="#"></a></div>
+	<br/><br/>
+   
+  
     <div class="center">
       <%if(login != null){ %>
-      <span style="font-weight: bold; color: #0d0d0d; font-size: 25px"
-        ><%=login.getId() %>님 환영합니다</span
-      >
+      <span style = 'font-weight: bold; color:#F2F2F2; font-size:25px;'>
+      😀<%=login.getId() %>님 좋은하루되세요😀</span>
 
       <% } %>
-
-      <br /><br /><br />
-
+	</div>
+      <br/><br/>
+	<div class="right">
       <%if(dto != null){ %>
-      <table class="table table-striped">
-        <col width="150" />
-        <col width="200" />
-        <col width="150" />
-        <col width="200" />
+      <table class="table table-hover" >
+        <col width="150" /><col width="200" /><col width="150" /><col width="200" />
 
         <tr>
           <th style="text-align: center">제 목</th>
-          <td colspan="3"><%=dto.getTitle() %></td>
+          <td colspan="3">
+          <font style="font-weight: bold; color: white"><%=dto.getTitle() %></font>
+          </td>
         </tr>
         <tr>
           <th style="text-align: center">아이디</th>
-          <td><%=dto.getId() %></td>
+          <td>
+          <font style="font-weight: bold; color: white"><%=dto.getId() %></font>
+          </td>
           <th style="text-align: center">조회수</th>
-          <td><%=dto.getReadcount() %></td>
+          <td>
+          <font style="font-weight: bold; color: white"><%=dto.getReadcount() %></font>
+          </td>
         </tr>
         <tr>
           <th style="text-align: center">등록일</th>
-          <td><%=dto.getWdate() %></td>
+          <td>
+          <font style="font-weight: bold; color: white"><%=dto.getWdate() %></font>
+          </td>
           <th style="text-align: center">마지막 수정시간</th>
           <% if(dto.getMdate() != null ){ %>
-          <td><%=dto.getMdate() %></td>
+          <td>
+          <font style="font-weight: bold; color: white"><%=dto.getMdate() %></font>
+          </td>
           <% } %>
         </tr>
 
         <tr>
           <th style="text-align: center; vertical-align: middle">내용</th>
           <td colspan="4" style="height: 300px; font-size: 120%">
-            <textarea
-              rows="12"
-              readonly
-              style="background-color: #ffffff; font-size: 18px"
-              cols="20"
-              class="form-control"
-            >
-<%=dto.getContent() %></textarea
-            >
+            <textarea rows="12" readonly style="background-color: #f2f2f2; font-size: 18px" cols="20" class="form-control">
+			<%=dto.getContent() %></textarea>
           </td>
         </tr>
       </table>
 
-      <br />
+      <br/>
 
-      <button
-        type="button"
-        class="btn btn-dark"
-        onclick="detailBbs(<%=dto.getSeq() %>)"
-      >
-        목록
-      </button>
+      <button type="button" class="btn btn-dark" onclick="detailBbs(<%=dto.getSeq() %>)">목록</button>
 
       <% if(login != null ){ %>
 
-      <button
-        type="button"
-        class="btn btn-dark"
-        onclick="answerBbs(<%=dto.getSeq() %>)"
-      >
-        답글
-      </button>
-      <% } %> <%if(login != null){ if( login== null ||
-      login.getId().equals(dto.getId()) || login.getAuth()==1 ){ %>
-      <button
-        type="button"
-        class="btn btn-dark"
-        onclick="updateBbs(<%=dto.getSeq() %>)"
-      >
-        글수정
-      </button>
+      <button type="button" class="btn btn-dark" onclick="answerBbs(<%=dto.getSeq() %>)">답글</button>
+      <% } %>
+      
+       <%if(login != null){ 
+    	   if( login== null || login.getId().equals(dto.getId()) || login.getAuth()==1 ){ %>
+      <button type="button" class="btn btn-dark" onclick="updateBbs(<%=dto.getSeq() %>)" >글수정</button>
 
-      <button
-        type="button"
-        class="btn btn-dark"
-        onclick="deleteBbs(<%=dto.getSeq() %>)"
-      >
-        글삭제
-      </button>
-      <% } %> <% } %> <% } %>
+      <button type="button" class="btn btn-dark" onclick="deleteBbs(<%=dto.getSeq() %>)">글삭제</button>
+     
+      <% }}} %>
+   
     </div>
+    <br/><br/>
 
-    <br /><br />
+ </div>
 
     <script type="text/javascript">
       function answerBbs(seq) {
@@ -175,6 +175,7 @@ login.getId().equals("")){ %>
     </script>
 
     <br /><br />
+
 
     <!-- 댓글 -->
     <div class="comment">
