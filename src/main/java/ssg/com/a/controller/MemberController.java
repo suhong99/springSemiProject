@@ -113,6 +113,8 @@ public class MemberController {
 		
 		return kakaomsg;
 	}
+	
+	
 }
 
 

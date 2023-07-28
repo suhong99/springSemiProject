@@ -66,7 +66,7 @@
         <div>
             <button type="button" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">Login</button>
             <!-- Checkbox -->
-            <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
+            <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end; margin: 10px 0px 15px 0px">
                 <div>
                     <input class="form-check-input me-2" id="chk_save_id" style="accent-color :black;" type="checkbox" value="" id="form2Example3" />
                     <label class="form-check-label" style="color: #b3b3b3; font-size: 13px;"  for="form2Example3">

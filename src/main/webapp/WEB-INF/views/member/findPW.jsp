@@ -18,20 +18,21 @@
       <form>
         <!-- ID input -->
         <div>
-            <input class="authInput" type="text" id="loginId" name="loginId" placeholder="아이디" />            
+            <input class="authInput" type="text" id="findId" name="findId" placeholder="아이디" />            
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-3">
-            <input class="authInput" type="text" id="loginPwd" name="loginPwd" placeholder="이메일" />            
+            <input class="authInput" type="text" id="findEmail" name="findEmail" placeholder="이메일" />            
         </div>
 
         <div>
-            <button type="button" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">Login</button>
+            <button type="button" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">아이디 확인</button>
+            <br>
             <!-- 회원가입 및 로그인 돌아가기 버튼 -->
             <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
                 <p class="small fw-bold mt-2 pt-1 mb-0">
-                    <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('login')">로그인</a>
+                    <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('login')">로그인하기</a>
                 </p>
                 <p class="small fw-bold mt-2 pt-1 mb-0">
                     <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('regi')">회원가입</a>
