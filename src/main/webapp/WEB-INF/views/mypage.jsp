@@ -17,7 +17,7 @@
 				color: #F2F2F2;
 			}
 			/* 삭제 버튼 css */
-			.delete-btn {
+			button {
 		       padding: 5px 10px;
 		       border: none;
 		       background-color: #D91E1E;
