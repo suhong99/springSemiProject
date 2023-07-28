@@ -5,16 +5,23 @@
     pageEncoding="UTF-8"%>
 
 	<%
-	MemberDto login = (MemberDto)session.getAttribute("login");%> 
-	<%-- if(login == null || login.getId().equals("")){
+	
+	MemberDto login = (MemberDto)session.getAttribute("login");
+	
+	%>
+	
+	 <% if(login == null || login.getId().equals("")){
 	%>  
-		<script>
-		alert("로그인 해 주십시오");
-		location.href = "home.do";
-		</script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	const modal = document.getElementById("modal");
+	modal.classList.add("show-modal");
+	alert("로그인 해 주십시오");
+	});
+	</script>
 	<%
-	}
-	%> --%>
+	} %>
+
 
 	<%	
 		BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
@@ -23,6 +30,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+
 <meta charset="UTF-8">
 <title>상세 글보기</title>
 
@@ -67,10 +77,17 @@ tr {
 
 <p></p>
 
-
 <div class="center">
+ <%if(login != null){
+
+	%>
+ <span style = 'font-weight: bold; color:#0D0D0D; font-size:25px;'><%=login.getId() %>님 환영합니다</span>
  
-<% if(login != null){ %>
+<% } %>
+
+ <br><br><br>
+ 
+<%if(dto != null){ %>
 <table class="table table-striped">
 <col width="150"><col width="200"><col width="150"><col width="200">
 
@@ -101,22 +118,28 @@ cols="20" class="form-control" ><%=dto.getContent() %></textarea>
 	</td>
 </tr>
 </table>
-<% } %>
+
 <br>
 
 <button type="button" class="btn btn-dark" onclick ="detailBbs(<%=dto.getSeq() %>)">목록</button>
+
+<% if(login != null ){ %>
+
 <button type="button" class="btn btn-dark" onclick="answerBbs(<%=dto.getSeq() %>)">답글</button>
-<%
-if(login != null && login.getId().equals(dto.getId()) || login.getAuth()==1){
+	<% } %>
+	
+<%if(login != null){
+if( login== null || login.getId().equals(dto.getId()) || login.getAuth()==1 ){
 	%>
 	<button type="button" class="btn btn-dark" onclick="updateBbs(<%=dto.getSeq() %>)">글수정</button>
 	
 	<button type="button" class="btn btn-dark" onclick="deleteBbs(<%=dto.getSeq() %>)">글삭제</button>
 	<%
-}
-%>
+	}
+	%>
 
-
+<% } %>
+<% } %>
 </div>
 
 <br><br>
@@ -137,13 +160,28 @@ function deleteBbs( seq ) {
 </script>
 
 <br><br>
-<%-- 댓글 --%>
-<div id="app" class="container">
 
-<form action="commentWriteAfBoard.do" method="post">
-<input type="hidden" name="seq" value="<%=dto.getSeq() %>"> <!-- 글에 대한 정보 -->
-<input type="hidden" name="id" value="<%=login.getId() %>"> <!-- 세션에 로그인한 사람 정보 -->
 
+
+<!-- 댓글 -->
+<div class="comment">
+	<form action="commentWriteAfBoard.do" method="post">  		<!--  -->
+		<div class="commentwrite">
+			<div>
+			<input type="hidden" name="seq" value="<%=dto.getId() %>"> <!-- 글에 대한 정보 -->
+			<%
+			// 로그인 있으면 
+			if (login != null) {
+			%>
+		
+			<input type="hidden" id="writer" name="id" value="<%=login.getId() %>"> <!-- 세션에 로그인한 사람 정보 -->
+			<%
+			}
+			%>
+			</div>
+			</div>
+
+<div>
 <table class="table table-hover">
 <col width="1000px"><col width="150px">
 <tr>
@@ -151,21 +189,68 @@ function deleteBbs( seq ) {
 </tr>
 <tr>
 	<td>
-		<textarea rows="3" class="form-control" name="content"></textarea>
+		<textarea rows="3" class="form-control" id="content" name="content" placeholder="댓글을 입력하세요"
+		spellcheck="false"></textarea>
 	</td>
 	<td style="padding-left: 30px">
-		<button type="submit" class="btn btn-dark btn-block p-4">등록</button>
+		<button type="submit" id="submitBtn" class="btn btn-dark btn-block p-4">등록</button>
 	</td>
 </tr>
 </table>
+</div>
 
-</form>
+<!-- 빈 댓글, 평점 제출 못하게 만들기 -->
+	<script type="text/javascript">
+			/* 빈 댓글, 평점은 폼 제출 못하게 */
+			$(document).ready(function(){
+				$("#submitBtn").prop("disabled", true); // 처음에는 공백이므로 댓글 제출 못하도록
+				$("#submitBtn").css("background-color", "#F28888"); // 제출 못할때는 색 연하게 
+							
 
-<table class="table table-bordered">
+				$("#content").on("input", function() {
+				let content = $("#content").val();
+			
+								
+			// 공백이면 제출 x
+			if (content.trim() == ""){ 
+				$("#submitBtn").prop("disabled", true);
+				$("#submitBtn").css("background-color", "#F28888"); 
+			}
+								
+			else{
+				$("#submitBtn").prop("disabled", false);
+				$("#submitBtn").css("background-color", "#D91E1E");
+			}
+		});
+	});
+						
+			// 로그인 안되어있으면 제출 막고 모달창으로 
+				$("form").on("submit", function(e) {
+			<%
+			 if(login == null){
+			%>
+			e.preventDefault();
+			<%
+			}
+			else{
+           	%>
+			$("form").submit();
+       		<%
+           	}
+            %>
+	        });
+			</script>
+	</form>	
+
+
+
+
+
+<!-- 댓글 리스트 불러오기 -->
+<table style="width:1106px; margin:0px;">
 <col width="400"><col width="400">
 
 <tbody id="tbody">
-
 <!-- Ajax는 비어있는 공간에 끼워넣기의 개념이다 -->
 </tbody>
 
@@ -174,31 +259,129 @@ function deleteBbs( seq ) {
 <script type="text/javascript">
 $(document).ready(function(){	
 	$.ajax({
-		url:"commentListBoard.do",
+		url:"commentListBoard.do",			//
 		type:"get",
-		data:{ seq:<%=dto.getSeq() %> },
+		data:{ seq:<%=dto.getId() %> },
 		success:function( list ){
 	
-			$("#tbody").html("");			
+			$("#tbody").html("");	
+			
+			
+			//
+			/* jquery for each문 */
 			$.each(list, function(i, item){
-				let str = 	"<tr class='table-light'>"	
-					+		"<td>아이디: " + item.id + "</td>"
-					+		"<td>: " + item.wdate + "</td>"
-					+	"</tr>"
-					+	"<tr>"
-					+		"<td colspan='2'>" + item.content + "</td>"								
-					+	"</tr>";
-				$("#tbody").append(str);
-			}); 	 /*append사용으로  윗줄에 $("#tbody").html(""); 이 코드가 필요하다 */	
+					// 공백 댓글 빼고 넣어주기 (안전장치)
+					if(item.content.trim() != ""){
+						let str = "<hr>"+"<div>";
+					// 작성자와 댓글 작성자가 동일하면 (내 댓글) 추가
+					if(item.id == $("#writer").val()){
+						str += "<span style='font-weight: bold; color: #F2F2F2;'>"+ star(item.id) + "</span>";
+						str += "<span style='font-weight: bold; color: #3085d6;'>(내 댓글)</span><br>";
+					}
+					else {
+                        str += "<span style='font-weight: bold; color: #F2F2F2;'>" + star(item.id) + " </span><br>";
+                    }
+				
+					// 내용 + 날짜
+					str += "<br><br><div>"
+					str += hasBadword(item.content)
+					str += "<span style='font-weight: bold; color: gray;'>"+ item.wdate + " </span>"
+					str += "</div>"
+					
+				
+				
+				
+					/* 삭제버튼 (작성자만 삭제 버튼 활성화) */
+					if(item.id == $("#writer").val()){
+						str += "<form action='commentDeleteAfBoard.do' method='post'>"
+						str += "<input type='hidden' name='seq' value="+item.seq+">"
+						str += "<input type='hidden' name='comment_id' value="+item.comment_id+">"
+						str += "<button type='submit' class='delete-btn'> ❌삭제</button>"
+						str += "</form>"
+						str += "</div>"
+					}
+					else{
+						str += "</div>"
+					}
+					
+					// 댓글 간격
+					str += "<hr><br><br>";
+					
+					$("#tbody").append(str);
+					}
+				}); 	 /*append사용으로  윗줄에 $("#tbody").html(""); 이 코드가 필요하다 */	
 		},
 		error:function(){
 			alert('error');
 		}
-	});
-})
-</script>
+});
 
+</script>
 </div>
+
+
+<!-- Modal -->
+	    <div class="modal-container" id="modal">
+	      <div id="modalContent">
+	        <div id="loginForm">
+	          <jsp:include page="member/login.jsp" flush="false" />
+	        </div>
+	        <div id="regiForm" style="display: none">
+	          <jsp:include page="member/regi.jsp" flush="false" />
+	        </div>
+	      </div>
+	    </div>
+	    <script>
+	      document.addEventListener("DOMContentLoaded", function () {
+	        const modal = document.getElementById("modal");
+	        const submitBtn = document.getElementById("submitBtn");
+	
+	        if (submitBtn) {
+	          document
+	            .getElementById("submitBtn")
+	            .addEventListener("click", function () {
+	            	// 만약 로그인 되어있으면 모달창 안나타나게 
+	            	<%
+	            		if(login != null){
+	            			%>
+	            			modal.classList.remove("show-modal");
+	            			<%
+	            		}
+	            		else{
+	            			%>
+	            			modal.classList.add("show-modal");
+	            			<%
+	            		}
+	            	%>
+	            });
+	        }
+	
+	        // 외부 클릭 시 모달 숨기기
+	        window.addEventListener("click", function (event) {
+	          if (event.target === modal) {
+	            modal.classList.remove("show-modal");
+	            // 로그인화면으로 돌아가기	
+	            document.getElementById("loginForm").style.display = "block";
+	            document.getElementById("regiForm").style.display = "none";
+	            // 회원가입 p태그 비우기
+	            $("#idcheck").text("");
+	          }
+	        });
+	      });
+	
+	      // 로그인 및 회원가입 폼 이동
+	      function toggleForm(formName) {
+	        if (formName === "login") {
+	          document.getElementById("loginForm").style.display = "block";
+	          document.getElementById("regiForm").style.display = "none";
+	        } else if (formName === "regi") {
+	          document.getElementById("loginForm").style.display = "none";
+	          document.getElementById("regiForm").style.display = "block";
+	        }
+	      }
+	    </script>
+
+
 
 </body>
 </html>

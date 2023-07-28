@@ -3,7 +3,7 @@ package ssg.com.a.dto;
 import java.io.Serializable;
 
 public class BbsComment implements Serializable {
-
+	private int comment_id;
 	private int seq;
 	private String id;
 	private String content;
@@ -11,13 +11,27 @@ public class BbsComment implements Serializable {
 	
 	public BbsComment() {
 	}
-
-	public BbsComment(int seq, String id, String content, String wdate) {
+	
+	public BbsComment(int comment_id, int seq) {
 		super();
+		this.comment_id = comment_id;
+		this.seq = seq;
+	}
+	public BbsComment(int comment_id, int seq, String id, String content, String wdate) {
+		super();
+		this.comment_id = comment_id;
 		this.seq = seq;
 		this.id = id;
 		this.content = content;
 		this.wdate = wdate;
+	}
+
+	public int getComment_id() {
+		return comment_id;
+	}
+
+	public void setComment_id(int comment_id) {
+		this.comment_id = comment_id;
 	}
 
 	public int getSeq() {
@@ -54,6 +68,8 @@ public class BbsComment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BbsComment [seq=" + seq + ", id=" + id + ", content=" + content + ", wdate=" + wdate + "]";
+		return "BbsComment [comment_id=" + comment_id + ", seq=" + seq + ", id=" + id + ", content=" + content
+				+ ", wdate=" + wdate + "]";
 	}
+
 }

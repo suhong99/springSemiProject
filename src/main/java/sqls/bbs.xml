@@ -89,12 +89,29 @@
 	where seq=#{seq}
 </delete>
 
-<!-- 조회수 -->
-<update id="readcount">
-	update bbs
-	set readcount=readcount+1
-	where seq=#{seq}
+
+
+
+<!-- -->
+<select id="readcountSelect" parameterType="ssg.com.a.dto.BbsDto"
+						resultType="Integer">
+	select count(*)
+	from readcount
+	where id=#{id} and seq=#{seq}
+</select>
+<!-- count= 0일때 추가 -->
+<insert id="readcountInsert"   parameterType="ssg.com.a.dto.BbsDto" >
+	insert into readcount(id, seq)
+	values (#{id},#{seq})
+</insert>
+
+<update id="readcount" parameterType="java.lang.Integer">
+		update bbs
+		set readcount= readcount+1
+		where seq=#{seq}
 </update>
+
+
 
 
 <!-- 답글 -->
@@ -120,18 +137,28 @@
 
 <!-- 댓글(bbscomment) -->
 <!-- 추가 -->
-<insert id="commentWrite" parameterType="ssg.com.a.dto.BbsComment">
+<insert id="commentWriteBoard" parameterType="ssg.com.a.dto.BbsComment">
 	insert into bbscomment(seq, id, content, wdate)
 	values(#{seq}, #{id}, #{content}, now())
 </insert>
 
 <!-- 목록 -->
 <select id="commentListBoard" parameterType="Integer" resultType="ssg.com.a.dto.BbsComment">
-	select seq, id, content, wdate
+	select comment_id, seq, id, content, wdate
 	from bbscomment
 	where seq=#{seq}
 	order by wdate desc
 </select>
+
+<!-- 삭제 -->
+<delete id="commentDeleteBoard" parameterType="ssg.com.a.dto.BbsComment">
+		delete from bbscomment
+		where comment_id = #{comment_id}
+</delete>
+
+
+
+
 
 <!-- 댓글 갯수 갱신 SQL -->
 <update id="commentcount">
