@@ -47,36 +47,53 @@ public class BbsServiceImpl implements BbsService{
 	
 	@Override
 	public boolean bbsupdate(BbsDto dto) throws Exception {
-		return dao.bbsupdate(dto)>0?true:false;
-		
+		return dao.bbsupdate(dto)>0?true:false;	
 	}
-	
-	
+		
 	 // 글삭제
 	 @Override 
 	 public int bbsdelete(int seq) throws Exception { 
-		 return dao.bbsdelete(seq);
-	
+		 return dao.bbsdelete(seq);	
 	 }
 	 
-	
-
+	 // 댓글
 	@Override
 	public boolean commentWrite(BbsComment comment) {		
 		return dao.commentWrite(comment)>0?true:false;
 	}
 
 	@Override
-	public List<BbsComment> commentList(int seq) {		
+	public List<BbsComment> commentList(Long seq) {		
 		return dao.commentList(seq);
+	}
+	
+	@Override
+	public boolean commentDelete(BbsComment comment) {
+		return dao.commentDelete(comment)>0?true:false;
+	}
+	
+	// 게시글 확인한 아이디 DB저장. 조회수 증가방지
+	@Override
+	public void readcount(int seq) {
+		dao.readcount(seq);	
 	}
 
 	@Override
-	public void readcount(Long seq) {
-		dao.readcount(seq);
-		
+	public int readcountSelect(BbsDto dto) {
+		return dao.readcountSelect(dto);	
 	}
 
+	@Override
+	public void readcountInsert(BbsDto dto) {
+		dao.readcountInsert(dto);
+		
+	}	
+		
+		
+		
+		
+		
+		
 	@Override
 	public void commnetcount(int seq, int amount) {
 		dao.commnetcount(seq, amount);
@@ -98,5 +115,9 @@ public class BbsServiceImpl implements BbsService{
 		return mapper.delete(seq);
 	}
 	*/
+
+	
+
+	
 
 }

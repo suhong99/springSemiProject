@@ -59,13 +59,13 @@ if(bbswrite != null && !bbswrite.equals("")){
 	}
 }
 
-String answer = (String)request.getAttribute("answer");
-if(answer != null && !answer.equals("")){
-	if(answer.equals("BBS_ANSWER_OK")){
+String bbsanswer = (String)request.getAttribute("bbsanswer");
+if(bbsanswer != null && !bbsanswer.equals("")){
+	if(bbsanswer.equals("BBS_ANSWER_OK")){
 		%>
 		<script type="text/javascript">
 		alert("답글이 성공적으로 작성되었습니다");
-		location.href = "bbs?param=bbslist";
+		location.href = "bbslist.do";
 		</script>
 		<%
 	}
@@ -75,7 +75,7 @@ if(answer != null && !answer.equals("")){
 		<script type="text/javascript">
 		alert("답글을 다시 작성해 주십시오");
 		let seq = "<%=seq %>";		
-		location.href = "bbs?param=answer&seq=" + seq;
+		location.href = "answer.do?seq=" + seq;
 		</script>
 		<%
 	}	

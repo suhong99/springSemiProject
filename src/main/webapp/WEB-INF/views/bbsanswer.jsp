@@ -78,7 +78,7 @@ tr {
 <h2>답글</h2>
 
 <!-- <form action="bbsanswerAf.do" method="get"> -->
-<form id="frm" method="get">
+<form id="frm" method="post" action="bbsanswer.do">
 <input type="hidden" name="seq" value="<%=dto.getSeq() %>">
 
 <table class="table table-bordered">
