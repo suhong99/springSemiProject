@@ -76,6 +76,9 @@
                 <p class="small fw-bold mt-2 pt-1 mb-0">
                     <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('regi')">회원가입</a>
                 </p>
+                <p class="small fw-bold mt-2 pt-1 mb-0">
+                    <a href="#" class="link-danger" style="color: #b3b3b3; font-size: 13px;"  onclick="toggleForm('findPW')">비밀번호찾기</a>
+                </p>
             </div>
             <!-- 카카오로그인  -->
            <div style="width: 100%; display: flex; justify-content: center;margin-top: 10px">

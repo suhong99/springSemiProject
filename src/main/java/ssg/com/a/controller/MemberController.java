@@ -36,6 +36,11 @@ public class MemberController {
 		System.out.println("MemberController regi() " + new Date());
 		return "regi";
 	}
+	@GetMapping("findPW.do")
+	public String findPW() {
+		System.out.println("MemberController findPW() " + new Date());
+		return "findPW";
+	}
 	
 	@ResponseBody
 	@PostMapping("idcheck.do")
