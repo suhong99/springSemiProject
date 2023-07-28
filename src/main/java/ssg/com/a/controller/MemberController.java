@@ -100,10 +100,6 @@ public class MemberController {
 	@PostMapping("kakaoLogin.do")
 	public String kakaoLogin(MemberDto mem, HttpServletRequest request) {
 		System.out.println("MemberController kakaoLogin() " + new Date());
-		// 암호화
-		String rawId = mem.getId();
-	    String hashedId = SHA256.encodeSha256(rawId);
-	    mem.setId(hashedId);
 		MemberDto dto = service.kakaoLogin(mem);
 		String kakaomsg = "LOGIN_NO";
 		if(dto != null) {
