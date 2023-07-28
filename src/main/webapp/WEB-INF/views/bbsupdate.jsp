@@ -53,7 +53,7 @@ tr {
 <div class="center">
 
 <!-- <form action="bbsupdateAf.do" method="get"> -->
-<form id="frm" method="get">
+<form id="frm" method="get" action="bbsupdateAf.do">
 <input type="hidden" name="seq" value="<%=dto.getSeq() %>">
 
 <table class="table table-bordered">

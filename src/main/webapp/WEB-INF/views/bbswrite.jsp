@@ -1,11 +1,29 @@
 
+<%@page import="ssg.com.a.dto.BbsDto"%>
 <%@page import="ssg.com.a.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-	MemberDto mem = (MemberDto)session.getAttribute("login");
-%>  
+	MemberDto login = (MemberDto)session.getAttribute("login");
+
+%> <%
+ 	if(login == null || login.getId().equals("")){
+	%>  
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		const modal = document.getElementById("modal");
+		modal.classList.add("show-modal");
+		alert("로그인 해 주십시오");
+		});
+	</script>
+	<%
+	}
+	%>  
+	
+	<%	
+		BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
+	%>
     
 <!DOCTYPE html>
 <html>
@@ -51,7 +69,16 @@ tr {
 
 <div class="center">
 
-<form id="frm" method="post">
+
+<% if(login != null){
+if(login == null || login.getId()!=null || login.getAuth()==1){
+	%>
+<span style = 'font-weight: bold; color:#0D0D0D; font-size:25px;'><%=login.getId() %>님 환영합니다</span>	
+	
+<br><br><br>
+	
+<%-- <%if(dto != null){ %> --%>
+<form id="frm" method="post" action="bbswrite.do">
 
 <table class="table table-bordered">
 <col width="200"><col width="500">
@@ -59,7 +86,7 @@ tr {
 <tr>
 	<th>아이디</th>
 	<td>
-		<input type="text" name="id" class="form-control" value="<%=mem.getId() %>" readonly="readonly">
+		<input type="text" name="id" class="form-control" value="<%=login.getId() %>" readonly="readonly">
 	</td>
 </tr>
 <tr>
@@ -82,6 +109,9 @@ tr {
 <button type="button" class="btn btn-dark">글쓰기</button>
 
 </form>
+
+<% }} %>
+
 </div>
 
 <script type="text/javascript">
@@ -104,6 +134,11 @@ $(document).ready(function(){
 	
 });
 </script>
+
+
+
+
+
 
 
 </body>
