@@ -43,6 +43,14 @@ public class MemberDaoImpl implements MemberDao {
 		session.insert(ns + "kakaoaddmember", dto);
 		return 	session.selectOne(ns + "kakaologin", dto);	
 	}
+
+	@Override
+	public MemberDto findMember(MemberDto dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }
 
 

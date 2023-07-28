@@ -13,4 +13,6 @@ public interface MemberDao {
 	
 	MemberDto kakaoLogin(MemberDto dto);
 	MemberDto kakaoAddmember(MemberDto dto);
+	
+	MemberDto findMember(MemberDto dto);
 }
