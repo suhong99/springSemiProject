@@ -66,28 +66,50 @@ public class BbsDaoImpl implements BbsDao {
 	// 댓글 
 	@Override
 	public int commentWrite(BbsComment comment) {
-		return session.insert(ns + "commentWrite", comment);
+		return session.insert(ns + "commentWriteBoard", comment);
 	}
 
 
 	// 댓글 리스트
 	@Override
-	public List<BbsComment> commentList(int seq) {
+	public List<BbsComment> commentList(Long seq) {
 		return session.selectList(ns + "commentListBoard", seq);
 	}
-
+	// 댓글 삭제
+	@Override
+	public int commentDelete(BbsComment comment) {
+		return session.delete(ns + "commentDeleteBoard", comment);
+	}
+	
 	// 조회수
-	@Override
-	public void readcount(Long seq) {
-		session.update(ns + "readcount", seq); 
-	}
-
-	@Override
-	public void commnetcount(int seq, int amount) {
-		session.update(ns + "commentcount", seq); 
-	}
-
 	
 	
+		@Override
+		public int readcountSelect(BbsDto dto) {
+			return session.selectOne(ns + "readcountSelect", dto);
+		}
+		@Override
+		public int readcount(int seq) {
+			return session.update(ns + "readcount", seq);
+		}
+
+		@Override
+		public int readcountInsert(BbsDto dto) {
+			return session.insert(ns + "readcountInsert", dto);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		@Override
+		public void commnetcount(int seq, int amount) {
+			// TODO Auto-generated method stub
+			
+		}
 	
 }
