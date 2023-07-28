@@ -31,7 +31,7 @@
 	          </li>   
 	          
 	          <li class="nav-item" class="nav-link">
-	            <a href="" class="nav-link">즐겨찾기</a>
+	            <a href="./mypage.do" class="nav-link">내 정보</a>
 	          </li>     
 			</ul>
 		</div>

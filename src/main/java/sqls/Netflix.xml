@@ -80,4 +80,17 @@
 		where seq = #{seq};
 	</select>
 	
+	<!-- 즐겨찾기 추가 -->
+	<insert id="favorite" parameterType="ssg.com.a.dto.FavoriteDto">
+		<!-- ignore pk(id, content_id) 겹치면 무시 -->
+		insert ignore into favorite(id, content_id, title, favorite) 
+		values (#{id}, #{content_id}, #{title}, 1)
+	</insert>
+	
+	<!-- 즐겨찾기 리스트 불러오기 -->
+	<select id="favoriteList" parameterType="String" resultType="ssg.com.a.dto.FavoriteDto">
+		select id, content_id, title, favorite
+		from favorite
+		where id = #{id} and favorite = 1;
+	</select>
 </mapper>

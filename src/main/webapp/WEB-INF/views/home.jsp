@@ -36,7 +36,7 @@
 		</style>
 	</head>
 	<body>
-		<form action="searchNetflix.do" method="get"style="display: flex; justify-content: flex-end;">
+	<form action="searchNetflix.do" method="get" style="display: flex; justify-content: flex-end;">
     <input type="text" class="input" placeholder="검색어를 입력하세요." id="searchInput" name="query">
     <button id="searchBtn" type="submit">검색</button>
 </form>

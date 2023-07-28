@@ -69,16 +69,32 @@
 					width="400px" height="575px">
 				</div>
 				<div class="text">
+				
 					<div class="title">
 						<!-- 영화 제목과 개봉일 연도 표시 -->
 						<span><%= dto.getTitle() %></span>&nbsp;
 						<span style="color: gray;">(<%=dto.getReleaseDate().substring(0, 4) %>)</span>
 						<br><br>
 					</div>
+					
 					<div class="score">
-						<button class="btn">즐겨찾기 추가</button>
-						<button class="btn">미정 버튼</button>
-						<button class="btn">미정 버튼</button><br><br>
+						<form id="favorite" action="favoriteAf.do" method="get">
+							<!-- 즐겨찾기 추가 -->
+							<%
+								// 로그인 있으면 
+								if (mem != null) {
+									%>
+									<input type="hidden" name="id" value="<%=mem.getId()%>"> <!--로그인 아이디 값 보내줌 -->
+									<input type="hidden" name="content_id" value="<%=dto.getId()%>"> <!--글 아이디 값 보내줌 -->
+									<input type="hidden" name="title" value="<%=dto.getTitle()%>"> <!--글 아이디 값 보내줌 -->
+									<button type="button" class="btn" onclick="favorite()">💕즐겨찾기 추가</button>
+									<%
+								}	
+							%>
+							<!-- 얘네는 그냥 버튼 -->
+							<button type="button" class="btn" onclick="back()">🏠︎홈으로</button>
+							<button type="button" class="btn" onclick="backSearch()">⬅이전 페이지</button><br><br>
+						</form>
 						<!-- 별점 8점 이상일때 인기, 3점 이하일때 최악 넣기 -->
 					    <% 
 					    	if (avg >= 7.0) { 
@@ -94,6 +110,7 @@
 					    %>
 						<span style="color: gray; font-weight: bold;">사이트 리뷰 평점 : <%=NetflixUtil.round(avg) %></span>	
 					</div>
+					
 					<div class="content">
 						<div>
 							<span style="font-size: 16px; color: gray; font-weight: bold;">개봉일 : <%= dto.getReleaseDate() %></span><br><br>
@@ -115,10 +132,6 @@
 
 						%>
 						</div>
-					</div>
-					<div class="button">
-						
-						<button class="btn" onclick="back()">Back to home</button>
 					</div>
 				</div>
 			</div>
@@ -334,6 +347,37 @@
 			// 홈으로 돌아가기
 			function back(){
 				location.href = "home.do"; 
+			}
+		</script>
+		
+		<script type="text/javascript">
+			// 홈으로 돌아가기
+			function backSearch(){
+				// 브라우저의 이전 페이지로 이동
+			    window.history.back();
+			}
+		</script> 
+		
+		<script type="text/javascript">
+			// 즐겨찾기 추가시 알림
+			function favorite(){
+	            Swal.fire({
+	                title: '즐겨찾기에 추가하시겠습니까?',
+	                icon: 'question',
+	                showCancelButton: true,
+	                confirmButtonColor: '#3085d6',
+	                cancelButtonColor: '#d33',
+	                confirmButtonText: '추가',
+	                cancelButtonText: '취소'
+	            })
+	            
+	            .then((result) => {
+	                if (result.isConfirmed) {
+	                    // 확인 버튼을 누르면 즐겨찾기 추가
+	                     $("#favorite").submit();
+	                }
+	            });
+	            
 			}
 		</script>
 		

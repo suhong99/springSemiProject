@@ -22,6 +22,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ssg.com.a.dto.FavoriteDto;
 import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
@@ -178,6 +179,7 @@ public class NetflixController {
 		return "redirect:/netflixtvdetail.do?id=" + comment.getSeq();
 	}
 	
+	/* 검색결과 */
 	@GetMapping("searchNetflix.do")
 	public String searchNetflix(@RequestParam(name = "query") String query, Model model) {
 	    try {
@@ -188,7 +190,9 @@ public class NetflixController {
 	        model.addAttribute("tvList", tvList);
 	        model.addAttribute("query", query);
 	        
-	        return "searchResult"; // 검색 결과를 보여줄 JSP 페이지 이름
+	        model.addAttribute("content", "searchResult");
+	        
+	        return "main"; // 검색 결과를 보여줄 JSP 페이지 이름
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        // 에러 처리 (예를 들어, 에러 페이지로 이동하거나 오류 메시지를 표시하는 등의 방법)
@@ -196,4 +200,56 @@ public class NetflixController {
 	    }
 	}
 	
+	/* 마이페이지 */
+	@GetMapping("mypage.do")
+	public String mypage(Model model) {
+		System.out.println("HomeController mypage() " + new Date());
+		
+		model.addAttribute("content", "mypage");
+		return "main";
+	}
+	
+	
+	/* movie 관심 컨텐츠 등록 */
+	@GetMapping("favoriteAf.do") 
+	public String favoriteAf(FavoriteDto dto) {
+		System.out.println("NetflixController favoriteAf()" + new Date());
+		boolean isS = service.favorite(dto);
+		
+		if (isS) {
+			System.out.println("즐겨찾기 성공");
+		}
+		else {
+			System.out.println("즐겨찾기 실패");
+		}
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/netflixdetail.do?id=" + dto.getContent_id();
+	}
+	
+	/* TV 관심 컨텐츠 등록 */
+	@GetMapping("favoriteTvAf.do") 
+	public String favoriteTvAf(FavoriteDto dto) {
+		System.out.println("NetflixController favoriteTvAf()" + new Date());
+		boolean isS = service.favorite(dto);
+		
+		if (isS) {
+			System.out.println("즐겨찾기 성공");
+		}
+		else {
+			System.out.println("즐겨찾기 실패");
+		}
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/netflixtvdetail.do?id=" + dto.getContent_id();
+	}
+	
+	/* 관심 컨텐츠 불러오기 */
+	@ResponseBody // AJAX
+	@GetMapping("favoriteList.do")
+	public List<FavoriteDto> favoriteList(String id){
+		System.out.println("NetflixController favoriteList()" + new Date());
+		
+		return service.favoriteList(id);
+	}
 }	

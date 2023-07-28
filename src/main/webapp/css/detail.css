@@ -33,17 +33,13 @@ body{
 	height: 100px;
 }
 
-.button{
-	height: 50px;
-}
-
 /* 제목 부분 */
 .title {
-	height:75px;
+	height: 90px;
 }
 
 .title > span{
-	font-size: 40px;
+	font-size: 30px;
 	font-weight: bold;
 }
 

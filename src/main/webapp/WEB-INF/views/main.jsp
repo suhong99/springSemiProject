@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
-= (String)request.getAttribute("content"); if(content == null){ content =
-"home"; } %>
+pageEncoding="UTF-8"%> 
+<%  
+	request.setCharacterEncoding("utf-8"); 
+	
+	String content= (String)request.getAttribute("content"); 
+	
+	if(content == null){ 
+		content ="home"; 
+		} 
+%>
 
 <!DOCTYPE html>
 <html>
@@ -15,8 +22,9 @@ pageEncoding="UTF-8"%> <% request.setCharacterEncoding("utf-8"); String content
     />
     <title>main</title>
     <link rel="stylesheet" type="text/css" href="./css/Modal.css" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="./css/NetflixContent.css?after">
+	
+    
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"

@@ -148,10 +148,12 @@
       </div>  
       <div class="col-md-3 col-sm-6">  
         <div class="footer-pad">  
-          <h4> Footer Heading 3 </h4>  
+          <h4> 개인별 개발 일지 </h4>  
           <ul class="list-unstyled">  
             <li><a href="https://github.com/suhong99/springSemiProject" target="_blank">깃허브</a></li>  
-            <li><a href="#">Public Works</a></li>  
+            <li>
+            	<a href="https://github.com/suhong99/springSemiProject/blob/cmg_20230727/%EB%AF%BC%EA%B7%9C%20readme.md" target="_blank">민규 : 개발일지</a>
+            </li> 
             <li><a href="#">Police Department</a></li>  
             <li><a href="#">Fire</a></li>  
             <li><a href="#">Mayor and City Council</a></li>  

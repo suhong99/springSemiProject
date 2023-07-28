@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ssg.com.a.dto.FavoriteDto;
 import ssg.com.a.dto.NetflixComment;
 import ssg.com.a.dto.NetflixContentDto;
 import ssg.com.a.dto.NetflixTvDto;
@@ -58,4 +59,15 @@ public class NetflixDaoImpl implements NetflixDao{
 		return session.delete(ns + "commentDelete", comment);
 	}
 
+	@Override
+	public int favorite(FavoriteDto dto) {
+		return session.insert(ns + "favorite", dto);
+	}
+
+	@Override
+	public List<FavoriteDto> favoriteList(String id) {
+		return session.selectList(ns +"favoriteList", id);
+	}
+	
+	
 }
