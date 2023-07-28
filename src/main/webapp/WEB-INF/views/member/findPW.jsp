@@ -23,7 +23,7 @@
 
         <!-- Password input -->
         <div class="form-outline mb-3">
-            <input class="authInput" type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호" />            
+            <input class="authInput" type="text" id="loginPwd" name="loginPwd" placeholder="이메일" />            
         </div>
 
         <div>
