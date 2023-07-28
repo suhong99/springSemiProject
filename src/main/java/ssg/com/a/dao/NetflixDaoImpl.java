@@ -68,6 +68,11 @@ public class NetflixDaoImpl implements NetflixDao{
 	public List<FavoriteDto> favoriteList(String id) {
 		return session.selectList(ns +"favoriteList", id);
 	}
+
+	@Override
+	public int favoriteDelete(FavoriteDto dto) {
+		return session.delete(ns + "favoriteDelete", dto);
+	}
 	
 	
 }

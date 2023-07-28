@@ -36,5 +36,8 @@ public interface NetflixDao {
 	
 	// 넷플릭스 관심 리스트 불러오기
 	List<FavoriteDto> favoriteList(String id);
+	
+	// 관심목록 지우기
+	int favoriteDelete(FavoriteDto dto);
 
 }
