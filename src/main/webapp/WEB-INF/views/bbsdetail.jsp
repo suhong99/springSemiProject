@@ -1,4 +1,3 @@
-
 <%@page import="ssg.com.a.dto.BbsDto"%>
 <%@page import="ssg.com.a.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
