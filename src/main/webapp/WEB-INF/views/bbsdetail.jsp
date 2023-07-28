@@ -6,7 +6,7 @@
 
 	<%
 	MemberDto login = (MemberDto)session.getAttribute("login");%> 
-	<%-- if(login == null || login.getId().equals("")){
+	<%-- if(login	 == null || login.getId().equals("")){
 	%>  
 		<script>
 		alert("로그인 해 주십시오");
