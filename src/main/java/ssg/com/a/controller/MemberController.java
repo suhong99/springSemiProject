@@ -18,6 +18,7 @@ import com.mysql.cj.Session;
 
 import ssg.com.a.dto.MemberDto;
 import ssg.com.a.service.MemberService;
+import ssg.com.a.util.SHA256;
 
 @Controller
 public class MemberController {
@@ -46,7 +47,6 @@ public class MemberController {
 	@PostMapping("idcheck.do")
 	public String idcheck(String id) {
 		System.out.println("MemberController idcheck() " + new Date());
-		
 		boolean isS = service.idcheck(id);
 		String msg = "YES";
 		if(isS == true) {
@@ -60,7 +60,9 @@ public class MemberController {
 	@PostMapping("regiAf.do")
 	public String regiAf(MemberDto mem) {
 		System.out.println("MemberController regiAf() " + new Date());
-		System.out.println("회원가입에서 mem"+ mem);
+		String rawPW = mem.getPwd();
+	    String hashedPW = SHA256.encodeSha256(rawPW);
+	    mem.setPwd(hashedPW);
 		boolean isS = service.addmember(mem);
 		String regimsg = "MEMBER_YES";
 		if(isS == false) {
@@ -74,7 +76,9 @@ public class MemberController {
 	@PostMapping("loginAf.do")
 	public String login(MemberDto mem, HttpServletRequest request) {
 		System.out.println("MemberController login() " + new Date());
-		
+		String rawPW = mem.getPwd();
+	    String hashedPW = SHA256.encodeSha256(rawPW);
+	    mem.setPwd(hashedPW);
 		MemberDto dto = service.login(mem);
 		String loginmsg = "LOGIN_NO";
 		if(dto != null) {
@@ -96,7 +100,10 @@ public class MemberController {
 	@PostMapping("kakaoLogin.do")
 	public String kakaoLogin(MemberDto mem, HttpServletRequest request) {
 		System.out.println("MemberController kakaoLogin() " + new Date());
-		
+		// 암호화
+		String rawId = mem.getId();
+	    String hashedId = SHA256.encodeSha256(rawId);
+	    mem.setId(hashedId);
 		MemberDto dto = service.kakaoLogin(mem);
 		String kakaomsg = "LOGIN_NO";
 		if(dto != null) {
