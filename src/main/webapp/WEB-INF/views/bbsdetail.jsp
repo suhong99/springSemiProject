@@ -184,7 +184,9 @@ login.getId().equals("")){ %>
           <div>
             <input type="hidden" name="seq" value="<%=dto.getId() %>" />
             <!-- 글에 대한 정보 -->
-            <% // 로그인 있으면 if (login != null) { %>
+            <% // 로그인 있으면 
+            if (login != null) { %>
+            
 
             <input
               type="hidden"
