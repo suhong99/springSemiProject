@@ -66,6 +66,11 @@ public class NetflixServieImpl implements NetflixService{
 	public List<FavoriteDto> favoriteList(String id) {
 		return dao.favoriteList(id);
 	}
+
+	@Override
+	public boolean favoriteDelete(FavoriteDto dto) {
+		return dao.favoriteDelete(dto) > 0 ? true : false;
+	}
 	
 	
 }

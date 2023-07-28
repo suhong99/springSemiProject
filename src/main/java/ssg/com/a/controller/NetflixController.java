@@ -270,4 +270,21 @@ public class NetflixController {
 	    Double avg = service.avg(id);
 	    return avg;
 	}
+	
+	/* 관심목록 삭제 */
+	@PostMapping("favoriteDeleteAf.do") 
+	public String favoriteDeleteAf(FavoriteDto dto) {
+		System.out.println("NetflixController favoriteDeleteAf()" + new Date());
+		boolean isS = service.favoriteDelete(dto);
+
+		if (isS) {
+			System.out.println("관심 목록 삭제 성공");
+		}
+		else {
+			System.out.println("관심 목록 삭제 실패");
+		}
+		
+		// redirect == sendRedirect --> 컨트롤러에서 컨트롤러로 보낼때
+		return "redirect:/mypage.do";
+	}
 }	

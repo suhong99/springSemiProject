@@ -23,6 +23,7 @@
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+		<script src="./js/func.js"></script>
 		<style>
 			/* 스핀 버튼 없애기 */
 		    input[type="number"]::-webkit-inner-spin-button,
@@ -342,87 +343,7 @@
 		
 		    typeOverview(); // 함수 호출로 한 글자씩 출력 시작
 	    </script>	
-	   
-		<script type="text/javascript">
-			// 홈으로 돌아가기
-			function back(){
-				location.href = "home.do"; 
-			}
-		</script>
-		
-		<script type="text/javascript">
-			// 홈으로 돌아가기
-			function backSearch(){
-				// 브라우저의 이전 페이지로 이동
-			    window.history.back();
-			}
-		</script> 
-		
-		<script type="text/javascript">
-			// 즐겨찾기 추가시 알림
-			function favorite(){
-	            Swal.fire({
-	                title: '즐겨찾기에 추가하시겠습니까?',
-	                icon: 'question',
-	                showCancelButton: true,
-	                confirmButtonColor: '#3085d6',
-	                cancelButtonColor: '#d33',
-	                confirmButtonText: '추가',
-	                cancelButtonText: '취소'
-	            })
-	            
-	            .then((result) => {
-	                if (result.isConfirmed) {
-	                    // 확인 버튼을 누르면 즐겨찾기 추가
-	                     $("#favorite").submit();
-	                }
-	            });
-	            
-			}
-		</script>
-		
-		<script type="text/javascript">
-			// 아이디 익명성
-			function star(id) {
-			  if (id === null || id.length <= 2) {
-				  let maskedId = id.substring(0, 1) + "*".repeat(6);
-			      return id;
-			  }
-		
-			  let maskedId = id.substring(0, 2) + "*".repeat(6);
-			  return maskedId;
-			}
-		</script>
-		
-		<script type="text/javascript">
-			function hasBadword(content) {
-				  // 비속어 리스트 
-				  const list = [
-				    "시발",
-				    "병신",
-				    "개새끼",
-				    "fuck",
-				    "shit",
-				    "ㅅㅂ",
-				    "좆"
-				    // 추가 가능..
-				  ];
-	
-				  // content를 소문자로 변환하여 비속어를 체크합니다.
-				  const lowerCaseContent = content.toLowerCase();
-	
-				  // list에 포함되어있는지 체크
-				  for (const word of list) {
-					    if (lowerCaseContent.includes(word.toLowerCase())) {
-					      return "<span style='font-weight: bold; color: red;'>**욕설 및 부적절한 단어가 포함되어있습니다. 클린한 댓글 문화를 지켜주세요!**</span><br><br>"; 
-					    }
-				  }
-	
-				  return "<span style='font-weight: bold; color: #F2F2F2;'>" + content + "</span><br><br>"; // 비속어가 포함되지 않은 경우 그대로 반환
-			}
-		</script>
-		
-		
+
 		<!-- Modal -->
 	    <div class="modal-container" id="modal">
 	      <div id="modalContent">

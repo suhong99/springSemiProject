@@ -93,4 +93,10 @@
 		from favorite
 		where id = #{id} and favorite = 1;
 	</select>
+	
+	<!-- 즐겨찾기 삭제 -->
+	<delete id="favoriteDelete" parameterType="ssg.com.a.dto.FavoriteDto">
+		delete from favorite
+		where id = #{id} and content_id = #{content_id}
+	</delete>
 </mapper>

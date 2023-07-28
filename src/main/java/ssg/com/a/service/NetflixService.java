@@ -19,4 +19,5 @@ public interface NetflixService {
 	boolean commentDelete(NetflixComment comment);
 	boolean favorite(FavoriteDto dto);
 	List<FavoriteDto> favoriteList(String id);
+	boolean favoriteDelete(FavoriteDto dto);
 }
