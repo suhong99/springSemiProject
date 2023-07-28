@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="./css/NetflixContent.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="./js/func.js"></script>
     
 		<style type="text/css">
 			/* 이미지 갖다대면 조금 더 확대 */
@@ -36,6 +37,15 @@
 		</style>
 </head>
 <body>
+	<form action="searchNetflix.do" method="get" style="display: flex; justify-content: flex-end;">
+	    <input type="text" class="input" placeholder="검색어를 입력하세요." id="searchInput" name="query">
+	    <button id="searchBtn" type="submit">검색</button>
+	</form>
+		
+		<!-- 검색 결과를 표시할 영역 -->
+		<div id="searchResults"></div>
+		
+		
 		<!-- 검색결과 Movie JSON 컨트롤러에 넘겨주기 -->
         <script type="text/javascript">
         	let contentList = {"contentList": JSON.stringify(<%=movieJson%>)}
@@ -90,9 +100,32 @@
 		                        <img onerror="this.onerror=null; this.src='./images/netflixreview.png'" src="https://image.tmdb.org/t/p/w500<%= movie.getPosterpath() %>">
 		                    </a>
 		                    <div class="poster-title">
-		                        <%= movie.getTitle() %>
+		                        <%= movie.getTitle() %><span id="<%=movie.getId()%>"> </span> <!-- 제목, 평점 같이 표시 -->
 		                    </div>
 		                </div>
+		                
+		                <!-- 사이트 자체 평점 제목옆에 표시 -->
+			            <script type="text/javascript">
+					        $(document).ready(function () {
+					            $.ajax({
+					                url: "getAvgRating.do",
+					                type: "get",
+					                data: { id: <%=movie.getId()%> },
+					                success: function (avg) {
+					                	if(avg != null && avg !== ''){
+					                		let avg2 = avg.toFixed(2) // 소수 두자리
+					                		$("#"+<%=movie.getId()%>+"").text("⭐"+ avg2);
+					                	}  
+					                	else{
+					                		$("#"+<%=movie.getId()%>+"").text("");
+					                	}
+					                },
+					                error: function () {
+					                    alert("평균 평점 불러오기 실패");
+					                }
+					            });
+					        });
+					    </script>
 		    		<% 
 		            }
 		        } 
@@ -125,9 +158,32 @@
 		                        <img onerror="this.onerror=null; this.src='./images/netflixreview.png'" src="https://image.tmdb.org/t/p/w500<%= tv.getPosterpath() %>">
 		                    </a>
 		                    <div class="poster-title">
-		                        <%= tv.getTitle() %>
+		                        <%= tv.getTitle() %><span id="<%=tv.getId()%>"> </span> <!-- 제목, 평점 같이 표시 -->
 		                    </div>
 		                </div>
+		                
+		                <!-- 사이트 자체 평점 제목옆에 표시 -->
+			            <script type="text/javascript">
+					        $(document).ready(function () {
+					            $.ajax({
+					                url: "getAvgRating.do",
+					                type: "get",
+					                data: { id: <%=tv.getId()%> },
+					                success: function (avg) {
+					                	if(avg != null && avg !== ''){
+					                		let avg2 = avg.toFixed(2) // 소수 두자리
+					                		$("#"+<%=tv.getId()%>+"").text("⭐"+ avg2);
+					                	}  
+					                	else{
+					                		$("#"+<%=tv.getId()%>+"").text("");
+					                	}
+					                },
+					                error: function () {
+					                    alert("평균 평점 불러오기 실패");
+					                }
+					            });
+					        });
+					    </script>
 		    			<% 
 		            }
 		        } 
@@ -141,79 +197,6 @@
 		    </div>
 		</div>
 		<br><br>
-		
-	    <!-- slider 스크립트 -->
-	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	    <script>
-		        const sliderContainer = document.querySelector('.slider-container');
-		        const posters = document.querySelectorAll('.poster-container');
-		
-		        let isDragging = false;
-		        let startPosition = 0;
-		        let currentTranslate = 0;
-		        let prevTranslate = 0;
-		        let animationID = 0;
-		
-		        posters.forEach((poster, index) => {
-		            poster.addEventListener('dragstart', (e) => e.preventDefault());
-		    
-		            // Touch events
-		            poster.addEventListener('touchstart', touchStart(index));
-		            poster.addEventListener('touchend', touchEnd);
-		            poster.addEventListener('touchmove', touchMove);
-		    
-		            // Mouse events
-		            poster.addEventListener('mousedown', touchStart(index));
-		            poster.addEventListener('mouseup', touchEnd);
-		            poster.addEventListener('mouseleave', touchEnd);
-		            poster.addEventListener('mousemove', touchMove);
-		        });
-		
-		        function touchStart(index) {
-		            return function (event) {
-		                isDragging = true;
-		                startPosition = getPositionX(event);
-		                currentTranslate = prevTranslate;
-		                animationID = requestAnimationFrame(animation);
-		                sliderContainer.classList.add('grabbing');
-		            };
-		        }
-		
-		        function touchEnd() {
-		            isDragging = false;
-		            cancelAnimationFrame(animationID);
-		            const movedBy = currentTranslate - prevTranslate;
-		            if (movedBy < -100) {
-		                // Swipe right
-		                prevTranslate = currentTranslate - 300;
-		            } else if (movedBy > 100) {
-		                // Swipe left
-		                prevTranslate = currentTranslate + 300;
-		            }
-		            sliderContainer.classList.remove('grabbing');
-		            setSliderPositionByIndex();
-		        }
-		
-		        function touchMove(event) {
-		            if (isDragging) {
-		                const currentPosition = getPositionX(event);
-		                currentTranslate = prevTranslate + currentPosition - startPosition;
-		            }
-		        }
-		
-		        function getPositionX(event) {
-		            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-		        }
-		
-		        function animation() {
-		            setSliderPositionByIndex();
-		            if (isDragging) requestAnimationFrame(animation);
-		        }
-		
-		        function setSliderPositionByIndex() {
-		            sliderContainer.style.transform = `translateX(${prevTranslate}px)`;
-		        }
-		    </script>
 
 	</body>
 </html>

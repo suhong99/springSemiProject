@@ -28,6 +28,7 @@
 		<link rel="stylesheet" type="text/css" href="./css/NetflixContent.css">
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script src="./js/func.js"></script>
 		
 		<style type="text/css">
 			/* 이미지 갖다대면 조금 더 확대 */
@@ -39,37 +40,13 @@
 	</head>
 	<body>
 	<form action="searchNetflix.do" method="get" style="display: flex; justify-content: flex-end;">
-    <input type="text" class="input" placeholder="검색어를 입력하세요." id="searchInput" name="query">
-    <button id="searchBtn" type="submit">검색</button>
-</form>
+	    <input type="text" class="input" placeholder="검색어를 입력하세요." id="searchInput" name="query">
+	    <button id="searchBtn" type="submit">검색</button>
+	</form>
 		
 		<!-- 검색 결과를 표시할 영역 -->
 		<div id="searchResults"></div>
-		
-		<script type="text/javascript">
-		    // 검색 버튼 클릭 시 실행할 함수
-		    function searchMovies() {
-		    // 검색어를 입력하는 input 요소 참조
-		    const searchInput = document.getElementById("searchInput");
-		    // 검색어 값을 가져옴
-		    const query = searchInput.value;
-		
-		    // 서버로 검색어를 전송하고 결과를 받아옴 (Ajax 사용)
-		    $.ajax({
-		        url: "searchNetflix.do", // 검색 요청을 처리하는 서블릿 또는 컨트롤러 URL
-		        type: "GET", // GET 메서드로 변경
-		        data: { query: query }, // 검색어를 GET 파라미터로 전송
-		        success: function (data) {
-		        	console.log(data);
-		        	$("#searchResults").html(data);
-		        },
-		        error: function (e) {
-		            alert("검색 실패");
-		        }
-		    });
-		}
-		</script>
-		        
+
         <!-- TOP20 Movie JSON 컨트롤러에 넘겨주기 -->
         <script type="text/javascript">
         	let contentList = {"contentList": JSON.stringify(<%=listMovieJson%>)}
@@ -201,78 +178,5 @@
 	        </div>
 		</div>
 		<br><br>
-	    <!-- slider 스크립트 -->
-	    <script>
-	        const sliderContainer = document.querySelector('.slider-container');
-	        const posters = document.querySelectorAll('.poster-container');
-	
-	        let isDragging = false;
-	        let startPosition = 0;
-	        let currentTranslate = 0;
-	        let prevTranslate = 0;
-	        let animationID = 0;
-	
-	        posters.forEach((poster, index) => {
-	            poster.addEventListener('dragstart', (e) => e.preventDefault());
-	    
-	            // Touch events
-	            poster.addEventListener('touchstart', touchStart(index));
-	            poster.addEventListener('touchend', touchEnd);
-	            poster.addEventListener('touchmove', touchMove);
-	    
-	            // Mouse events
-	            poster.addEventListener('mousedown', touchStart(index));
-	            poster.addEventListener('mouseup', touchEnd);
-	            poster.addEventListener('mouseleave', touchEnd);
-	            poster.addEventListener('mousemove', touchMove);
-	        });
-	
-	        function touchStart(index) {
-	            return function (event) {
-	                isDragging = true;
-	                startPosition = getPositionX(event);
-	                currentTranslate = prevTranslate;
-	                animationID = requestAnimationFrame(animation);
-	                sliderContainer.classList.add('grabbing');
-	            };
-	        }
-	
-	        function touchEnd() {
-	            isDragging = false;
-	            cancelAnimationFrame(animationID);
-	            const movedBy = currentTranslate - prevTranslate;
-	            if (movedBy < -100) {
-	                // Swipe right
-	                prevTranslate = currentTranslate - 300;
-	            } else if (movedBy > 100) {
-	                // Swipe left
-	                prevTranslate = currentTranslate + 300;
-	            }
-	            sliderContainer.classList.remove('grabbing');
-	            setSliderPositionByIndex();
-	        }
-	
-	        function touchMove(event) {
-	            if (isDragging) {
-	                const currentPosition = getPositionX(event);
-	                currentTranslate = prevTranslate + currentPosition - startPosition;
-	            }
-	        }
-	
-	        function getPositionX(event) {
-	            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-	        }
-	
-	        function animation() {
-	            setSliderPositionByIndex();
-	            if (isDragging) requestAnimationFrame(animation);
-	        }
-	
-	        function setSliderPositionByIndex() {
-	            sliderContainer.style.transform = `translateX(${prevTranslate}px)`;
-	        }
-	    </script>
-	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	    
 	</body>
 </html>
