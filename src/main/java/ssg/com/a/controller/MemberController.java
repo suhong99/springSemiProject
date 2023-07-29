@@ -2,6 +2,7 @@ package ssg.com.a.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.protobuf.Message;
 import com.mysql.cj.Session;
 
 import ssg.com.a.dto.MemberDto;
@@ -138,26 +140,11 @@ public class MemberController {
 			String title = "[넷리뷰] 비밀번호변경 인증 이메일 입니다"; 
 			String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
 					+ "넷리뷰 비밀번호찾기(변경) 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); // 
-
-			try {
-				MimeMessage message = MailSender.createMimeMessage();
-				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
-
-				messageHelper.setFrom(setfrom); 
-				messageHelper.setTo(tomail); 
-				messageHelper.setSubject(title);
-				messageHelper.setText(content); 
-
-				mailSender.send(message);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-
+			
 			
 		}
-		String msg = "YES";
 		
-		return msg;
+		return "emailChk";
 	}
 }
 
