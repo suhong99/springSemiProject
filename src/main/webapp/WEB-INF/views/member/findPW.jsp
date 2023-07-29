@@ -14,7 +14,7 @@
 
   <div class="container-fluid" >
 		<h1 class="authHeader"> 비밀번호 찾기</h1>
-  		
+   	    <%--    <jsp:include page='<%=content + ".jsp" %>' flush="false" />  		 --%>
       <form>
         <!-- ID input -->
         <div>

@@ -2,29 +2,22 @@ package ssg.com.a.controller;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Properties;
 import java.util.Random;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.protobuf.Message;
-import com.mysql.cj.Session;
-
 import ssg.com.a.dto.MemberDto;
 import ssg.com.a.service.MemberService;
+import ssg.com.a.util.MailSender;
 import ssg.com.a.util.SHA256;
 
 @Controller
@@ -128,20 +121,21 @@ public class MemberController {
 	@PostMapping("findMember.do")
 	public String findMember(MemberDto mem, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println("MemberController findMember() " + new Date());
-		
+		// email과 아이디가 일치하는 유저인지 확인
 		MemberDto dto= service.findMember(mem);
 		if(dto != null) {
 			Random r = new Random();
 			int num = r.nextInt(999999); // 랜덤난수설정
+			// 이메일 정보 출력
 			session.setAttribute("email", dto.getEmail());
-
-			String setfrom = "ivedot@naver.com"; // naver 
-			String tomail = dto.getEmail(); //받는사람
+			
+			String receiver = dto.getEmail(); //받는사람
 			String title = "[넷리뷰] 비밀번호변경 인증 이메일 입니다"; 
 			String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
-					+ "넷리뷰 비밀번호찾기(변경) 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); // 
+					+ "넷리뷰 비밀번호찾기(변경) 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); 
 			
-			
+			// 메일 전송
+			String isS =MailSender.sendEmail(receiver, title, content);
 		}
 		
 		return "emailChk";
