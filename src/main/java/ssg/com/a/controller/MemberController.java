@@ -122,10 +122,13 @@ public class MemberController {
 	public String findMember(MemberDto mem, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println("MemberController findMember() " + new Date());
 		// email과 아이디가 일치하는 유저인지 확인
+		String findMembermsg = "WRONG";
 		MemberDto dto= service.findMember(mem);
 		if(dto != null) {
 			Random r = new Random();
 			int num = r.nextInt(999999); // 랜덤난수설정
+			findMembermsg = "FIND";
+
 			// 이메일 정보 출력
 			session.setAttribute("email", dto.getEmail());
 			
@@ -136,9 +139,14 @@ public class MemberController {
 			
 			// 메일 전송
 			String isS =MailSender.sendEmail(receiver, title, content);
+			if(isS=="YES") {
+		        session.setAttribute("authCode", num); // 세션에 인증번호 저장
+				findMembermsg = "SEND";
+
+			}
 		}
 		
-		return "emailChk";
+		return findMembermsg;
 	}
 }
 

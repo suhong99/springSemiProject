@@ -52,24 +52,24 @@
 			// event.preventDefault();
 		    // 폼 데이터 가져오기
 		    const formData = {
-		        id: $("#loginId").val(),
-		        pwd: $("#loginPwd").val()
+		        id: $("#findId").val(),
+		        pwd: $("#findEmail").val()
 		    };
 		    // Ajax로 서버에 POST 요청 보내기
 		    $.ajax({
-		        url: "loginAf.do",
+		        url: "findMember.do",
 		        type: "post",
 		        data: formData,
 		        success: function(response) {
 		        	console.log(response);
-		        	 const loginMsg = response.trim();
-		             if (loginMsg === "LOGIN_NO") {
-		                 alert("아이디나 비밀번호를 확인해 주십시오");
-		             } else if (loginMsg === "LOGIN_YES") {
-		                 alert("로그인 되었습니다.");
+		        	 const findMember = response.trim();
+		             if (findMember === "WRONG") {
+		                 alert("아이디와 메일을 확인해 주십시오");
+		             } else if (findMember === "FIND") {
+		                 alert("메일 전송이 불가능합니다.");
 		                 location.reload();
 		             } else {
-		                 alert("로그인 처리 중 에러가 발생했습니다.");
+		                 alert("메일이 전송되었습니다.");
 		             }
 		        },
 		        error: function() {
