@@ -1,14 +1,32 @@
 package ssg.com.a.util;
 
 import java.security.MessageDigest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
-// 1234 -> 해쉬 ABCD$&^#*@&#^@&*#^&@#123123
 
 // 해쉬암호 : SHA256
+// src/main/resources에 있는 config.properties 파일에 mSalt 저장
 public class SHA256 {
-	private final static String mSalt = "코스";
-    
+	 // private final static String mSalt="코스";
+	   private final static String mSalt;
+
+	    static {
+	        Properties prop = new Properties();
+	        try {
+	            InputStream inputStream = SHA256.class.getResourceAsStream("/config.properties");
+	            prop.load(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        mSalt = prop.getProperty("mSalt");
+	    }
+
     public static String encodeSha256(String source) {
+	        	
         String result = "";
         
         byte[] a = source.getBytes();
