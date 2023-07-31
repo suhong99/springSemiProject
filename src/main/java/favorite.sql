@@ -6,6 +6,18 @@ create table favorite(
 	primary key(id, content_id)
 );
 
+ALTER TABLE favorite
+ADD CONSTRAINT fk_favorite_member_id
+FOREIGN KEY (id) REFERENCES member(id);
+
+ALTER TABLE bbs
+ADD CONSTRAINT fk_bbs_member_id
+FOREIGN KEY (id) REFERENCES member(id);
+
+ALTER TABLE netflixcomment
+ADD CONSTRAINT fk_netflixcomment_member_id
+FOREIGN KEY (id) REFERENCES member(id);
+
 drop table favorite;
 
 select * from favorite;
