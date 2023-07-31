@@ -97,8 +97,9 @@
 						resultType="Integer">
 	select count(*)
 	from readcount
-	where id=#{id} and seq=#{seq}
+	where id = #{id} and seq=#{seq}
 </select>
+
 <!-- count= 0일때 추가 -->
 <insert id="readcountInsert"   parameterType="ssg.com.a.dto.BbsDto" >
 	insert into readcount(id, seq)
@@ -107,7 +108,7 @@
 
 <update id="readcount" parameterType="java.lang.Integer">
 		update bbs
-		set readcount= readcount+1
+		set readcount= readcount + 1
 		where seq=#{seq}
 </update>
 

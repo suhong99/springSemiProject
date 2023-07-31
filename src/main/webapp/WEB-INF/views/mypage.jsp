@@ -37,7 +37,7 @@
 		<br>
 		<h4 style='font-weight: bold; color: gray;'>마이페이지</h4>
 		<br>
-		<div style="width: 1800px; height:500px;">
+		<div style="width: 1800px; height:auto;">
 			<h5 style='font-weight: bold; color: #F2F2F2;'>내 정보</h5><br>
 			
 			<div>
@@ -60,7 +60,7 @@
 			
 			<h5 style='font-weight: bold; color: #F2F2F2;'>내가 좋아하는 영화</h5><br>
 			<!-- 관심 리스트 불러오기 -->
-			<table style="width: 1106px; margin: 0px;">
+			<table style="width: 1106px;  margin: 0px;">
 				<!-- Ajax로 id에 그냥 끼워넣기 -->
 				<tbody id="tbody">
 				</tbody>
