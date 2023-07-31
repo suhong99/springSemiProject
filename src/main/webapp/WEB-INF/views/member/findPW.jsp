@@ -14,7 +14,7 @@
 
   <div class="container-fluid" >
 		<h1 class="authHeader"> 비밀번호 찾기</h1>
-   	    <%--    <jsp:include page='<%=content + ".jsp" %>' flush="false" />  		 --%>
+   	    <jsp:include page='emailChk.jsp' flush="false" />
       <form>
         <!-- ID input -->
         <div>
@@ -27,7 +27,7 @@
         </div>
 
         <div>
-            <button type="button" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="login()">아이디 확인</button>
+            <button type="button" class="btn btn-primary btn-lg" style="background-color: #e50914; border: none; width: 100%" onclick="findPW()">아이디 확인</button>
             <br>
             <!-- 회원가입 및 로그인 돌아가기 버튼 -->
             <div style="display: flex; flex-direction:row; justify-content: space-around; align-items: flex-end;">
@@ -48,12 +48,12 @@
 
 
 <script type="text/javascript">
-		function login(event) {
+		function findPW(event) {
 			// event.preventDefault();
 		    // 폼 데이터 가져오기
 		    const formData = {
 		        id: $("#findId").val(),
-		        pwd: $("#findEmail").val()
+		        email: $("#findEmail").val()
 		    };
 		    // Ajax로 서버에 POST 요청 보내기
 		    $.ajax({

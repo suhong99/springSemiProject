@@ -124,11 +124,11 @@ public class MemberController {
 		// email과 아이디가 일치하는 유저인지 확인
 		String findMembermsg = "WRONG";
 		MemberDto dto= service.findMember(mem);
+	
 		if(dto != null) {
 			Random r = new Random();
 			int num = r.nextInt(999999); // 랜덤난수설정
 			findMembermsg = "FIND";
-
 			// 이메일 정보 출력
 			session.setAttribute("email", dto.getEmail());
 			
@@ -137,15 +137,19 @@ public class MemberController {
 			String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
 					+ "넷리뷰 비밀번호찾기(변경) 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); 
 			
+
 			// 메일 전송
 			String isS =MailSender.sendEmail(receiver, title, content);
+			System.out.println("에러위치 3");
+
 			if(isS=="YES") {
 		        session.setAttribute("authCode", num); // 세션에 인증번호 저장
 				findMembermsg = "SEND";
 
 			}
 		}
-		
+		System.out.println("에러위치 4");
+
 		return findMembermsg;
 	}
 }
