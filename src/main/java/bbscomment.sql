@@ -28,7 +28,7 @@ set commentcount =( select count(seq)
 					
 					
 					
-					
+	
 drop table readcount;
 
 create table readcount(

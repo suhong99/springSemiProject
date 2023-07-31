@@ -147,11 +147,11 @@
       <% } %>
       
        <%if(login != null){ 
-    	   if( login== null || login.getId().equals(dto.getId()) || login.getAuth()==1 ){ %>
-      <button type="button" class="btn btn-dark" onclick="updateBbs(<%=dto.getSeq() %>)" >글수정</button>
-
-      <button type="button" class="btn btn-dark" onclick="deleteBbs(<%=dto.getSeq() %>)">글삭제</button>
-     
+    	   if( 	login.getId().equals(dto.getId()) ){ %>
+	      <button type="button" class="btn btn-dark" onclick="updateBbs(<%=dto.getSeq() %>)" >글수정</button>
+			<% }  if( 	login.getId().equals(dto.getId()) || login.getAuth()==1 ){ %>
+	      <button type="button" class="btn btn-dark" onclick="deleteBbs(<%=dto.getSeq() %>)">글삭제</button>
+	     
       <% }}} %>
    
     </div>
@@ -177,7 +177,7 @@
     <br /><br />
 
 
-    <!-- 댓글 -->
+   <%--  <!-- 댓글 -->
     <div class="comment">
       <form action="commentWriteAfBoard.do" method="post">
         <!--  -->
@@ -343,6 +343,6 @@
       	});
 
       });
-    </script>
+    </script> --%>
   </body>
 </html>
