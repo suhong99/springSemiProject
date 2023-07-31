@@ -78,4 +78,29 @@ input[type='number']::-webkit-inner-spin-button {
 
 --> netflixcontroller에서 model.addattr("content", "searchResult")로 main.jsp에 넘겨줌
 
+### 21. 이모지 추가 이전페이지 버튼
 
+--> window.history.back으로 버튼 구현
+
+### 22. 마이페이지 구현 시작 
+--> 즐겨찾기 기능 추가 + 마이페이지에서 즐겨찾기 리스트 받기
+
+### 23. 즐겨찾기는 중복되면?
+--> pk를 id, content_id 쌍으로해서 중복되면 ignore 연산 
+
+### 24. 즐겨찾기 후 tv, movie detail따로 
+--> redirect 컨트롤러 두개 나눠서
+
+25. 검색 속도가 너무 느리다 (가, 나... 등) 
+
+### 26. 제목옆에 평균평점 표시 
+--> avg 함수 따로 컨트롤러에 빼서 ajax로 요청
+
+### 27. JS 파일 분리
+--> 코드 가독성 리팩토링
+
+### 28. 관심목록 삭제 구현 
+--> 댓글리스트 삭제와 비슷한 로직
+
+### 29. readcount db 로직 수정
+--> PK (id, seq)로 수정 = 한 id가 다른 seq를 읽을 수 있기때문에
