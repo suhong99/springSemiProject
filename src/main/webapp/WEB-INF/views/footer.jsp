@@ -152,7 +152,7 @@
           <ul class="list-unstyled">  
             <li><a href="https://github.com/suhong99/springSemiProject" target="_blank">깃허브</a></li>  
             <li>
-            	<a href="https://github.com/suhong99/springSemiProject/blob/cmg_20230727/%EB%AF%BC%EA%B7%9C%20readme.md" target="_blank">민규 : 개발일지</a>
+            	<a href="https://github.com/suhong99/springSemiProject/blob/master/%EB%AF%BC%EA%B7%9C%20readme.md" target="_blank">민규 : 개발일지</a>
             </li> 
             <li><a href="#">Police Department</a></li>  
             <li><a href="#">Fire</a></li>  

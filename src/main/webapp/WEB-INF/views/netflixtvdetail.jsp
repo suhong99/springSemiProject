@@ -51,7 +51,18 @@
 					<div class="title">
 						<!-- 영화 제목과 개봉일 연도 표시 -->
 						<span><%= dto.getTitle() %></span>&nbsp;
-						<span style="color: gray;">(<%=dto.getReleasedate().substring(0, 4) %>)</span>
+						<%
+							if (dto.getReleasedate().length() == 0){
+								%>
+								<span style="color: gray;">(알 수 없음)</span>
+								<%
+							}
+							else{
+								%>
+								<span style="color: gray;">(<%=dto.getReleasedate().substring(0, 4) %>)</span>	
+								<%
+							}	 	
+						%>
 						<br><br>
 					</div>
 					<div class="score">

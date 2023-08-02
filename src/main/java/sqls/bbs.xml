@@ -78,7 +78,7 @@
 <!-- 글수정 -->
 <update id="bbsupdate">
 	update bbs
-	set title=#{title}, content=#{content}, mdate=now()
+	set title=#{title}, content=#{content}, wdate=now()
 	where seq=#{seq}	
 </update>
 

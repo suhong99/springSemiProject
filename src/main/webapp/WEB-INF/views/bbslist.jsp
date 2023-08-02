@@ -69,7 +69,7 @@
     </head>
 
     <body>
-      <div style="width: 1800px; height: auto">
+      <div style="width: 1800px; height: auto;">
         <br/><br/>
         <div class="center">
           <%if(login != null){ %>

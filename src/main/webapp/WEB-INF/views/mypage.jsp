@@ -37,7 +37,7 @@
 		<br>
 		<h4 style='font-weight: bold; color: gray;'>마이페이지</h4>
 		<br>
-		<div style="width: 1800px; height:auto;">
+		<div style="width: 1800px; height: 600px;">
 			<h5 style='font-weight: bold; color: #F2F2F2;'>내 정보</h5><br>
 			
 			<div>
@@ -99,7 +99,7 @@
 								str += "<button type='submit' class='deleteBtn"+i+"'> ❌삭제 </button>"
 								str += "<span style='font-weight: bold; color: gray;'>"+item.title+"</span><br>";
 								str += "</div>";
-								$("#tbody").append(str); 
+								$("#tbody").append(str+"<br>"); 
 							}
 						});
 

@@ -5,6 +5,7 @@
 <%
 	MemberDto login = (MemberDto)session.getAttribute("login");
 	BbsDto dto = (BbsDto)request.getAttribute("bbsdto");
+	System.out.println(dto.getContent());
 %>
 <!DOCTYPE html>
 <html>
@@ -82,10 +83,10 @@
   <body>
   
 
-   <div class="Top-link"><a id="topLink" href="#"></a></div>
-	<br/><br/>
+   <!-- <div class="Top-link"><a id="topLink" href="#"></a></div>
+	<br/><br/> -->
    
-  
+  	<br><br>
     <div class="center">
       <%if(login != null){ %>
       <span style = 'font-weight: bold; color:#F2F2F2; font-size:25px;'>
@@ -129,11 +130,10 @@
         </tr>
 
         <tr>
-          <th style="text-align: center; vertical-align: middle">내용</th>
-          <td colspan="4" style="height: 300px; font-size: 120%">
-            <textarea rows="12" readonly style="background-color: #f2f2f2; font-size: 18px" cols="20" class="form-control">
-			<%=dto.getContent() %></textarea>
-          </td>
+          <th style="text-align: center ; vertical-align: middle;">내용</th>
+			<td colspan="4" style="height: 300px; font-size: 120%">
+			<textarea rows="12" readonly style="background-color: #ffffff; font-size: 18px"
+			cols="20" class="form-control" ><%=dto.getContent() %></textarea>
         </tr>
       </table>
 
